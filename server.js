@@ -27,6 +27,7 @@ const app = http.createServer((req, res)=>{
             res.end(data);
         });
     }
+    console.log(_url);
 })
 
 
