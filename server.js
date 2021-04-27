@@ -22,14 +22,13 @@ const app = http.createServer((req, res)=>{
         fs.readFile('./views/create.html', (err, data)=> {
             res.end(data);
         });
-    } else if(_url === '/login/signup') {
+    } else if(_url === '/signup') {
         fs.readFile('./views/signup.html', (err, data)=> {
             res.end(data);
         });
     }
     console.log(_url);
 })
-
 
 
 app.listen(3000, function(){
