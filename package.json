@@ -1,0 +1,23 @@
+{
+  "name": "wooggooms",
+  "version": "1.0.0",
+  "description": "[loopbackseal](https://github.com/young961027)  \r [swparkdev](https://github.com/swparkdev)  \r [42KIM](https://github.com/42KIM)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LM-channel-team-project/wooggooms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LM-channel-team-project/wooggooms/issues"
+  },
+  "homepage": "https://github.com/LM-channel-team-project/wooggooms#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
