@@ -38,7 +38,7 @@ app.get("/sign-up", function(req, res, next) {
 
 app.post("/sign-up_process", function(req, res) {
     // Create DB table
-    res.redirect("/main");
+    res.redirect("/");
 });
 
 // Sign-in Route
@@ -54,7 +54,7 @@ app.get("/sign-in", function(req, res, next) {
 
 app.post("/sign-in_process", function(req, res) {
     // Create DB table
-    res.redirect("/main");
+    res.redirect("/");
 });
 
 // Mypage Route
