@@ -23,7 +23,6 @@ router.post("/sign-up_process", function(req, res) {
 
 // Sign-in Route
 router.get("/sign-in", function(req, res, next) {
-    console.log(__dirname);
     res.sendFile("sign-in.html", views_options, function(err) {
         if(err) {
             next(err);
