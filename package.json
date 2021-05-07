@@ -1,7 +1,6 @@
 {
   "name": "wooggooms",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "dependencies": {
     "express": "^4.17.1",
@@ -13,5 +12,14 @@
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LM-channel-team-project/wooggooms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LM-channel-team-project/wooggooms/issues"
+  },
+  "homepage": "https://github.com/LM-channel-team-project/wooggooms#readme",
+  "description": ""
 }
