@@ -7,12 +7,16 @@ const views_options = {
 
 // Mypage Route
 router.get("/", function(req, res, next) {
-    res.sendFile("mypage.html", views_options, function(err) {
-        if(err) {
-            next(err);
-        } else {
-            console.log("Sent: mypage.html");
-        }
-    });
+    if(!req.session.isMember) {
+        res.send('로그인부터 하고 오세요!');
+    } else {
+        res.sendFile("mypage.html", views_options, function(err) {
+            if(err) {
+                next(err);
+            } else {
+                console.log("Sent: mypage.html");
+            }
+        });
+    }
 });
 module.exports = router;

@@ -7,13 +7,17 @@ const views_options = {
 
 // Create Route
 router.get("/", function(req, res, next) {
-    res.sendFile("create.html", views_options, function(err) {
-        if(err) {
-            next(err);
-        } else {
-            console.log("Sent: create.html");
-        }
-    });
+    if(!req.session.isMember) {
+        res.redirect('/auth/sign-in');
+    } else {
+        res.sendFile("create.html", views_options, function(err) {
+            if(err) {
+                next(err);
+            } else {
+                console.log("Sent: create.html");
+            }
+        });
+    }
 });
 
 router.post("/create_process", function(req, res) {

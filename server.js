@@ -1,16 +1,30 @@
 const express = require("express");
 const app = express();
 const helmet = require("helmet");
-const path = require("path");
+//const path = require("path");
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const mypageRouter = require('./routes/mypage');
 const createRouter = require('./routes/create');
-
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 const PORT = 3000;
 
-app.use(express.urlencoded( { extended: false }));
 app.use(helmet());
+app.use(express.urlencoded( { extended: false }));
+app.use(session({
+    secret: 'session_secret',
+    store: new MySQLStore({
+        host: 'localhost',
+        port: 3306,
+        user: 'root',
+        password: 'gnltk341',
+        database: 'wooggooms'
+    }),
+    resave: false,
+    saveUninitialized: false
+}));
+
 // Routers
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
