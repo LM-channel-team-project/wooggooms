@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const helmet = require("helmet");
-const path = require("path");
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const mypageRouter = require('./routes/mypage');
