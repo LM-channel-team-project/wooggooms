@@ -1,0 +1,8 @@
+{
+    "secret": "blahblahblah",
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "gnltk341",
+    "database": "wooggooms"
+}

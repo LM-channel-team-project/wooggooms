@@ -9,11 +9,12 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const views_options = {
     root : path.join(__dirname, "../views")
 }
+const dbCredentials = require('../config/mysql.json');
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'gnltk341',
-    database: 'wooggooms'
+    host: dbCredentials.host,
+    user: dbCredentials.user,
+    password: dbCredentials.password,
+    database: dbCredentials.database
 });
 db.connect();
 

@@ -12,14 +12,15 @@ const PORT = 3000;
 
 app.use(helmet());
 app.use(express.urlencoded( { extended: false }));
+const dbCredentials = require('./config/mysql.json');
 app.use(session({
-    secret: 'session_secret',
+    secret: dbCredentials.secret,
     store: new MySQLStore({
-        host: 'localhost',
-        port: 3306,
-        user: 'root',
-        password: 'gnltk341',
-        database: 'wooggooms'
+        host: dbCredentials.host,
+        port: dbCredentials.port,
+        user: dbCredentials.user,
+        password: dbCredentials.password,
+        database: dbCredentials.database
     }),
     resave: false,
     saveUninitialized: false
