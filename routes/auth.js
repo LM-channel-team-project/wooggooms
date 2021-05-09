@@ -32,8 +32,4 @@ router.get("/sign-in", function(req, res, next) {
     });
 });
 
-router.post("/sign-in_process", function(req, res) {
-    // Create DB table
-    res.redirect("/");
-});
 module.exports = router;
