@@ -7,7 +7,7 @@ const views_options = {
 
 // Create Route
 router.get("/", function(req, res, next) {
-    if(!req.session.isMember) {
+    if(!req.user) {
         res.redirect('/auth/sign-in');
     } else {
         res.sendFile("create.html", views_options, function(err) {

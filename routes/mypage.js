@@ -7,9 +7,10 @@ const views_options = {
 
 // Mypage Route
 router.get("/", function(req, res, next) {
-    if(!req.session.isMember) {
+    if(!req.user) {
         res.send('로그인부터 하고 오세요!');
     } else {
+        console.log(`반갑습니다 ${req.user.nickname}!`);
         res.sendFile("mypage.html", views_options, function(err) {
             if(err) {
                 next(err);

@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
 const helmet = require("helmet");
-//const path = require("path");
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const mypageRouter = require('./routes/mypage');
 const createRouter = require('./routes/create');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
+const passport = require('passport');
 const PORT = 3000;
 
 app.use(helmet());
@@ -24,12 +24,14 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 // Routers
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/mypage', mypageRouter);
 app.use('/create', createRouter);
+
 
 // 404 responses handler
 app.use(function (req, res, next) {

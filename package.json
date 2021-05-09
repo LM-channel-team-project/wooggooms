@@ -5,9 +5,14 @@
   "main": "server.js",
   "dependencies": {
     "express": "^4.17.1",
+    "express-mysql-session": "^2.1.5",
+    "express-session": "^1.17.1",
     "helmet": "^4.5.0",
     "mysql": "^2.18.1",
-    "nanoid": "^3.1.22"
+    "nanoid": "^3.1.22",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {

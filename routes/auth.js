@@ -3,6 +3,9 @@ const router = express.Router();
 const path = require("path");
 const { nanoid } = require('nanoid');
 const mysql = require('mysql');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const views_options = {
     root : path.join(__dirname, "../views")
 }
@@ -13,6 +16,78 @@ const db = mysql.createConnection({
     database: 'wooggooms'
 });
 db.connect();
+
+
+// Passport Local-Strategy
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    db.query(`SELECT * FROM user WHERE id=?`,
+        [id],
+        function(err, results) {
+            const user = results[0];
+            if(!user) { return done(err, false) }
+            return done(null, user);
+        }
+    );
+    console.log('deserialized DONE!');
+});
+
+passport.use(new LocalStrategy(
+    {
+        usernameField: 'email',
+        passwordField: 'pwd'
+    },
+    function (email, password, done) {
+        db.query(`SELECT * FROM user WHERE email=?`,
+            [email],
+            function(err, results) {
+                const user = results[0];
+                if(err) { return done(err); }
+                if(!user) {
+                    return done(null, false, { message: 'Incorrect email' });
+                }
+                if(password !== user.password) {
+                    return done(null, false, { message: 'Incorrect password' });
+                }
+                return done(null, user);
+            }
+        )
+    }
+))
+
+// Passport GoogleOAuth Strategy
+const googleCredentials = require('../config/google.json');
+
+passport.use(new GoogleStrategy({
+    clientID: googleCredentials.web.client_id,
+    clientSecret: googleCredentials.web.client_secret,
+    callbackURL: googleCredentials.web.redirect_uris[0]
+  },
+  function(accessToken, refreshToken, profile, done) {
+      const email = profile.emails[0].value;
+
+    //   이 사용자를 DB에서 어떻게 처리할 건지?
+    //   처리가 완료되면 done(null, user)로 serializeUser 시킴.
+  }
+));
+
+router.get('/google',
+    passport.authenticate('google', {
+        scope: [
+            'https://www.googleapis.com/auth/plus.login'
+        ]
+    })
+);
+
+router.get('/google/callback', 
+    passport.authenticate('google', { failureRedirect: '/auth/sign-in' }),
+    function(req, res) {
+        res.redirect('/');
+});
+
 
 // Sign-up Route
 router.get("/sign-up", function(req, res, next) {
@@ -67,42 +142,18 @@ router.get("/sign-in", function(req, res, next) {
 });
 
 // Sign-in_process Route
-router.post("/sign-in_process", function(req, res) {
-    const post = req.body;
-    const email = post.email;
-    const pwd = post.pwd;
-    // 입력한 email과 일치하는 회원정보를 DB에서 찾는 query
-    db.query(`SELECT * FROM user WHERE email=?`,
-        [email],
-        function(err, results, fields) {
-            if(err) {
-                console.log(err);
-            }
-            if(!results[0]) {
-                // 입력한 email과 일치하는 값이 DB에 없는 경우
-                console.log('일치하는 이메일이 없습니다');
-            } else {
-                if(pwd === results[0].password) {
-                    // email & password가 일치하는 경우
-                    console.log('로그인에 성공했습니다');
-                    // 세션에 Memeber 여부 & 고유 id 값  추가
-                    req.session.isMember = true;
-                    req.session.user_id = results[0].id;
-                    req.session.save(function() {
-                        return res.redirect('/');
-                    })
-                } else {
-                    // password가 일치하지 않는 경우
-                    console.log('비밀번호가 일치하지 않습니다');
-                }
-            }
+router.post("/sign-in_process",
+    passport.authenticate('local', { failureRedirect: '/auth/sign-in' }),
+        function(req, res) {
+            req.session.save(function() {
+                res.redirect('/');
+            });
         }
-    );
-});
+);
 
 // Sign-out Route
 router.get("/sign-out", function(req, res) {
-    if(!req.session.isMember) {
+    if(!req.user) {
         res.send('로그인이 되어있지 않습니다.');
     } else {
         req.session.destroy(function() {
