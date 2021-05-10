@@ -7,6 +7,8 @@ const mypageRouter = require("./routes/mypage");
 const createRouter = require("./routes/create");
 const PORT = 3000;
 
+app.use(express.urlencoded({ extended: false }));
+
 app.use(helmet());
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
