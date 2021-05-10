@@ -9,19 +9,23 @@ const passport = require('passport');
 const session = require("express-session")
 const FileStore = require("session-file-store")(session)
 const PORT = 3000;
-
+const authData = {
+    email: "young961027@gmail.com",
+    password: "1234",
+    nickname: "loopbackseal"
+};
 app.use(helmet());
-app.use(passport.initialize());
-app.use(passport.session())
-app.use(express.urlencoded({ 
-    extended: false
-}));
 
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
     store: new FileStore()
+}));
+app.use(passport.initialize());
+app.use(passport.session())
+app.use(express.urlencoded({ 
+    extended: false
 }));
 
 passport.serializeUser(function(user, done) {

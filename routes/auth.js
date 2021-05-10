@@ -7,11 +7,6 @@ const FileStore = require("session-file-store")(session)
 const views_options = {
     root : path.join(__dirname, "../views")
 }
-const authData = {
-    email: "young961027@gmail.com",
-    password: "1234",
-    nickname: "loopbackseal"
-};
 
 const passport = require("passport"), LocalStrategy = require("passport-local").Strategy;
 
