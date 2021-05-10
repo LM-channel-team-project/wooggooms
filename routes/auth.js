@@ -69,7 +69,7 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
       const email = profile.emails[0].value;
-
+      console.log(email);
     //   이 사용자를 DB에서 어떻게 처리할 건지?
     //   처리가 완료되면 done(null, user)로 serializeUser 시킴.
   }
@@ -78,7 +78,8 @@ passport.use(new GoogleStrategy({
 router.get('/google',
     passport.authenticate('google', {
         scope: [
-            'https://www.googleapis.com/auth/plus.login'
+            'https://www.googleapis.com/auth/plus.login',
+            'email'
         ]
     })
 );

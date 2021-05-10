@@ -4,4 +4,4 @@ config/google.json
 
 config/mysql.json
 
-package-lock.json/
+package-lock.json
