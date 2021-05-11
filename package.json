@@ -1,11 +1,16 @@
 {
   "name": "wooggooms",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "dependencies": {
     "express": "^4.17.1",
-    "helmet": "^4.5.0"
+    "express-mysql-session": "^2.1.6",
+    "express-session": "^1.17.1",
+    "helmet": "^4.5.0",
+    "mysql": "^2.18.1",
+    "nanoid": "^3.1.23",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -13,5 +18,14 @@
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LM-channel-team-project/wooggooms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LM-channel-team-project/wooggooms/issues"
+  },
+  "homepage": "https://github.com/LM-channel-team-project/wooggooms#readme",
+  "description": ""
 }

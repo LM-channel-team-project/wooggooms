@@ -8,7 +8,11 @@
 </head>
 <body>
     <a href="/">👉Home</a>
-    <p>This is sign-in page.</p>
+    <form action="/auth/sign-in_process" method="post">
+        <input type="email" placeholder="이메일" name="email" required />
+        <input type="password" placeholder="비밀번호" name="password" required />
+        <input type="submit" value="이메일 로그인" />
+      </form>
     <a href="/auth/sign-up">👉회원가입 하러 가기</button>
 </body>
 </html>
