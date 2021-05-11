@@ -68,8 +68,7 @@ passport.use(new GoogleStrategy({
     callbackURL: googleCredentials.web.redirect_uris[0]
   },
   function(accessToken, refreshToken, profile, done) {
-      const email = profile.emails[0].value;
-      console.log(email);
+      console.log('HERE:',accessToken, refreshToken, profile);
     //   이 사용자를 DB에서 어떻게 처리할 건지?
     //   처리가 완료되면 done(null, user)로 serializeUser 시킴.
   }
@@ -79,7 +78,6 @@ router.get('/google',
     passport.authenticate('google', {
         scope: [
             'https://www.googleapis.com/auth/plus.login',
-            'email'
         ]
     })
 );
@@ -155,14 +153,10 @@ router.post("/sign-in_process",
 
 // Sign-out Route
 router.get("/sign-out", function(req, res) {
-    if(!req.user) {
-        res.send('로그인이 되어있지 않습니다.');
-    } else {
-        req.session.destroy(function() {
-            res.redirect('/');
-            console.log('로그아웃 처리되었습니다');
-        });
-    }
+    req.session.destroy(function() {
+        res.redirect('/');
+        console.log('로그아웃 처리되었습니다');
+    });
 })
 
 module.exports = router;
