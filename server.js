@@ -7,40 +7,28 @@ const mypageRouter = require('./routes/mypage');
 const createRouter = require('./routes/create');
 const passport = require('passport');
 const session = require("express-session")
-const FileStore = require("session-file-store")(session)
+const MySQLStore = require('express-mysql-session')(session);
 const PORT = 3000;
-const authData = {
-    email: "young961027@gmail.com",
-    password: "1234",
-    nickname: "loopbackseal"
-};
+
+app.use(express.urlencoded({ 
+    extended: false
+}));
 app.use(helmet());
 
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
-    store: new FileStore()
+    store: new MySQLStore({
+        host: process.env.DB_HOST,
+        port: 3306,
+        user: process.env.DB_USER,
+        password: process.env.DB_PWD,
+        database: 'wooggooms'
+    })
 }));
 app.use(passport.initialize());
-app.use(passport.session())
-app.use(express.urlencoded({ 
-    extended: false
-}));
-
-passport.serializeUser(function(user, done) {
-    console.log("Serialize User : ",user)
-    done(null, user.email);
-    // done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-    console.log("Deserialize User : ", id);
-    done(null, authData);
-    // User.findById(id, function(err, user) {
-        //     done(err, user);
-        // });
-    });
+app.use(passport.session());
     
 // Routers
 app.use('/', indexRouter);
