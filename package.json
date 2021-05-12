@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.5",
     "express-session": "^1.17.1",
@@ -14,7 +15,14 @@
     "passport-google-oauth": "^2.0.0",
     "passport-local": "^1.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-html": "^6.1.2",
+    "eslint-plugin-import": "^2.22.1",
+    "prettier": "2.3.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

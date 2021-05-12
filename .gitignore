@@ -2,6 +2,6 @@ node_modules/
 
 config/google.json
 
-config/mysql.json
-
 package-lock.json
+
+.env

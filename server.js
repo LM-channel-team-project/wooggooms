@@ -1,30 +1,26 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const helmet = require("helmet");
+const session = require('express-session');
+const passport = require('passport');
+const helmet = require('helmet');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const mypageRouter = require('./routes/mypage');
 const createRouter = require('./routes/create');
-const session = require('express-session');
-const MySQLStore = require('express-mysql-session')(session);
-const passport = require('passport');
+const dbConfig = require('./config/databaseConfig');
 const PORT = 3000;
+const dotenv = require('dotenv').config();
 
 app.use(helmet());
-app.use(express.urlencoded( { extended: false }));
-const dbCredentials = require('./config/mysql.json');
-app.use(session({
-    secret: dbCredentials.secret,
-    store: new MySQLStore({
-        host: dbCredentials.host,
-        port: dbCredentials.port,
-        user: dbCredentials.user,
-        password: dbCredentials.password,
-        database: dbCredentials.database
-    }),
+app.use(express.urlencoded({ extended: false }));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    store: dbConfig.db,
     resave: false,
     saveUninitialized: false
-}));
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 // Routers
@@ -33,19 +29,18 @@ app.use('/auth', authRouter);
 app.use('/mypage', mypageRouter);
 app.use('/create', createRouter);
 
-
 // 404 responses handler
 app.use(function (req, res, next) {
-    res.status(404).send("Sorry can't find that!");
+  res.status(404).send("Sorry can't find that!");
 });
 
 // Server error handler
 app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.status(500).send("Something broke!");
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
 // Start HTTP server listening
-app.listen(PORT, function() {
-    console.log(`listening on ${PORT}`);
+app.listen(PORT, function () {
+  console.log(`listening on ${PORT}`);
 });
