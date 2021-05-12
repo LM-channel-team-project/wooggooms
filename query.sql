@@ -1,6 +1,6 @@
 CREATE  TABLE `USERS` (
   `id` VARCHAR(30) NOT NULL,
-  `email` VARCHAR(45) NOT NULL ,
+  `email` VARCHAR(45) NULL ,
   `password` VARCHAR(45) NULL ,
   `nickname` VARCHAR(45) NOT NULL ,
   `sns_type` VARCHAR(10)  NULL,
