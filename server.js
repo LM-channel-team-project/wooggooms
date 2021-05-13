@@ -1,46 +1,19 @@
 /* eslint-disable no-console */
-// express
 const express = require('express');
 
-const app = express();
-app.use(express.urlencoded({ extended: false }));
-
-// helmet
-const helmet = require('helmet');
-
-app.use(helmet());
-
-// session
-const session = require('express-session');
-const MySQLStore = require('express-mysql-session')(session);
-
-const options = {
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: '111111',
-  database: 'wooggooms'
-};
-const sessionStore = new MySQLStore(options);
-app.use(
-  session({
-    key: 'session_cookie_name',
-    secret: 'session_cookie_secret',
-    store: sessionStore,
-    resave: false,
-    saveUninitialized: false
-  })
-);
-
-// passport
+const router = express.Router();
 const passport = require('passport');
 
-app.use(passport.initialize());
-app.use(passport.session());
+const app = express();
+
+module.exports = app;
+
+require('./config/express')(app, passport);
+require('./config/passport')(passport);
 
 // router
 const indexRouter = require('./routes/index');
-const authRouter = require('./routes/auth');
+const authRouter = require('./routes/auth')(router, passport);
 const mypageRouter = require('./routes/mypage');
 const createRouter = require('./routes/create');
 
