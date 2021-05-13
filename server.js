@@ -8,7 +8,8 @@ const app = express();
 
 module.exports = app;
 
-require('./config/express')(app, passport);
+const db = require('./config/database')();
+require('./config/express')(app, passport, db);
 require('./config/passport')(passport);
 
 // router

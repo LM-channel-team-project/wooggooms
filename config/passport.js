@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const db = require('./database');
+const db = require('./database.js')();
 const local = require('./passport/local');
 
 module.exports = function (passport) {

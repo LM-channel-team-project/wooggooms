@@ -1,9 +1,8 @@
 const helmet = require('helmet');
 const express = require('express');
 const session = require('express-session');
-const db = require('./database.js');
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, db) {
   app.use(helmet());
   app.use(express.urlencoded({ extended: false }));
   app.use(
