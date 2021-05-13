@@ -13,7 +13,7 @@ const MySQLStore = require('express-mysql-session')(session);
 
 const config = require('./config/databaseConfig');
 const db = config.db;
-const sessionStore = new MySQLStore({ port: 3306 }, db);
+const sessionStore = new MySQLStore({}, db);
 app.use(
   session({
     secret: 'keyboard cat',
@@ -56,7 +56,3 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
 });
-
-// module.exports = {
-//   connection: new MySQLStore({ port: 3306 }, db)
-// };
