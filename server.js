@@ -7,7 +7,7 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const mypageRouter = require('./routes/mypage');
 const createRouter = require('./routes/create');
-const dbConfig = require('./config/databaseConfig');
+const dbConfig = require('./config/database');
 const PORT = 3000;
 const dotenv = require('dotenv').config();
 

@@ -9,7 +9,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const views_options = {
   root: path.join(__dirname, '../views')
 };
-const dbConfig = require('../config/databaseConfig');
+const dbConfig = require('../config/database');
 const { db } = dbConfig;
 const dotenv = require('dotenv').config();
 
@@ -167,7 +167,7 @@ router.get(
 router.get(
   '/google',
   passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/plus.login']
+    scope: ['https://www.googleapis.com/auth/userinfo.profile']
   })
 );
 
