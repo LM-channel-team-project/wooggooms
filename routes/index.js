@@ -9,7 +9,6 @@ const views_options = {
   root: path.join(__dirname, '../views')
 };
 
-// Main Route
 router.get('/', (req, res, next) => {
   res.sendFile('main.html', views_options, err => {
     if (err) {
