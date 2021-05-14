@@ -23,6 +23,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+require('./config/passport')(passport);
 // Routers
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
