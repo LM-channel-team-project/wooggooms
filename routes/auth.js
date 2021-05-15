@@ -57,53 +57,42 @@ passport.use(
 );
 
 // Passport GoogleOAuth Strategy
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GG_ID,
-      clientSecret: process.env.GG_SECRET,
-      callbackURL: process.env.GG_CBURL
-    },
-    function (accessToken, refreshToken, profile, done) {
-      const sns_id = profile.id;
-      const sns_type = profile.provider;
-      const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
-      db.query(sql, [sns_id, sns_type], function (err, results) {
-        const user = results[0];
-        // 처음 방문한 유저라면: 회원가입 시키고 로그인 시키기
-        if (!user) {
-          const id = nanoid();
-          const nickname = profile.displayName;
-          const sql =
-            'INSERT INTO user (id, sns_id, sns_type, nickname) VALUES (?, ?, ?, ?)';
-          db.query(
-            sql,
-            [id, sns_id, sns_type, nickname],
-            function (err, result, field) {
-              if (err) {
-                console.log(err);
-              }
-              console.log('구글계정으로 처음 방문하셨네요!');
-              const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
-              db.query(sql, [sns_id, sns_type], function (err, results) {
-                if (err) {
-                  console.log(err);
-                }
-                console.log('구글계정으로 가입시켰습니다!');
-                return done(null, results[0]);
-              });
-            }
-          );
-        }
-        // 처음 방문한 유저가 아니라면: 바로 로그인 시키기
-        if (user) {
-          console.log('재방문 하셨네요!');
-          return done(null, user);
-        }
-      });
-    }
-  )
-);
+// passport.use(
+//   new GoogleStrategy(
+//     {
+//       clientID: process.env.GG_ID,
+//       clientSecret: process.env.GG_SECRET,
+//       callbackURL: process.env.GG_CBURL
+//     },
+//     function (accessToken, refreshToken, profile, done) {
+//       const sns_id = profile.id;
+//       const sns_type = profile.provider;
+//       const sql_select = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
+//       db.query(sql_select, [sns_type, sns_id], (err, results) => {
+//         const user = results[0];
+//         if (err) {
+//           return done(err);
+//         }
+//         // 회원정보가 없는 경우 => 가입
+//         if(!user) {
+//           const id = nanoid();
+//           const nickname = profile.displayName;
+//           const sql_insert = 'INSERT INTO user (id, sns_id, sns_type, nickname) VALUES (?, ?, ?, ?)';
+//           db.query(sql_insert,
+//             [id, sns_id, sns_type, nickname],
+//             (err) => {
+//               if(err) {
+//                 return done(err)
+//               }
+//             }
+//           )
+//         }
+//         // 회원정보가 있는 경우 => 로그인
+//         return done(null, user);
+//       });
+//     }
+//   )
+// );
 
 // Passport Facebook Strategy
 passport.use(
