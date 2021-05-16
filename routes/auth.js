@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const path = require('path');
 const { nanoid } = require('nanoid');
@@ -6,28 +7,28 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
-const views_options = {
-  root: path.join(__dirname, '../views')
-};
-const dbConfig = require('../config/database');
-const { db } = dbConfig;
-const dotenv = require('dotenv').config();
 
-passport.serializeUser(function (user, done) {
+const views_options = {
+  root: path.join(__dirname, '../views'),
+};
+const dotenv = require('dotenv').config();
+const dbConfig = require('../config/database');
+
+const { db } = dbConfig;
+
+passport.serializeUser((user, done) => {
   done(null, user.id);
-  console.log('serialized: ', user);
 });
 
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser((id, done) => {
   const sql = 'SELECT * FROM user WHERE id=?';
-  db.query(sql, [id], function (err, results) {
+  db.query(sql, [id], (err, results) => {
     const user = results[0];
     if (!user) {
       return done(err, false);
     }
     return done(null, user);
   });
-  console.log('deserialized');
 });
 
 // Passport Local-Strategy
@@ -35,11 +36,11 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: 'email',
-      passwordField: 'pwd'
+      passwordField: 'pwd',
     },
-    function (email, password, done) {
+    (email, password, done) => {
       const sql = 'SELECT * FROM user WHERE email=?';
-      db.query(sql, [email], function (err, results) {
+      db.query(sql, [email], (err, results) => {
         const user = results[0];
         if (err) {
           return done(err);
@@ -57,42 +58,48 @@ passport.use(
 );
 
 // Passport GoogleOAuth Strategy
-// passport.use(
-//   new GoogleStrategy(
-//     {
-//       clientID: process.env.GG_ID,
-//       clientSecret: process.env.GG_SECRET,
-//       callbackURL: process.env.GG_CBURL
-//     },
-//     function (accessToken, refreshToken, profile, done) {
-//       const sns_id = profile.id;
-//       const sns_type = profile.provider;
-//       const sql_select = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
-//       db.query(sql_select, [sns_type, sns_id], (err, results) => {
-//         const user = results[0];
-//         if (err) {
-//           return done(err);
-//         }
-//         // 회원정보가 없는 경우 => 가입
-//         if(!user) {
-//           const id = nanoid();
-//           const nickname = profile.displayName;
-//           const sql_insert = 'INSERT INTO user (id, sns_id, sns_type, nickname) VALUES (?, ?, ?, ?)';
-//           db.query(sql_insert,
-//             [id, sns_id, sns_type, nickname],
-//             (err) => {
-//               if(err) {
-//                 return done(err)
-//               }
-//             }
-//           )
-//         }
-//         // 회원정보가 있는 경우 => 로그인
-//         return done(null, user);
-//       });
-//     }
-//   )
-// );
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GG_ID,
+      clientSecret: process.env.GG_SECRET,
+      callbackURL: process.env.GG_CBURL,
+    },
+    (accessToken, refreshToken, profile, done) => {
+      const sns_id = profile.id;
+      const sns_type = profile.provider;
+      const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
+      db.query(sql, [sns_id, sns_type], (err, results) => {
+        const user = results[0];
+        if (!user) {
+          const id = nanoid();
+          const sns_profile = profile.photos[0].value;
+          const nickname = profile.displayName;
+          const sql = 'INSERT INTO user (id, sns_id, sns_type, sns_profile, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
+          db.query(
+            sql,
+            [id, sns_id, sns_type, sns_profile, nickname],
+            err => {
+              if (err) {
+                return done(err);
+              }
+              const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
+              db.query(sql, [sns_id, sns_type], (err, results) => {
+                if (err) {
+                  return done(err);
+                }
+                return done(null, results[0]);
+              });
+            }
+          );
+        }
+        if (user) {
+          return done(null, user);
+        }
+      });
+    }
+  )
+);
 
 // Passport Facebook Strategy
 passport.use(
@@ -100,42 +107,38 @@ passport.use(
     {
       clientID: process.env.FB_ID,
       clientSecret: process.env.FB_SECRET,
-      callbackURL: process.env.FB_CBURL
+      callbackURL: process.env.FB_CBURL,
     },
-    function (accessToken, refreshToken, profile, done) {
+    (accessToken, refreshToken, profile, done) => {
+      console.log('Profile: ', profile);
       const sns_id = profile.id;
       const sns_type = profile.provider;
       const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
-      db.query(sql, [sns_id, sns_type], function (err, results) {
+      db.query(sql, [sns_id, sns_type], (err, results) => {
         const user = results[0];
-        // 처음 방문한 유저라면: 회원가입 시키고 로그인 시키기
         if (!user) {
           const id = nanoid();
+          const sns_profile = '';
           const nickname = profile.displayName;
-          const sql =
-            'INSERT INTO user (id, sns_id, sns_type, nickname) VALUES (?, ?, ?, ?)';
+          const sql = 'INSERT INTO user (id, sns_id, sns_type, sns_profile, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
           db.query(
             sql,
-            [id, sns_id, sns_type, nickname],
-            function (err, result, field) {
+            [id, sns_id, sns_type, sns_profile, nickname],
+            err => {
               if (err) {
-                console.log(err);
+                return done(err);
               }
-              console.log('페이스북 계정으로 처음 방문하셨네요!');
               const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
-              db.query(sql, [sns_id, sns_type], function (err, results) {
+              db.query(sql, [sns_id, sns_type], (err, results) => {
                 if (err) {
-                  console.log(err);
+                  return done(err);
                 }
-                console.log('페이스북 계정으로 가입시켰습니다!');
                 return done(null, results[0]);
               });
             }
           );
         }
-        // 처음 방문한 유저가 아니라면: 바로 로그인 시키기
         if (user) {
-          console.log('재방문 하셨네요!');
           return done(null, user);
         }
       });
@@ -149,28 +152,28 @@ router.get(
   '/facebook/callback',
   passport.authenticate('facebook', {
     successRedirect: '/',
-    failureRedirect: '/auth/sign-in'
+    failureRedirect: '/auth/sign-in',
   })
 );
 
 router.get(
   '/google',
   passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/userinfo.profile']
+    scope: ['https://www.googleapis.com/auth/userinfo.profile'],
   })
 );
 
 router.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/sign-in' }),
-  function (req, res) {
+  (req, res) => {
     res.redirect('/');
   }
 );
 
 // Sign-up Route
-router.get('/sign-up', function (req, res, next) {
-  res.sendFile('sign-up.html', views_options, function (err) {
+router.get('/sign-up', (req, res, next) => {
+  res.sendFile('sign-up.html', views_options, err => {
     if (err) {
       next(err);
     } else {
@@ -181,37 +184,31 @@ router.get('/sign-up', function (req, res, next) {
 
 // Sign-up_process Route
 // POST request 암호화 필요
-router.post('/sign-up_process', function (req, res) {
-  console.log(req.body);
+router.post('/sign-up_process', (req, res) => {
   const post = req.body;
   const id = nanoid();
-  const email = post.email;
-  const pwd = post.pwd;
-  const pwd2 = post.pwd2;
-  const nickname = post.nickname;
-  const sql =
-    'INSERT INTO user (id, email, password, nickname) VALUES (?, ?, ?, ?)';
-  // 이메일주소, 패스워드, 닉네임 유효성 검사 기능 필요
+  const { email } = post;
+  const { pwd } = post;
+  const { pwd2 } = post;
+  const { nickname } = post;
+  const sql = 'INSERT INTO user (id, email, password, nickname) VALUES (?, ?, ?, ?)';
   if (pwd !== pwd2) {
-    // 비밀번호가 일치하지 않는 경우, 회원가입 불가 기능 추가 필요
     console.log('비밀번호가 일치하지 않습니다');
   } else {
-    // MySQL wooggoooms-user에 회원정보 저장
-    db.query(sql, [id, email, pwd, nickname], function (err, result, fields) {
+    db.query(sql, [id, email, pwd, nickname], (err, result, fields) => {
       if (err) {
         console.log(err);
       } else {
         console.log('New User Signed Up!');
       }
     });
-    // '회원가입이 완료되었습니다' 팝업. 확인 누르면 로그인 페이지로 리다이렉트
     res.redirect('/auth/sign-in');
   }
 });
 
 // Sign-in Route
-router.get('/sign-in', function (req, res, next) {
-  res.sendFile('sign-in.html', views_options, function (err) {
+router.get('/sign-in', (req, res, next) => {
+  res.sendFile('sign-in.html', views_options, err => {
     if (err) {
       next(err);
     } else {
@@ -224,16 +221,16 @@ router.get('/sign-in', function (req, res, next) {
 router.post(
   '/sign-in_process',
   passport.authenticate('local', { failureRedirect: '/auth/sign-in' }),
-  function (req, res) {
-    req.session.save(function () {
+  (req, res) => {
+    req.session.save(() => {
       res.redirect('/');
     });
   }
 );
 
 // Sign-out Route
-router.get('/sign-out', function (req, res) {
-  req.session.destroy(function () {
+router.get('/sign-out', (req, res) => {
+  req.session.destroy(() => {
     res.redirect('/');
     console.log('로그아웃 처리되었습니다');
   });
