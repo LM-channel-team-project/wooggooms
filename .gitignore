@@ -1,0 +1,7 @@
+node_modules/
+
+config/google.json
+
+package-lock.json
+
+.env
