@@ -1,20 +1,18 @@
 const express = require('express');
 
 const router = express.Router();
-const path = require('path');
-
-const views_options = {
-  root: path.join(__dirname, '../views')
-};
+const dbConfig = require('../config/database');
 
 // Main Route
 router.get('/', (req, res, next) => {
-  res.sendFile('main.html', views_options, err => {
+  const selectGroupList = 'SELECT * FROM study_group';
+  dbConfig.db.query(selectGroupList, (err, results) => {
     if (err) {
       next(err);
     } else {
-      console.log('Sent: main.html');
+      res.render('main', { data: results });
     }
   });
 });
+
 module.exports = router;

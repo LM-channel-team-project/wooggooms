@@ -14,17 +14,19 @@ const dbConfig = require('./config/database');
 const PORT = 3000;
 
 app.use(helmet());
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     store: dbConfig.db,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.set('view engine', 'ejs');
 // Routers
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
