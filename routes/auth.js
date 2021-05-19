@@ -73,13 +73,14 @@ function signUpGoogle(profile) {
     if (err) {
       next(err);
     } else {
-      console.log(`[${email}] [${nickname}] [${sns_type}] signed up for a google account.`);
+      console.log(`[] signed up for a google account.`);
       // 적용시 console.log()가 동작하지 않음 -> next(err)이 적용된건지 확인 필요.
     }
   });
   const isUserSQL = 'SELECT * FROM USERS WHERE sns_id=?'; // sns_id를 통해 db내에 존재하는 특정 회원을 지정.
+  const user = '';
   db.query(isUserSQL,profile.id,(err,results) => {
-    const user = results[0];
+    user = results[0];
   });
   // 해당 경우는 바로 위에서 회원가입을 했기 때문에 가독성을 위해 if(err)과 if(!user)를 생략하였으나,
   // 혹시 모를 오류에 대비하여 해당 항목 추가할 것.
@@ -178,7 +179,6 @@ router.get('/sign-out', function (req, res) {
   console.log('Signed out.');
   res.redirect('/');
 });
-
 
 
 module.exports = router;

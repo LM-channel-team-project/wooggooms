@@ -7,8 +7,14 @@
     <title>Document</title>
   </head>
   <body>
-    <a href="/auth/sign-in">👉LOGIN</a>
-    <a href="/mypage">👉MYPAGE</a>
+    <!-- 사용자가 로그인 되지 않았을 경우 -->
+    <sectoin class="isNotLogin">
+      <a href="/auth/sign-in">👉LOGIN</a>
+    </section>
+    <!-- 사용자의 로그인이 확인 된 경우 -->
+    <section class="isLogin">
+      <a href="/mypage">👉MYPAGE</a>
+    </section>
     <p>Welcome! this is main page.</p>
     <a href="/create">👉CREATE A STUDY👈</a>
     <div style="border: 1px solid">
