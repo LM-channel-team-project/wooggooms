@@ -116,6 +116,7 @@ passport.use(
       const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
       db.query(sql, [sns_id, sns_type], (err, results) => {
         const user = results[0];
+        console.log(results);
         if (!user) {
           const id = nanoid();
           const sns_profile = '';
