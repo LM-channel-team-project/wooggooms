@@ -5,6 +5,7 @@ html {
   font-size: 20px;
   height: 100%;
   display: flex;
+  background-color: aquamarine;
   justify-content: center;
 }
 body {
@@ -30,6 +31,7 @@ section {
   display: flex;
   overflow-x: scroll;
   padding-top: 16px;
+  padding-bottom: 13px;
   margin-left: 4px;
 }
 .main-category-num {
@@ -44,7 +46,7 @@ section {
 .middle-category {
   display: flex;
   overflow-x: scroll;
-  padding-top: 13px;
+  height: 40px;
   margin-left: 3px;
 }
 .middle-category-num {
