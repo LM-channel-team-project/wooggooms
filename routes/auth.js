@@ -192,11 +192,11 @@ router.post('/sign-up_process', (req, res) => {
   const { pwd } = post;
   const { pwd2 } = post;
   const { nickname } = post;
-  const sql = 'INSERT INTO user (id, email, password, nickname) VALUES (?, ?, ?, ?)';
+  const sql = 'INSERT INTO user (id, email, password, nickname, create_date) VALUES (?, ?, ?, ?, NOW())';
   if (pwd !== pwd2) {
     console.log('비밀번호가 일치하지 않습니다');
   } else {
-    db.query(sql, [id, email, pwd, nickname], (err, result, fields) => {
+    db.query(sql, [id, email, pwd, nickname], err => {
       if (err) {
         console.log(err);
       } else {
