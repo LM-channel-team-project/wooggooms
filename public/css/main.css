@@ -1,0 +1,75 @@
+@charset 'utf-8';
+
+html {
+  font-family: 'Gothic A1', sans-serif;
+  font-size: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+body {
+  padding-left: 12px;
+  padding-right: 13px;
+  overflow-x: hidden;
+  width: 350px;
+  height: inherit;
+  /* overflow-x: hidden; */
+  color: rgb(29, 29, 31);
+  background: white;
+}
+section {
+  margin-top: 0.3rem;
+  background-color: blueviolet;
+}
+
+.classification-section {
+  min-height: 93px;
+  height: 14%;
+}
+.main-category {
+  display: flex;
+  overflow-x: scroll;
+  padding-top: 16px;
+  margin-left: 4px;
+}
+.main-category-num {
+  background-color: blue;
+  text-align: center;
+  padding-top: 7px;
+  margin-left: 9px;
+  min-width: 60px;
+  height: 30px;
+  font-size: 14px;
+}
+.middle-category {
+  display: flex;
+  overflow-x: scroll;
+  padding-top: 13px;
+  margin-left: 3px;
+}
+.middle-category-num {
+  background-color: blue;
+  text-align: center;
+  padding-top: 5px;
+  margin-left: 3px;
+  min-width: 50px;
+  height: 20px;
+  font-size: 9px;
+}
+.search-form {
+  display: flex;
+  min-height: 45px;
+  align-items: center;
+  justify-content: center;
+  height: 6%;
+}
+
+.search-input {
+  margin-left: 20%;
+  height: 27px;
+}
+.search-button-input {
+  margin-left: 2%;
+  margin-right: 18%;
+  height: 27px;
+}

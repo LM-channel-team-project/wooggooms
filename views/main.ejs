@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/public/css/default.css" />
+    <link rel="stylesheet" href="/public/css/main.css" type="text/css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="/auth/sign-in">👉LOGIN</a>
+    <a href="/mypage">👉MYPAGE</a>
+    <section class="classification-section">
+      <div class="main-category">
+        <% for (var i = 0;i < mainCategory.length;i++){ %>
+        <div class="main-category-num" id="<%= i %>">
+          <%= mainCategory[i] %>
+        </div>
+        <% } %>
+      </div>
+      <div class="middle-category">
+        <% for (var i = 0;i < mainCategory.length;i++){ %>
+        <div class="middle-category-num" id="<%= i %>">
+          <%= middleCategory[2][i] %>
+        </div>
+        <% } %>
+      </div>
+    </section>
+    <section class="search-section">
+      <form action="/" method="post" class="search-form">
+        <input
+          class="search-input"
+          type="text"
+          name="studygroup-search"
+          placeholder="검색"
+        />
+        <input class="search-button-input" type="submit" value="검색" />
+      </form>
+    </section>
+    <a href="/create">👉CREATE A STUDY👈</a>
+    <div style="border: 1px solid">
+      Study List
+      <div style="border: 1px solid">STUDY 1</div>
+      <div style="border: 1px solid">STUDY 2</div>
+      <div style="border: 1px solid">STUDY 3</div>
+    </div>
+    <a href="/auth/sign-out">👉LOG OUT</a>
+  </body>
+</html>
