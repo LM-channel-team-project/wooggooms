@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <div id='headerLogo'>(logo)</div>
+        <a href='/' id='headerLogo' class='logo'>(logo)</a>
         <a href='/' id='headerText'>(우. 꿈. 스)</a>
             <% if(!isLoggedIn) { %>
             <a href='/auth/sign-in' id='signIn' class='headerBtn'>(sign in)</a>
@@ -28,7 +28,6 @@
             <a href='/create' class='createStudyBtn'>(새로운 스터디 만들기)</a>
             <p class='studyList'>My Study List</p>
             <% } %> 
-
         </div>
     </section>
     <section>

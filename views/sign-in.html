@@ -5,19 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <a href="/">👉Home</a>
-    <p>This is sign-in page.</p>
-    <form action="/auth/sign-in_process" method="post">
-        <p><input type="text" name="email" placeholder="email"></p>
-        <p><input type="password" name="pwd" placeholder="password"></p>
-        <p>
-            <input type="submit" value="sign-up">
-        </p>
+    <a id="signInLogo" class="logo" href="/">(logo)</a>
+    <form action="/auth/sign-in_process" method="post" id="signinForm" class="formContainer">
+        <input class="formInput" type="text" name="email" placeholder="이메일">
+        <input class="formInput" type="password" name="pwd" placeholder="비밀번호">
+        <input class="submitBtn" type="submit" value="이메일 로그인">
     </form>
-    <a href="/auth/google">👉Google로 로그인</a>
-    <a href="/auth/facebook">👉Facebook으로 로그인</a>
-    <a href="/auth/sign-up">👉회원가입 하러 가기</a>
+    <div id="snsContainer">
+        <a href="/auth/google">(Google)</a>
+        <a href="/auth/facebook">(Facebook)</a>
+    </div>
+    <div id="authPanel">
+        <a id="signupLink" href="/auth/sign-up">이메일 회원가입</a>
+        <span>|</span>
+        <a id="resetPwdLink" href="">비밀번호 재설정</a>
+    </div>
 </body>
 </html>

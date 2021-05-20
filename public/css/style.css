@@ -1,12 +1,13 @@
 :root {
     --body-width: 375px;
+    /* Logo */
+    --logo-width: ;
+    --logo-height: ;
 
     /* Header */
     --header-width: 350px;
     --header-height: 50px;
     --header-bg-color: #e5e5e5;
-    --header-logo-width: ;
-    --header-logo-height: ;
     --header-logo-margin: 0 0 0 10px;
     --header-text-width: ;
     --header-text-height: ;
@@ -23,6 +24,11 @@
     --create-button-hegiht: ;
     --my-study-list-width: ;
     --my-study-list-height: ;
+
+    /* Form Container */
+    --form-width: 240px;
+    --form-height: 40px;
+    --form-submit-margin: 40px;
 }
 
 body {
@@ -30,6 +36,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 header {
@@ -42,9 +49,12 @@ header {
     background-color: var(--header-bg-color);
 }
 
+.logo {
+    width: var(--logo-width);
+    height: var(--logo-height);
+}
+
 #headerLogo {
-    width: var(--header-logo-width);
-    height: var(--header-logo-height);
     margin: var(--header-logo-margin);
 }
 
@@ -71,4 +81,38 @@ header {
 
 #createContainer .createStudyBtn {
     margin: auto;
+}
+
+#signInLogo, #signUpLogo {
+    margin: 80px;
+}
+
+.formContainer {
+    width: var(--form--width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formInput {
+    width: var(--form-width);
+    height: var(--form-height);
+}
+
+.submitBtn {
+    width: var(--form-width);
+    height: var(--form-height);
+    margin: var(--form-submit-margin);
+}
+
+#snsContainer {
+    width:  var(--form-width);
+    height: var(--form-height);
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#authPanel {
+    margin: 20px;
 }
