@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
     if (err) {
       next(err);
     } else {
-      res.render('main', { data: results });
+      res.render('index', { data: results });
     }
   });
 });

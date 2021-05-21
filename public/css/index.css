@@ -1,82 +1,88 @@
 :root {
   /* Group List */
-  --body-width: 375px;
-
-  --group-list-container-width: 350px;
-  --group-list-container-height: 100%;
-  --group-list-container-margin: auto;
-  --group-list-container-padding: 10px;
   --group-list-container-color: #e5e5e5;
+  --group-list-container-margin: 12px;
+  --group-list-container-padding: 11px;
 
-  --thumnail-container-width: 80px;
+  --list-spacing-margin-bottom: 16px;
+
+  --thumnail-container-width: 120px;
   --thumnail-container-height: 80px;
+  --thumnail-container-margin-right: 5px;
+  --thumnail-border-radius: 5%;
 
-  --thumnail-border-radius: 0%;
+  --group-table-border-spacing: 3px;
 
   --group-name-background-color: #c4c4c4;
   --group-name-font-color: #ffffff;
   --group-name-font-size: 20px;
-  --group-name-width: 234px;
+  --group-name-width: 198px;
   --group-name-height: 38px;
+  --group-name-padding: 0;
 
   --group-location-background-color: #c4c4c4;
   --group-location-font-color: #ffffff;
   --group-location-font-size: 12px;
-  --group-location-width: 141px;
+  --group-location-width: 119px;
   --group-location-height: 16px;
+  --group-location-padding: 0;
 
   --group-num-background-color: #c4c4c4;
   --group-num-font-color: #ffffff;
   --group-num-font-size: 12px;
-  --group-num-width: 89px;
-  --group-num-height: 16px;
+  --group-num-padding: 0px;
 
   --group-tag-background-color: #ffffff;
   --group-tag-font-color: #c4c4c4;
   --group-tag-font-size: 14px;
-  --group-tag-width: 234px;
-  --group-tag-height: 22px;
+  --group-tag-padding: 0;
 }
 
 html {
   height: 100%;
   margin: 0;
-  padding: 0px;
+  padding: 0;
 }
 
 body {
+  width: 375px;
   margin: 0 auto;
-  width: var(--body-width);
 }
 
-table {
-  text-align: center;
-  border-spacing: 3px;
-  margin-bottom: 13px;
-  table-layout: fixed;
-  cursor: pointer;
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 #groupListContainer {
-  width: var(--group-list-container-width);
-  height: var(--group-list-container-height);
+  background-color: var(--group-list-container-color);
   margin: var(--group-list-container-margin);
   padding: var(--group-list-container-padding);
-  background-color: var(--group-list-container-color);
   overflow: auto;
 }
 
-#groupListContainer .thumnail {
-  border-radius: var(--thumnail-border-radius);
-  height: 100%;
-  display: block;
-  margin: auto;
+#groupListContainer li {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--list-spacing-margin-bottom);
 }
 
 #groupListContainer .thumnailContainer {
   width: var(--thumnail-container-width);
   height: var(--thumnail-container-height);
-  table-layout: fixed;
+  margin-right: var(--thumnail-container-margin-right);
+}
+
+#groupListContainer .thumnail {
+  border-radius: var(--thumnail-border-radius);
+  height: 100%;
+}
+
+#groupListContainer table {
+  text-align: center;
+  cursor: pointer;
+  border-spacing: var(--group-table-border-spacing);
 }
 
 #groupListContainer .groupNameContainer {
@@ -85,7 +91,7 @@ table {
   font-size: var(--group-name-font-size);
   width: var(--group-name-width);
   height: var(--group-name-height);
-  table-layout: fixed;
+  padding: var(--group-name-padding);
 }
 
 #groupListContainer .groupLocationContainer {
@@ -94,19 +100,18 @@ table {
   font-size: var(--group-location-font-size);
   width: var(--group-location-width);
   height: var(--group-location-height);
+  padding: var(--group-location-padding);
 }
 #groupListContainer .groupNumContainer {
   background-color: var(--group-num-background-color);
   color: var(--group-num-font-color);
   font-size: var(--group-num-font-size);
-  width: var(--group-num-width);
-  height: var(--group-num-height);
+  padding: var(--group-num-padding);
 }
 
 #groupListContainer .groupTagContainer {
   background-color: var(--group-tag-background-color);
   color: var(--group-tag-font-color);
   font-size: var(--group-tag-font-size);
-  width: var(--group-tag-width);
-  height: var(--group-tag-height);
+  padding: var(--group-tag-padding);
 }

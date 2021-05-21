@@ -1,21 +1,26 @@
 <div id="groupListContainer">
-  <% data.forEach(function(group) { %>
-  <table onclick="location.href=''">
-    <tr>
-      <th rowspan="3" class="thumnailContainer">
-        <img class="thumnail" src="<%= group.thumnail %>" />
-      </th>
-      <th colspan="2" class="groupNameContainer"><%= group.name %></th>
-    </tr>
-    <tr>
-      <td class="groupLocationContainer"><%= group.location %></td>
-      <td class="groupNumContainer">
-        모집중 <%= group.num_member %>/<%= group.max_num_member %>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" class="groupTagContainer"><%= group.tag %></td>
-    </tr>
-  </table>
-  <% }); %>
+  <ul>
+    <% data.forEach(function(group) { %>
+    <li>
+      <div class="thumnailContainer">
+        <!-- <a href=""><img class="thumnail" src="<%= group.thumnail %>" /></a> -->
+        <a href=""><img class="thumnail" src="/code.jpg" /></a>
+      </div>
+      <table onclick="location.href=''">
+        <tr>
+          <th colspan="2" class="groupNameContainer"><%= group.name %></th>
+        </tr>
+        <tr>
+          <td class="groupLocationContainer"><%= group.location %></td>
+          <td class="groupNumContainer">
+            모집중 <%= group.num_member %>/<%= group.max_num_member %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="groupTagContainer"><%= group.tag %></td>
+        </tr>
+      </table>
+    </li>
+    <% }); %>
+  </ul>
 </div>

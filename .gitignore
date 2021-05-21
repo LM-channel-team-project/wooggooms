@@ -1,7 +1,13 @@
 node_modules/
 
-config/google.json
-
 package-lock.json
 
 .env
+
+db.sql
+
+.eslintrc.json
+
+.prettierrc
+
+code.jpg
