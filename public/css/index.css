@@ -1,0 +1,30 @@
+@import url(template.css);
+
+:root {
+    /* create container */
+    --create-container-width: 350px;
+    --create-container-height: 140px;
+    --create-container-bg-color: #e5e5e5;
+    --create-container-margin: 10px auto;
+    --create-button-width: ;
+    --create-button-hegiht: ;
+    --mystudy-list-width: ;
+    --mystudy-list-height: ;
+
+}
+
+#createContainer {
+    width: var(--create-container-width);
+    height: var(--create-container-height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: var(--create-container-margin);
+    background-color: var(--create-container-bg-color);
+}
+
+#createContainer .createStudyBtn {
+    margin: auto;
+}
+
+

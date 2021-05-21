@@ -5,16 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/css/auth.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <a id="signUpLogo" class="logo" href="/">(logo)</a>
-    <form action="/auth/sign-up_process" method="post" id="signinForm" class="formContainer">
+    <a href='/' id='signUpLogo' class='logo'>(logo)</a>
+    <form action="/auth/sign-up_process" method="post" id="signUnForm" class="formContainer">
         <input class="formInput" type="text" name="email" placeholder="이메일">
         <input class="formInput" type="password" name="pwd" placeholder="비밀번호">
         <input class="formInput" type="password" name="pwd2" placeholder="비밀번호 확인">
         <input class="formInput" type="text" name="nickname" placeholder="닉네임">
         <input class="submitBtn" type="submit" value="이메일 회원가입">
     </form>
+    <footer id="footer">
+        (회사소개 이용약관 copyright 등등)
+    </footer>
 </body>
 </html>

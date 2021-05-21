@@ -1,0 +1,48 @@
+@import url(template.css);
+
+:root {  
+    /* auth logo */
+    --auth-logo-width: ;
+    --auth-logo-height: ;
+    --auth-logo-margin: 80px;
+
+    /* form container */
+    --form-width: 240px;
+    --form-height: 40px;
+    --form-submit-margin: 40px;
+}
+
+
+#signInLogo, #signUpLogo {
+    margin: var(--auth-logo-margin);
+}
+
+.formContainer {
+    width: var(--form--width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formInput {
+    width: var(--form-width);
+    height: var(--form-height);
+}
+
+.submitBtn {
+    width: var(--form-width);
+    height: var(--form-height);
+    margin: var(--form-submit-margin);
+}
+
+#snsContainer {
+    width:  var(--form-width);
+    height: var(--form-height);
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#authPanel {
+    margin: 20px;
+}

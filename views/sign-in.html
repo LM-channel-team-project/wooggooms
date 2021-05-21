@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/css/auth.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <a id="signInLogo" class="logo" href="/">(logo)</a>
-    <form action="/auth/sign-in_process" method="post" id="signinForm" class="formContainer">
+    <a href='/' id='signInLogo' class='logo'>(logo)</a>
+    <form action="/auth/sign-in_process" method="post" id="signInForm" class="formContainer">
         <input class="formInput" type="text" name="email" placeholder="이메일">
         <input class="formInput" type="password" name="pwd" placeholder="비밀번호">
         <input class="submitBtn" type="submit" value="이메일 로그인">
@@ -23,5 +23,10 @@
         <span>|</span>
         <a id="resetPwdLink" href="">비밀번호 재설정</a>
     </div>
+    <footer id="footer">
+        (회사소개 이용약관 copyright 등등)
+    </footer>
+    <!-- scripts -->
+    <script src='/js/sign-in.js'></script>
 </body>
 </html>
