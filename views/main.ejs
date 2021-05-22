@@ -10,7 +10,7 @@
 <body>
     <header id="header">
         <a href='/' id='headerLogo' class='logo'>(logo)</a>
-        <a href='/' id='headerText'>(우. 꿈. 스)</a>
+        <a href='/' class='headerText'>(우. 꿈. 스)</a>
             <% if(!isLoggedIn) { %>
             <a href='/auth/sign-in' id='signIn' class='headerBtn'>(sign in)</a>
             <% } else { %>
@@ -29,7 +29,7 @@
             <% } %> 
         </div>
         <div id="groupListContainer">
-            스터디 목록
+            (스터디 목록)
         </div>
         <!-- 임시 로그아웃 버튼 -->
         <a href='/auth/sign-out'>👉로그아웃(임시버튼)</a>
@@ -37,8 +37,5 @@
     <footer id="footer">
         (회사소개 이용약관 copyright 등등)
     </footer>
-    
-    <!-- scripts -->
-    <script src='/js/index.js'></script>
 </body>
 </html>

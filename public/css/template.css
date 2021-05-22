@@ -55,7 +55,7 @@ header {
     margin: var(--header-logo-margin);
 }
 
-#headerText {
+.headerText {
     width: var(--header-text-width);
     height: var(--header-text-height);
 }

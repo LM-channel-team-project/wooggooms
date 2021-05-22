@@ -12,7 +12,6 @@ router.get('/', (req, res, next) => {
   if (!req.user) {
     res.redirect('/auth/sign-in');
   } else {
-    console.log('req.user: ', req.user);
     res.sendFile('create.html', views_options, err => {
       if (err) {
         next(err);

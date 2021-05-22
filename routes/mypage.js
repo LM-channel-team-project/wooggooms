@@ -4,6 +4,10 @@ const router = express.Router();
 
 // Mypage Route
 router.get('/', (req, res, next) => {
-  res.render('mypage');
+  if (!req.user) {
+    res.redirect('/auth/sign-in');
+  } else {
+    res.render('mypage');
+  }
 });
 module.exports = router;

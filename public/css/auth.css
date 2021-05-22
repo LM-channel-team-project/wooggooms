@@ -12,7 +12,6 @@
     --form-submit-margin: 40px;
 }
 
-
 #signInLogo, #signUpLogo {
     margin: var(--auth-logo-margin);
 }

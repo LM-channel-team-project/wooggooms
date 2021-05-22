@@ -11,7 +11,6 @@ const authRouter = require('./routes/auth');
 const mypageRouter = require('./routes/mypage');
 const createRouter = require('./routes/create');
 const dbConfig = require('./config/database');
-require('path');
 
 const PORT = 3000;
 
