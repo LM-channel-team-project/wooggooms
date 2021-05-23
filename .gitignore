@@ -4,10 +4,12 @@ package-lock.json
 
 .env
 
-db.sql
-
 .eslintrc.json
 
 .prettierrc
+
+.prettierignore
+
+db.sql
 
 code.jpg
