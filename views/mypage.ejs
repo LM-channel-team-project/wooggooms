@@ -8,17 +8,14 @@
     <link href="/css/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <header id="header">
-        <a href='/' id='headerLogo' class='logo'>(logo)</a>
-        <a href='/' class='headerText'>(우. 꿈. 스)</a>
-        <a href='/mypage' id='mypage' class='headerBtn'>(mypage)</a>
-    </header>
-    <main id=mypageContainer>
+    <!-- header -->
+    <%- include('includes/header'); %>
+    <!-- main -->
+    <main class="main">
         <p>This is mypage.</p>
         <a href='/auth/sign-out'>👉로그아웃(임시버튼)</a>
     </main>
-    <footer id="footer">
-        (회사소개 이용약관 copyright 등등)
-    </footer>
+    <!-- footer -->
+    <%- include('includes/footer'); %>
 </body>
 </html>

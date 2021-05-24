@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/index.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- header -->
+    <%- include('includes/header'); %>
+    <!-- main -->
+    <main class="main">
+        <div class="create-container">
+            <% if(!isLoggedIn) { %>
+            <a href='/auth/sign-in' class='create-container__button--unauthed'>(새로운 스터디 만들기)</a>
+            <% } else { %>
+            <!-- 내가 가입한 스터디가 있으면 n개 불러와서 출력 -->
+            <!-- 가입한 스터디 없으면 그대로 스터디 생성 버튼 -->
+            <a href='/create' class='create-container__button--authed'>(새로운 스터디 만들기)</a>
+            <p class='create-container__list'>내 스터디1</p>
+            <p class='create-container__list'>내 스터디2</p>
+            <% } %> 
+        </div>       
+        <div class="studylist-container">
+            (스터디 목록)
+        </div>
+
+        <!-- 임시 로그아웃 버튼 -->
+        <a href='/auth/sign-out'>👉로그아웃(임시버튼)</a>
+    </main>
+    <!-- footer -->
+    <%- include('includes/footer'); %>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<header class="header">
+    <div class="header__logo-img">
+        <div class="logo-img">
+            <a href='/' class='logo_link'>(logo)</a>
+        </div>
+    </div>
+    <div class="header__logo-txt">
+        <div class="logo-txt">
+            <a href='/' class='logo_link'>(우. 꿈. 스)</a>
+        </div>
+    </div>
+    <% if(!isLoggedIn) { %>
+    <a href='/auth/sign-in' class='header__button--sign-in'>(sign in)</a>
+    <% } else { %>
+    <a href='/mypage' class='header__button--mypage'>(mypage)</a>
+    <% } %>      
+</header>

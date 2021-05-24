@@ -1,47 +1,77 @@
-@import url(template.css);
+@import url(default.css);
 
 :root {  
-    /* auth logo */
-    --auth-logo-width: ;
-    --auth-logo-height: ;
-    --auth-logo-margin: 80px;
-
-    /* form container */
-    --form-width: 240px;
-    --form-height: 40px;
-    --form-submit-margin: 40px;
+    /* form */
+    --input-width: 240px;
+    --input-height: 40px;
+    --submit-width: 240px;
+    --submit-height: 40px;
+    --submit-margin: 40px;
 }
 
-#signInLogo, #signUpLogo {
-    margin: var(--auth-logo-margin);
+/* sign in */
+.sign-in-logo-img {
+    margin: 80px;
 }
 
-.formContainer {
-    width: var(--form--width);
+.sign-in-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.formInput {
-    width: var(--form-width);
-    height: var(--form-height);
+.sign-in-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.submitBtn {
-    width: var(--form-width);
-    height: var(--form-height);
-    margin: var(--form-submit-margin);
+.sign-in-form__input {
+    width: var(--input-width);
+    height: var(--input-height);
 }
 
-#snsContainer {
-    width:  var(--form-width);
-    height: var(--form-height);
+.sign-in-form__submit {
+    width: var(--submit-width);
+    height: var(--submit-height);
+    margin: var(--submit-margin);
+}
+
+.oauth-container {
     display: flex;
     justify-content: space-evenly;
+    width:  240px;
+    height: 40px;
 }
 
-#authPanel {
-    margin: 20px;
+/* sign up */
+.sign-up-logo-img {
+    margin: 80px;
+}
+
+.sign-up-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-up-form__input {
+    width: var(--input-width);
+    height: var(--input-height);
+}
+
+.sign-up-form__submit {
+    width: var(--submit-width);
+    height: var(--submit-height);
+    margin: var(--submit-margin);
 }

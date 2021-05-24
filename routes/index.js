@@ -12,7 +12,7 @@ function isLoggedIn(req) {
 
 // Main Route
 router.get('/', (req, res, next) => {
-  res.render('main', {
+  res.render('index', {
     isLoggedIn: isLoggedIn(req),
   });
 });

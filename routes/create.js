@@ -12,13 +12,7 @@ router.get('/', (req, res, next) => {
   if (!req.user) {
     res.redirect('/auth/sign-in');
   } else {
-    res.sendFile('create.html', views_options, err => {
-      if (err) {
-        next(err);
-      } else {
-        console.log('Sent: create.html');
-      }
-    });
+    res.render('create');
   }
 });
 

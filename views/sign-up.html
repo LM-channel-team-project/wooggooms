@@ -8,16 +8,23 @@
     <link href="/css/auth.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <a href='/' id='signUpLogo' class='logo'>(logo)</a>
-    <form action="/auth/sign-up_process" method="post" id="signUnForm" class="formContainer">
-        <input class="formInput" type="text" name="email" placeholder="이메일">
-        <input class="formInput" type="password" name="pwd" placeholder="비밀번호">
-        <input class="formInput" type="password" name="pwd2" placeholder="비밀번호 확인">
-        <input class="formInput" type="text" name="nickname" placeholder="닉네임">
-        <input class="submitBtn" type="submit" value="이메일 회원가입">
-    </form>
-    <footer id="footer">
-        (회사소개 이용약관 copyright 등등)
-    </footer>
+    <!-- logo -->
+    <div class="sign-up-logo-img">
+        <div class="logo-img">
+            <a href='/' class='logo_link'>(logo)</a>
+        </div>
+    </div>
+    <!-- Sign up container -->
+    <div class="sign-up-container">
+        <form action="/auth/sign-up_process" method="post" class="sign-up-form">
+            <input class="sign-up-form__input" type="text" name="email" placeholder="이메일">
+            <input class="sign-up-form__input" type="password" name="pwd" placeholder="비밀번호">
+            <input class="sign-up-form__input" type="password" name="pwd2" placeholder="비밀번호 확인">
+            <input class="sign-up-form__input" type="text" name="nickname" placeholder="닉네임">
+            <input class="sign-up-form__submit" type="submit" value="이메일 회원가입">
+        </form>
+    </div>
+    <!-- footer -->
+    <%- include('includes/footer'); %>
 </body>
 </html>
