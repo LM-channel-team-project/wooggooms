@@ -1,0 +1,21 @@
+.create-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    height: 143px;
+    margin: 10px auto;
+    background-color: #e5e5e5;
+}
+
+.create-panel__btn--unauth {
+    margin: auto;
+}
+
+.create-panel__btn--auth {
+    height: 83px;
+}
+
+.create-panel__list {
+    height: 30px;
+}

@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "dotenv": "^9.0.2",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.5",
     "express-session": "^1.17.1",
@@ -20,6 +21,7 @@
     "eslint": "^7.26.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-ejs": "^0.0.2",
     "eslint-plugin-html": "^6.1.2",
     "eslint-plugin-import": "^2.22.1",
     "prettier": "2.3.0"

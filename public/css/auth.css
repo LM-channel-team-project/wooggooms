@@ -1,0 +1,75 @@
+:root {  
+    /* form */
+    --input-width: 240px;
+    --input-height: 40px;
+    --submit-width: 240px;
+    --submit-height: 40px;
+    --submit-margin: 40px;
+}
+
+/* sign in */
+.sign-in-logo-img {
+    margin: 80px;
+}
+
+.sign-in-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-in-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-in-form__input {
+    width: var(--input-width);
+    height: var(--input-height);
+}
+
+.sign-in-form__submit {
+    width: var(--submit-width);
+    height: var(--submit-height);
+    margin: var(--submit-margin);
+}
+
+.oauth-container {
+    display: flex;
+    justify-content: space-evenly;
+    width:  240px;
+    height: 40px;
+}
+
+/* sign up */
+.sign-up-logo-img {
+    margin: 80px;
+}
+
+.sign-up-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-up-form__input {
+    width: var(--input-width);
+    height: var(--input-height);
+}
+
+.sign-up-form__submit {
+    width: var(--submit-width);
+    height: var(--submit-height);
+    margin: var(--submit-margin);
+}
