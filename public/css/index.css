@@ -27,6 +27,7 @@ section {
 
 .classify-menu {
   min-height: 93px;
+  width: 350px;
   height: 14%;
 }
 .classify-menu__main {
@@ -64,6 +65,7 @@ section {
 }
 .search-form__form {
   display: flex;
+  width: 350px;
   min-height: 45px;
   align-items: center;
   justify-content: center;
