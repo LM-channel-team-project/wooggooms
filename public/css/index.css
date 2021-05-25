@@ -1,5 +1,13 @@
 @charset 'utf-8';
 
+:root {
+  --font-size-large: 20px;
+  --font-size-default: 16px;
+  --font-size-medium: 14px;
+  --font-size-small: 12px;
+  --font-size-x-small: 9px;
+}
+
 html {
   font-family: 'Gothic A1', sans-serif;
   display: flex;
@@ -25,6 +33,30 @@ section {
   background-color: rgba(156, 171, 194, 0.2);
 }
 
+/* create panel */
+.create-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+  height: 143px;
+  margin: 10px auto;
+  background-color: #e5e5e5;
+}
+
+.create-panel__btn--unauth {
+  margin: auto;
+}
+
+.create-panel__btn--auth {
+  height: 83px;
+}
+
+.create-panel__list {
+  height: 30px;
+}
+
+/* classify-menu */
 .classify-menu {
   min-height: 93px;
   width: 350px;
@@ -63,6 +95,8 @@ section {
   height: 20px;
   font-size: 9px;
 }
+
+/* search-form */
 .search-form__form {
   display: flex;
   width: 350px;
@@ -79,24 +113,59 @@ section {
   margin-right: 20%;
   height: 33px;
 }
-.create-panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 350px;
-  height: 143px;
-  margin: 10px auto;
+
+/* search list */
+.search-list {
+  width: 328px;
+  padding: 11px;
   background-color: #e5e5e5;
 }
 
-.create-panel__btn--unauth {
-  margin: auto;
+.search-list__item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
-.create-panel__btn--auth {
-  height: 83px;
+.search-list__img {
+  object-fit: cover;
+  width: 120px;
+  height: 82px;
+  margin-right: 5px;
+  border-radius: 5%;
 }
 
-.create-panel__list {
-  height: 30px;
+.search-list__table {
+  border-collapse: separate;
+  border-spacing: 3px;
+  cursor: pointer;
+}
+
+.search-list__name {
+  width: 198px;
+  height: 38px;
+  font-size: var(--font-size-large);
+  color: #ffffff;
+  background-color: #c4c4c4;
+}
+
+.search-list__loc {
+  width: 119px;
+  height: 16px;
+  font-size: var(--font-size-small);
+  color: #ffffff;
+  background-color: #c4c4c4;
+}
+
+.search-list__num {
+  font-size: var(--font-size-small);
+  color: #ffffff;
+  background-color: #c4c4c4;
+}
+
+.search-list__tag {
+  height: 22px;
+  font-size: var(--font-size-medium);
+  color: #c4c4c4;
+  background-color: #ffffff;
 }
