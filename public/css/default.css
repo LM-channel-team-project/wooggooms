@@ -42,7 +42,11 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
+td, th {
+  text-align: center;
+  vertical-align: middle;
+  padding: 0;
+}
 
 /* template */
 html {
@@ -53,10 +57,10 @@ body {
 	-webkit-font-smoothing: antialiased;
 
 	display: flex;
-    flex-direction: column;
+  flex-direction: column;
 	justify-content: center;
 	align-items: center;
-    width: 350px;
+  width: 350px;
 	padding-left: 12px;
 	padding-right: 13px;
 }
@@ -71,30 +75,30 @@ body {
 
 header {
 	display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 350px;
-    height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  width: 350px;
+  height: 50px;
 
-    /* temp */
-    border: solid 1px;
+  /* temp */
+  border: solid 1px;
 }
 
 main {
 	display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 350px;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
 
-    /* temp */
-    border: solid 1px;
+  /* temp */
+  border: solid 1px;
 }
 
 footer {
 	width: 350px;
-    text-align: center;
+  text-align: center;
 
-    /* temp */
-    font-size: 5px;
-    border: solid 1px;
+  /* temp */
+  font-size: 5px;
+  border: solid 1px;
 }
