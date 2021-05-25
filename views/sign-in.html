@@ -5,19 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="/css/default.css" rel="stylesheet" type="text/css">
+    <link href="/css/auth.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <a href="/">👉Home</a>
-    <p>This is sign-in page.</p>
-    <form action="/auth/sign-in_process" method="post">
-        <p><input type="text" name="email" placeholder="email"></p>
-        <p><input type="password" name="pwd" placeholder="password"></p>
-        <p>
-            <input type="submit" value="sign-up">
-        </p>
-    </form>
-    <a href="/auth/google">👉Google로 로그인</a>
-    <a href="/auth/facebook">👉Facebook으로 로그인</a>
-    <a href="/auth/sign-up">👉회원가입 하러 가기</a>
+    <!-- logo -->
+    <div class="sign-in-logo-img">
+        <div class="logo-img">
+            <a href='/' class='logo_link'>(logo)</a>
+        </div>
+    </div>
+    <!-- Sign in container -->
+    <div class="sign-in-container">
+        <form action="/auth/sign-in_process" method="post" class="sign-in-form">
+            <input class="sign-in-form__input" type="text" name="email" placeholder="이메일">
+            <input class="sign-in-form__input" type="password" name="pwd" placeholder="비밀번호">
+            <input class="sign-in-form__submit" type="submit" value="이메일 로그인">
+        </form>
+        <div class="oauth-container">
+            <div class="oauth-container__btn--google">
+                <a href="/auth/google">(Google)</a>
+            </div>
+            <div class="oauth-container__btn--facebook">
+                <a href="/auth/facebook">(Facebook)</a>
+            </div>
+        </div>
+        <div class="sign-in-container__link">
+            <a href="/auth/sign-up" class="sign-in-container__link--sign-up">이메일 회원가입</a>
+            <a href="" class="sign-in-container__link--find-pwd">비밀번호 재설정</a>
+        </div>
+    </div>
+    <!-- footer -->
+    <%- include('includes/footer'); %>
 </body>
 </html>

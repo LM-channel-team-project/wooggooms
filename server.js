@@ -4,10 +4,10 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const passport = require('passport');
+const ejs = require('ejs');
 const helmet = require('helmet');
 const dotenv = require('dotenv').config();
-const ejs = require('ejs');
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
 const mypageRouter = require('./routes/mypage');
 const createRouter = require('./routes/create');
@@ -16,6 +16,7 @@ const dbConfig = require('./config/database');
 const PORT = 3000;
 
 app.set('view engine', 'ejs');
+
 app.use(helmet());
 app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: false }));

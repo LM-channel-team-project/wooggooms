@@ -3,10 +3,19 @@ const express = require('express');
 
 const router = express.Router();
 
+// Func for checking user login
+function isLoggedIn(req) {
+  if (req.user) {
+    return true;
+  }
+  return false;
+}
+
 // Main Route
 // eslint-disable-next-line no-unused-vars
 router.get('/', (req, res, next) => {
   res.render('index.ejs', {
+    isLoggedIn: isLoggedIn(req),
     mainCategory: ['추천', '전체', '공무원', '어학', '취업', '수능', '취미'],
     middleCategory: [
       ['9급', '7급', '5급'],
@@ -24,4 +33,5 @@ router.get('/', (req, res, next) => {
     ]
   });
 });
+
 module.exports = router;

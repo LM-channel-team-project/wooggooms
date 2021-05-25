@@ -1,24 +1,22 @@
 const express = require('express');
 
 const router = express.Router();
-const path = require('path');
 
-const views_options = {
-  root: path.join(__dirname, '../views')
-};
+// Func for checking user login
+function isLoggedIn(req) {
+  if (req.user) {
+    return true;
+  }
+  return false;
+}
 
 // Mypage Route
 router.get('/', (req, res, next) => {
   if (!req.user) {
-    res.send('로그인부터 하고 오세요!');
+    res.redirect('/auth/sign-in');
   } else {
-    console.log(`반갑습니다 ${req.user.nickname}!`);
-    res.sendFile('mypage.html', views_options, err => {
-      if (err) {
-        next(err);
-      } else {
-        console.log('Sent: mypage.html');
-      }
+    res.render('mypage', {
+      isLoggedIn: isLoggedIn(req),
     });
   }
 });
