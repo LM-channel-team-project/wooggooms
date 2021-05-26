@@ -34,7 +34,7 @@
         <% } %>
       </div>
       <!-- classify-menu -->
-      <section class="classify-menu">
+      <div class="classify-menu">
         <div class="classify-menu__main">
           <% for (var i = 0;i < mainCategory.length;i++){ %>
           <div class="classify-menu__main--num" id="<%= i %>">
@@ -49,9 +49,9 @@
           </div>
           <% } %>
         </div>
-      </section>
+      </div>
       <!-- search section -->
-      <section class="search-form">
+      <div class="search-form">
         <form action="/" method="post" class="search-form__form">
           <input
             class="search-form__input"
@@ -61,7 +61,7 @@
           />
           <input class="search-form__btn" type="submit" value="검색" />
         </form>
-      </section>
+      </div>
       <div class="search-list">
         <%- include('includes/search-list', {data: data}); %>
       </div>
