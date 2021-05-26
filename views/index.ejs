@@ -18,7 +18,7 @@
     <%- include('includes/header'); %>
     <!-- main -->
     <main class="main">
-      <div class="create-panel">
+      <section class="create-panel">
         <% if(!isLoggedIn) { %>
         <a href="/auth/sign-in" class="create-panel__btn--unauth">
           (새로운 스터디 만들기)
@@ -32,9 +32,9 @@
         <p class="create-panel__list">내 스터디1</p>
         <p class="create-panel__list">내 스터디2</p>
         <% } %>
-      </div>
+      </section>
       <!-- classify-menu -->
-      <div class="classify-menu">
+      <section class="classify-menu">
         <div class="classify-menu__main">
           <% for (var i = 0;i < mainCategory.length;i++){ %>
           <div class="classify-menu__main--num" id="<%= i %>">
@@ -49,9 +49,9 @@
           </div>
           <% } %>
         </div>
-      </div>
+      </section>
       <!-- search section -->
-      <div class="search-form">
+      <section class="search-form">
         <form action="/" method="post" class="search-form__form">
           <input
             class="search-form__input"
@@ -61,10 +61,10 @@
           />
           <input class="search-form__btn" type="submit" value="검색" />
         </form>
-      </div>
-      <div class="search-list">
+      </section>
+      <section class="search-list">
         <%- include('includes/search-list', {data: data}); %>
-      </div>
+      </section>
       <!-- 임시 로그아웃 버튼 -->
       <a href="/auth/sign-out">👉로그아웃(임시버튼)</a>
     </main>
