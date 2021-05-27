@@ -1,31 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="/css/default.css" rel="stylesheet" type="text/css">
-    <link href="/css/auth.css" rel="stylesheet" type="text/css">
-</head>
-<body>
+    <link href="/public/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/auth.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
     <!-- logo -->
     <div class="sign-up-logo-img">
-        <div class="logo-img">
-            <a href='/' class='logo_link'>(logo)</a>
-        </div>
+      <div class="logo-img">
+        <a href="/" class="logo_link">(logo)</a>
+      </div>
     </div>
     <!-- Sign up container -->
     <div class="sign-up-container">
-        <form action="/auth/sign-up_process" method="post" class="sign-up-form">
-            <input class="sign-up-form__input" type="text" name="email" placeholder="이메일">
-            <input class="sign-up-form__input" type="password" name="pwd" placeholder="비밀번호">
-            <input class="sign-up-form__input" type="password" name="pwd2" placeholder="비밀번호 확인">
-            <input class="sign-up-form__input" type="text" name="nickname" placeholder="닉네임">
-            <input class="sign-up-form__submit" type="submit" value="이메일 회원가입">
-        </form>
+      <form action="/auth/sign-up_process" method="post" class="sign-up-form">
+        <input
+          class="sign-up-form__input"
+          type="text"
+          name="email"
+          placeholder="이메일"
+        />
+        <input
+          class="sign-up-form__input"
+          type="password"
+          name="pwd"
+          placeholder="비밀번호"
+        />
+        <input
+          class="sign-up-form__input"
+          type="password"
+          name="pwd2"
+          placeholder="비밀번호 확인"
+        />
+        <input
+          class="sign-up-form__input"
+          type="text"
+          name="nickname"
+          placeholder="닉네임"
+        />
+        <input
+          class="sign-up-form__submit"
+          type="submit"
+          value="이메일 회원가입"
+        />
+      </form>
     </div>
     <!-- footer -->
     <%- include('includes/footer'); %>
-</body>
+  </body>
 </html>

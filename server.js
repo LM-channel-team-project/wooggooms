@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const express = require('express');
 
 const app = express();
@@ -17,14 +18,14 @@ const PORT = 3000;
 app.set('view engine', 'ejs');
 
 app.use(helmet());
-app.use(express.static('public'));
+app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: false }));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     store: dbConfig.db,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false
   })
 );
 app.use(passport.initialize());
@@ -42,7 +43,7 @@ app.use((req, res, next) => {
 
 // Server error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  // console.error(err.stack);
   res.status(500).send('Something broke!');
 });
 

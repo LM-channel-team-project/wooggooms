@@ -1,3 +1,7 @@
+/* eslint-disable no-console */
+/* eslint-disable operator-linebreak */
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 const express = require('express');
 
 const router = express.Router();
@@ -9,7 +13,7 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 
 const views_options = {
-  root: path.join(__dirname, '../views'),
+  root: path.join(__dirname, '../views')
 };
 const dotenv = require('dotenv').config();
 const dbConfig = require('../config/database');
@@ -36,7 +40,7 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: 'email',
-      passwordField: 'pwd',
+      passwordField: 'pwd'
     },
     (email, password, done) => {
       const sql = 'SELECT * FROM user WHERE email=?';
@@ -63,7 +67,7 @@ passport.use(
     {
       clientID: process.env.GG_ID,
       clientSecret: process.env.GG_SECRET,
-      callbackURL: process.env.GG_CBURL,
+      callbackURL: process.env.GG_CBURL
     },
     (accessToken, refreshToken, profile, done) => {
       const sns_id = profile.id;
@@ -75,23 +79,20 @@ passport.use(
           const id = nanoid();
           const sns_profile = profile.photos[0].value;
           const nickname = profile.displayName;
-          const sql = 'INSERT INTO user (id, sns_id, sns_type, sns_profile, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
-          db.query(
-            sql,
-            [id, sns_id, sns_type, sns_profile, nickname],
-            err => {
+          const sql =
+            'INSERT INTO user (id, sns_id, sns_type, sns_profile, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
+          db.query(sql, [id, sns_id, sns_type, sns_profile, nickname], err => {
+            if (err) {
+              return done(err);
+            }
+            const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
+            db.query(sql, [sns_id, sns_type], (err, results) => {
               if (err) {
                 return done(err);
               }
-              const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
-              db.query(sql, [sns_id, sns_type], (err, results) => {
-                if (err) {
-                  return done(err);
-                }
-                return done(null, results[0]);
-              });
-            }
-          );
+              return done(null, results[0]);
+            });
+          });
         }
         if (user) {
           return done(null, user);
@@ -107,7 +108,7 @@ passport.use(
     {
       clientID: process.env.FB_ID,
       clientSecret: process.env.FB_SECRET,
-      callbackURL: process.env.FB_CBURL,
+      callbackURL: process.env.FB_CBURL
     },
     (accessToken, refreshToken, profile, done) => {
       console.log('Profile: ', profile);
@@ -121,23 +122,20 @@ passport.use(
           const id = nanoid();
           const sns_profile = '';
           const nickname = profile.displayName;
-          const sql = 'INSERT INTO user (id, sns_id, sns_type, sns_profile, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
-          db.query(
-            sql,
-            [id, sns_id, sns_type, sns_profile, nickname],
-            err => {
+          const sql =
+            'INSERT INTO user (id, sns_id, sns_type, sns_profile, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
+          db.query(sql, [id, sns_id, sns_type, sns_profile, nickname], err => {
+            if (err) {
+              return done(err);
+            }
+            const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
+            db.query(sql, [sns_id, sns_type], (err, results) => {
               if (err) {
                 return done(err);
               }
-              const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
-              db.query(sql, [sns_id, sns_type], (err, results) => {
-                if (err) {
-                  return done(err);
-                }
-                return done(null, results[0]);
-              });
-            }
-          );
+              return done(null, results[0]);
+            });
+          });
         }
         if (user) {
           return done(null, user);
@@ -160,7 +158,7 @@ router.get(
 router.get(
   '/google',
   passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/userinfo.profile'],
+    scope: ['https://www.googleapis.com/auth/userinfo.profile']
   })
 );
 
@@ -192,7 +190,8 @@ router.post('/sign-up_process', (req, res) => {
   const { pwd } = post;
   const { pwd2 } = post;
   const { nickname } = post;
-  const sql = 'INSERT INTO user (id, email, password, nickname, create_date) VALUES (?, ?, ?, ?, NOW())';
+  const sql =
+    'INSERT INTO user (id, email, password, nickname, create_date) VALUES (?, ?, ?, ?, NOW())';
   if (pwd !== pwd2) {
     console.log('비밀번호가 일치하지 않습니다');
   } else {
@@ -200,7 +199,7 @@ router.post('/sign-up_process', (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log('New User Signed Up!');
+        console.log('New User Signed Up!', result);
       }
     });
     res.redirect('/auth/sign-in');
