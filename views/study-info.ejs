@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= data.name %></title>
+    <link href="/public/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/index.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <main class="study-info">
+      <header class="study-info__header">
+        <span><%= data.name %></span>
+        <span>
+          <%= data.category_large %> <%= data.category_medium %> <%=
+          data.location %>
+        </span>
+        <span><%= data.num_member %> / <%= data.max_num_member %></span>
+        <form action="/">
+          <button class='study-info__back-btn'>뒤로가기</button>
+        </form>
+      </header>
+      <section class="study-info__item">
+        <img class="study-info__img" src="/study.jpg">
+        <div class="study-info__desc">스터디 소개 <%= data.description %></div>
+      </section>
+      <section class="study-info__qna">
+        <img class="study-info__mgr-img" src="/profile.jpg">
+        <span class="study-info__mgr-name">스터디장</span>
+      </section>
+      <section class="study-info__chat"></section>
+    </main>
+    </body>
+  </html>
+</html>
