@@ -8,27 +8,6 @@
   --font-size-x-small: 9px;
 }
 
-html {
-  font-family: 'Gothic A1', sans-serif;
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  font-size: 24px;
-  background-color: #e5e5e5;
-}
-body {
-  padding-left: 12px;
-  padding-right: 13px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
-  width: 350px;
-  height: inherit;
-  background: #ffffff;
-}
-
 /* create panel */
 .create-panel {
   display: flex;
@@ -56,7 +35,7 @@ body {
 .classify-menu {
   min-height: 93px;
   width: 350px;
-  height: 14%;
+  /* height: 14%; */
   margin-top: 0.3rem;
   background-color: rgba(156, 171, 194, 0.2);
 }
