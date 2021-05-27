@@ -5,16 +5,12 @@
 const express = require('express');
 
 const router = express.Router();
-const path = require('path');
 const { nanoid } = require('nanoid');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-const views_options = {
-  root: path.join(__dirname, '../views')
-};
 const dotenv = require('dotenv').config();
 const dbConfig = require('../config/database');
 
@@ -172,18 +168,12 @@ router.get(
 
 // Sign-up Route
 router.get('/sign-up', (req, res, next) => {
-  res.sendFile('sign-up.html', views_options, err => {
-    if (err) {
-      next(err);
-    } else {
-      console.log('Sent: sign-up.html');
-    }
-  });
+  res.render('sign-up');
 });
 
 // Sign-up_process Route
 // POST request 암호화 필요
-router.post('/sign-up_process', (req, res) => {
+router.post('/sign-up_process', (req, res, next) => {
   const post = req.body;
   const id = nanoid();
   const { email } = post;
@@ -197,9 +187,7 @@ router.post('/sign-up_process', (req, res) => {
   } else {
     db.query(sql, [id, email, pwd, nickname], err => {
       if (err) {
-        console.log(err);
-      } else {
-        console.log('New User Signed Up!', result);
+        next(err);
       }
     });
     res.redirect('/auth/sign-in');
@@ -208,13 +196,7 @@ router.post('/sign-up_process', (req, res) => {
 
 // Sign-in Route
 router.get('/sign-in', (req, res, next) => {
-  res.sendFile('sign-in.html', views_options, err => {
-    if (err) {
-      next(err);
-    } else {
-      console.log('Sent: sign-in.html');
-    }
-  });
+  res.render('sign-in');
 });
 
 // Sign-in_process Route

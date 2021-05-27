@@ -1,0 +1,13 @@
+<% if(!isLoggedIn) { %>
+<a href="/auth/sign-in" class="create-panel__btn--unauth">
+  (새로운 스터디 만들기)
+</a>
+<% } else { %>
+<!-- 내가 가입한 스터디가 있으면 n개 불러와서 출력 -->
+<!-- 가입한 스터디 없으면 그대로 스터디 생성 버튼 -->
+<a href="/create" class="create-panel__btn--auth">
+  (새로운 스터디 만들기)
+</a>
+<p class="create-panel__list">내 스터디1</p>
+<p class="create-panel__list">내 스터디2</p>
+<% } %>

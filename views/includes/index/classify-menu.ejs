@@ -1,0 +1,14 @@
+<div class="classify-menu__main">
+  <% for (var i = 0;i < mainCategory.length;i++){ %>
+  <div class="classify-menu__main--num" id="<%= i %>">
+    <%= mainCategory[i] %>
+  </div>
+  <% } %>
+</div>
+<div class="classify-menu__sub">
+  <% for (var i = 0;i < mainCategory.length;i++){ %>
+  <div class="classify-menu__sub--num" id="<%= i %>">
+    <%= middleCategory[2][i] %>
+  </div>
+  <% } %>
+</div>
