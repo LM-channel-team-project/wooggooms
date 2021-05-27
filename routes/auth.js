@@ -173,7 +173,7 @@ router.get('/sign-up', (req, res, next) => {
 
 // Sign-up_process Route
 // POST request 암호화 필요
-router.post('/sign-up_process', (req, res) => {
+router.post('/sign-up_process', (req, res, next) => {
   const post = req.body;
   const id = nanoid();
   const { email } = post;
@@ -187,9 +187,7 @@ router.post('/sign-up_process', (req, res) => {
   } else {
     db.query(sql, [id, email, pwd, nickname], err => {
       if (err) {
-        console.log(err);
-      } else {
-        console.log('New User Signed Up!', result);
+        next(err);
       }
     });
     res.redirect('/auth/sign-in');
