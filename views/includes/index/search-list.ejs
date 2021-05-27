@@ -1,7 +1,9 @@
 <ul>
   <% data.forEach(function(group) { %>
   <li class="search-list__item">
-    <a href=""><img class="search-list__img" src="<%= group.thumnail %>" /></a>
+    <a href="/study/info/<%= group.id %>"
+      ><img class="search-list__img" src="<%= group.thumnail %>"
+    /></a>
     <table class="search-list__table">
       <tr>
         <th colspan="2" class="search-list__name"><%= group.name %></th>
