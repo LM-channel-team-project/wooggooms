@@ -98,8 +98,10 @@
 /* search list */
 .search-list {
   width: 328px;
+  height: 350px;
   padding: 11px;
   background-color: #e5e5e5;
+  overflow: auto;
 }
 
 .search-list__item {
