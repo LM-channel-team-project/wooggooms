@@ -13,6 +13,7 @@
   },
   "plugins": ["import", "html", "ejs"],
   "extends": ["airbnb-base", "prettier"],
+  "ignorePatterns": ["*.ejs"],
   "rules": {
     // "off" or 0 - turn the rule off
     // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
@@ -34,17 +35,23 @@
     "require-await": "error",
     "arrow-parens": ["error", "as-needed"], // a => {}
     "no-param-reassign": ["error", { "props": false }],
-    "no-unused-expressions": ["error", {
-      "allowTernary": true,      // a || b
-      "allowShortCircuit": true, // a ? b : 0
-      "allowTaggedTemplates": true
-    }],
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowTernary": true, // a || b
+        "allowShortCircuit": true, // a ? b : 0
+        "allowTaggedTemplates": true
+      }
+    ],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    "max-len": ["error", {
-      "code": 110,
-      "ignoreComments": true,
-      "ignoreStrings": true,
-      "ignoreTemplateLiterals": true
-    }] // prettier의 printWidth 옵션 대신 사용
+    "max-len": [
+      "error",
+      {
+        "code": 110,
+        "ignoreComments": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true
+      }
+    ] // prettier의 printWidth 옵션 대신 사용
   }
 }

@@ -1,0 +1,72 @@
+:root {
+  --font-size-large: 20px;
+  --font-size-default: 16px;
+  --font-size-medium: 14px;
+  --font-size-small: 12px;
+  --font-size-x-small: 9px;
+}
+
+.study-info__header {
+  background-color: #c4c4c4;
+}
+
+.study-info__header .header-left {
+  font-size: var(--font-size-medium);
+}
+
+.study-info__name {
+  display: block;
+  font-size: var(--font-size-large);
+}
+
+.study-info__img,
+.study-info__mgr-img {
+  width: 288px;
+}
+
+.study-info__chat-btn {
+  background: transparent;
+  border: none;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.study-info__chat-btn img {
+  width: 100%;
+}
+
+.chat-popup {
+  display: none; /* default */
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+  border: 1px solid;
+  z-index: 9;
+}
+
+.chat-popup__form {
+  width: 353px;
+  padding: 10px;
+  background-color: white;
+}
+
+.chat-popup__bubble {
+  padding: 100px;
+  text-align: center;
+}
+
+.chat-popup__bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat-popup__form textarea {
+  width: 280px;
+  height: 10px;
+  padding: 15px;
+  margin: 0;
+  border: none;
+  background: #e5e5e5;
+}
