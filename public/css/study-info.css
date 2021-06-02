@@ -97,15 +97,28 @@
 }
 
 .study-info-item__text {
+  position: relative;
   width: 200px;
   height: 200px;
   margin-left: 18px;
   padding: 10px;
+  border-radius: 10px;
   color: #ffffff;
   background-color: #c4c4c4;
 }
 
-.study-info-apply-btn {
+/* text balloon triangle */
+.study-info-item__text::after {
+  position: absolute;
+  top: 10px;
+  left: -15px;
+  border-top: 10px solid transparent;
+  border-right: 15px solid #c4c4c4;
+  border-bottom: 10px solid transparent;
+  content: '';
+}
+
+.study-info-apply__btn {
   width: var(--submit-width);
   height: var(--submit-height);
   margin: var(--submit-margin);
