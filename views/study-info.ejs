@@ -11,39 +11,57 @@
   </head>
   <body>
     <main class="study-info">
-      <!-- header -->
-      <section class="study-info__title">
+      <!-- study-info-title -->
+      <section class="study-info-title">
         <div>
-          <div class="study-info__name"><%= data.name %></div>
-          <span class="study-info__cat">
+          <span class="study-info-title__name"><%= data.name %></span>
+          <span class="study-info-title__dets">
             <%= data.category_large %>, <%= data.category_medium %>,
+            <%=data.location %>
           </span>
-          <span class="study-info__loc"><%=data.location %></span>
         </div>
         <div>
-          <span class="study-info__mmbr">
+          <span class="study-info-title__mmbr">
             <%= data.num_member %> / <%= data.max_num_member %>
           </span>
-          <button type="button" class="study-info__back-btn">뒤로가기</button>
+          <button type="button" class="study-info-title__back-btn">
+            뒤로가기
+          </button>
         </div>
       </section>
-      <!-- info -->
-      <section class="study-info__item">
-        <img class="study-info__img" src="" />
-        <img class="study-info__mgr-img" src="" />
-        <div class="study-info__mgr-name">스터디장</div>
-        <div class="study-info__text"><%= data.description %></div>
-        <button class="study-info__apply-btn" type="button" value="">
+      <!-- study-info-item -->
+      <section class="study-info-item">
+        <div class="study-info-item__img-ctr">
+          <img class="study-info-item__img" src="/study.jpg" />
+        </div>
+        <div class="study-info-item__desc">
+          <div class="study-info-item__mgr">
+            <div class="study-info-item__mgr-img-ctr">
+              <img class="study-info-item__mgr-img" src="/profile.jpg" />
+            </div>
+            <span class="study-info-item__mgr-name">닉네임</span>
+          </div>
+          <span class="study-info-item__text"><%= data.description %></span>
+        </div>
+      </section>
+      <!-- study-apply-btn -->
+      <section>
+        <button class="study-info-apply-btn" type="button" value="">
           지원하기!
         </button>
       </section>
-      <!-- qna -->
-      <section class="study-info__qna">
-        <div class="study-info__list"></div>
-        <textarea class="study-info__input" placeholder="댓글 작성"></textarea>
-        <button type="submit" class="study-info__input-btn" value="">
-          전송
-        </button>
+      <!-- study-info-qna -->
+      <section class="study-info-qna">
+        <div class="study-info-qna__input">
+          <textarea
+            class="study-info-qna__text"
+            placeholder="댓글을 남겨보세요"
+          ></textarea>
+          <button type="submit" class="study-info-qna__send-btn" value="">
+            등록
+          </button>
+        </div>
+        <div class="study-info-qna__list">test comment</div>
       </section>
     </main>
     <script src="/public/js/study-info.js"></script>
