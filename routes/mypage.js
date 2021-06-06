@@ -17,7 +17,9 @@ router.get('/', (req, res, next) => {
   } else {
     res.render('mypage', {
       isLoggedIn: isLoggedIn(req),
+      nickname: req.user.nickname
     });
   }
 });
+
 module.exports = router;

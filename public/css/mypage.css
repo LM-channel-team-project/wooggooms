@@ -1,0 +1,109 @@
+:root {
+    --font-size-large: 20px;
+    --font-size-default: 16px;
+    --font-size-medium: 14px;
+    --font-size-small: 12px;
+    --font-size-x-small: 9px;
+  }
+
+.my-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 330px;
+    height: 50px;
+    background-color: #e5e5e5;
+    padding: 10px;
+}
+
+.join-group-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    height: 300px;
+    margin-top: 0.3rem;
+    background-color: #e5e5e5;
+    overflow: scroll;
+}
+
+/* 스크롤바 있지만 안 보이게 하기 */
+.join-group-list::-webkit-scrollbar {
+    display: none;
+}
+
+.lead-group-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    margin-top: 0.3rem;
+    background-color: #e5e5e5;
+}
+
+.lead-group-list::-webkit-scrollbar {
+    display: none;
+}
+
+.group-list__text {
+    font-size: var(--font-size-default);
+}
+
+.group-list__item {
+    width: 330px;
+    /* temp */
+    border: 1px solid;
+}
+
+.group-list-cat {
+    display: flex;
+    align-items: center;
+}
+
+.cat-filter-main__btn {
+    background-color: rgba(196, 196, 196, 1);
+    text-align: center;
+    padding-top: 3px;
+    margin-left: 9px;
+    min-width: 60px;
+    height: 30px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+.cat-filter-main__btn:hover {
+    background-color: #ddd;
+}
+.cat-filter-main__btn.active-main {
+    background-color: #4f4f4f;
+}
+.cat-filter-main__btn.active-main:hover {
+    background-color: #4f4f4f;
+}
+.cat-filter-sub__btn {
+    background-color: rgba(229, 229, 229, 1);
+    text-align: center;
+    padding-top: 2px;
+    margin-left: 6px;
+    min-width: 50px;
+    height: 20px;
+    font-size: 9px;
+    border: none;
+    outline: none;
+}
+.cat-filter-sub__btn:hover {
+    background-color: dimgray;
+}
+
+.group-list__info {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px;
+}
+
+.group-list__mgr {
+    display: flex;
+    justify-content: flex-end;
+}

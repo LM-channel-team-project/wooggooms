@@ -7,16 +7,24 @@
     <title>Document</title>
     <link href="/public/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="/public/css/default.css" rel="stylesheet" type="text/css" />
-    <link href="/css/index.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/mypage.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <!-- header -->
     <%- include('includes/header'); %>
     <!-- main -->
     <main class="main">
-      <p>This is mypage.</p>
-      <a href="/auth/sign-out">👉로그아웃(임시버튼)</a>
+      <section class="my-info">
+        <%- include('includes/mypage/my-info'); %>
+      </section>
+      <section class="join-group-list">
+        <%- include('includes/mypage/join-group-list'); %>
+      </section>
+      <section class="lead-group-list">
+        <%- include('includes/mypage/lead-group-list'); %>
+      </section>     
     </main>
+    <a href="/auth/sign-out">👉로그아웃(임시버튼)</a>
     <!-- footer -->
     <%- include('includes/footer'); %>
   </body>
