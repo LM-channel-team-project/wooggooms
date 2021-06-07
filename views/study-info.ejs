@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= data.name %></title>
+    <title>test name</title>
     <link href="/public/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="/public/css/default.css" rel="stylesheet" type="text/css" />
     <link href="/public/css/study-info.css" rel="stylesheet" type="text/css" />
@@ -14,16 +14,13 @@
       <!-- study-info-title -->
       <section class="study-info-title">
         <div>
-          <span class="study-info-title__name"><%= data.name %></span>
+          <span class="study-info-title__name">test name</span>
           <span class="study-info-title__dets">
-            <%= data.category_large %>, <%= data.category_medium %>, <%=
-            data.location %>
+            category, category, location
           </span>
         </div>
         <div>
-          <span class="study-info-title__mmbr">
-            <%= data.num_member %> / <%= data.max_num_member %>
-          </span>
+          <span class="study-info-title__mmbr">0/0</span>
           <button type="button" class="study-info-title__back-btn">
             뒤로가기
           </button>
@@ -32,19 +29,25 @@
       <!-- study-info-item -->
       <section class="study-info-item">
         <div class="study-info-item__img-ctr">
-          <img class="study-info-item__img" src="" />
+          <img
+            class="study-info-item__img"
+            src="/public/img/test-thumnail.png"
+          />
         </div>
         <div class="study-info-item__desc">
           <div class="study-info-item__mgr">
             <div class="study-info-item__mgr-img-ctr">
-              <img class="study-info-item__mgr-img" src="" />
+              <img
+                class="study-info-item__mgr-img"
+                src="/public/img/test-profile.png"
+              />
             </div>
             <span class="study-info-item__mgr-name">닉네임</span>
           </div>
           <span class="study-info-item__text">test description</span>
         </div>
       </section>
-      <!-- study-apply-btn -->
+      <!-- study-info-apply -->
       <section class="study-info-apply">
         <button class="study-info-apply__btn" type="button" value="">
           지원하기!
