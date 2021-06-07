@@ -151,11 +151,19 @@
   cursor: pointer;
 }
 
+.search-list__table a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 1.8em;
+  color: #ffffff;
+  text-decoration: none; /* temp */
+}
+
 .search-list__name {
   width: 198px;
   height: 38px;
   font-size: var(--font-size-large);
-  color: #ffffff;
   background-color: #c4c4c4;
 }
 
@@ -163,19 +171,20 @@
   width: 119px;
   height: 16px;
   font-size: var(--font-size-small);
-  color: #ffffff;
   background-color: #c4c4c4;
 }
 
 .search-list__num {
   font-size: var(--font-size-small);
-  color: #ffffff;
   background-color: #c4c4c4;
 }
 
 .search-list__tag {
   height: 22px;
   font-size: var(--font-size-medium);
-  color: #c4c4c4;
   background-color: #ffffff;
+}
+
+.search-list__tag a {
+  color: #c4c4c4;
 }
