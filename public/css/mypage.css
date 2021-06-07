@@ -21,10 +21,11 @@
     flex-direction: column;
     align-items: center;
     width: 350px;
-    height: 300px;
     margin-top: 0.3rem;
-    background-color: #e5e5e5;
     overflow: scroll;
+    /* temp */
+    height: 600px;
+    background-color: #e5e5e5;
 }
 
 /* 스크롤바 있지만 안 보이게 하기 */
@@ -37,8 +38,15 @@
     flex-direction: column;
     align-items: center;
     width: 350px;
-    margin-top: 0.3rem;
+    margin-top: 0.3rem; 
+    overflow: scroll;
+    /* temp */
+    height: 200px;
     background-color: #e5e5e5;
+}
+
+.lead-group-list::-webkit-scrollbar {
+    display: none;
 }
 
 .lead-group-list::-webkit-scrollbar {
