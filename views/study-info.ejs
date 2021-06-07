@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test name</title>
+    <link href="/public/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/study-info.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <main class="study-info">
+      <!-- study-info-title -->
+      <section class="study-info-title">
+        <div>
+          <span class="study-info-title__name">test name</span>
+          <span class="study-info-title__dets">
+            category, category, location
+          </span>
+        </div>
+        <div>
+          <span class="study-info-title__mmbr">0/0</span>
+          <button type="button" class="study-info-title__back-btn">
+            뒤로가기
+          </button>
+        </div>
+      </section>
+      <!-- study-info-item -->
+      <section class="study-info-item">
+        <div class="study-info-item__img-ctr">
+          <img
+            class="study-info-item__img"
+            src="/public/img/test-thumnail.png"
+          />
+        </div>
+        <div class="study-info-item__desc">
+          <div class="study-info-item__mgr">
+            <div class="study-info-item__mgr-img-ctr">
+              <img
+                class="study-info-item__mgr-img"
+                src="/public/img/test-profile.png"
+              />
+            </div>
+            <span class="study-info-item__mgr-name">닉네임</span>
+          </div>
+          <span class="study-info-item__text">test description</span>
+        </div>
+      </section>
+      <!-- study-info-apply -->
+      <section class="study-info-apply">
+        <button class="study-info-apply__btn" type="button" value="">
+          지원하기!
+        </button>
+      </section>
+      <!-- study-info-qna -->
+      <section class="study-info-qna">
+        <div class="study-info-qna__input">
+          <textarea
+            class="study-info-qna__text"
+            placeholder="댓글을 남겨보세요"
+          ></textarea>
+          <button type="submit" class="study-info-qna__send-btn" value="">
+            등록
+          </button>
+        </div>
+        <div class="study-info-qna__list">test comment</div>
+      </section>
+    </main>
+    <script src="/public/js/study-info.js"></script>
+  </body>
+</html>
