@@ -22,6 +22,7 @@ router.get('/', (req, res, next) => {
     } else {
       res.render('index', {
         isLoggedIn: isLoggedIn(req),
+        path: '/',
         data: results
       });
     }

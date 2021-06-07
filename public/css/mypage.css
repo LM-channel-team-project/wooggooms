@@ -52,7 +52,8 @@
 .group-list__item {
     width: 330px;
     /* temp */
-    border: 1px solid;
+    border: 1px dotted;
+    background-color: #eeeeee;
 }
 
 .group-list-cat {
