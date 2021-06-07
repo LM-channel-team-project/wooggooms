@@ -22,19 +22,20 @@
       <section class="create-panel">
         <%- include('includes/index/create-panel'); %>
       </section>
-      <section class="classify-menu">
-        <%- include('includes/index/classify-menu'); %>
+      <section class="cat-filter">
+        <%- include('includes/index/category-filter'); %>
       </section>
       <section class="search-form">
         <%- include('includes/index/search-form'); %>
       </section>
       <section class="search-list">
-        <%- include('includes/index/search-list', {data: data}); %>
+        <%- include('includes/index/search-list'); %>
       </section>
       <!-- 임시 로그아웃 버튼 -->
       <a href="/auth/sign-out">👉로그아웃(임시버튼)</a>
     </main>
     <!-- footer -->
     <%- include('includes/footer'); %>
+    <script src="/public/js/category-filter.js"></script>
   </body>
 </html>
