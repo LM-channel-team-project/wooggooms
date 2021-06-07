@@ -1,25 +1,21 @@
 <ul>
-  <% data.forEach(function(group) { %>
+  <% for(let i = 0; i < 10; i++) { %>
   <li class="search-list__item">
-    <a href="/study/info/<%= group.id %>">
-      <img class="search-list__img" src="<%= group.thumnail %>" />
+    <a href="">
+      <img class="search-list__img" src="/public/img/test-thumnail.png" />
     </a>
     <table class="search-list__table">
       <tr>
-        <th colspan="2" class="search-list__name">
-          <a href="/study/info/<%= group.id %>"><%= group.name %></a>
-        </th>
+        <th colspan="2" class="search-list__name">test name</th>
       </tr>
       <tr>
-        <td class="search-list__loc"><%= group.location %></td>
-        <td class="search-list__num">
-          모집중 <%= group.num_member %>/<%= group.max_num_member %>
-        </td>
+        <td class="search-list__loc">test location</td>
+        <td class="search-list__num">모집중 0/0</td>
       </tr>
       <tr>
-        <td colspan="2" class="search-list__tag"><%= group.tag %></td>
+        <td colspan="2" class="search-list__tag">test tag</td>
       </tr>
     </table>
   </li>
-  <% }); %>
+  <% } %>
 </ul>
