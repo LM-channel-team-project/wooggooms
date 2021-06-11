@@ -1,12 +1,10 @@
 :root {
-  /* temp : index.css */
   --font-size-large: 20px;
   --font-size-default: 16px;
   --font-size-medium: 14px;
   --font-size-small: 12px;
   --font-size-x-small: 9px;
 
-  /* temp : auth.css */
   --submit-width: 240px;
   --submit-height: 40px;
 }
@@ -25,8 +23,6 @@
   display: none;
 }
 
-/* group-info-title */
-
 .group-info-title {
   display: flex;
   justify-content: space-between;
@@ -38,7 +34,6 @@
 }
 
 .group-info-title__name {
-  display: block;
   margin: 0 20px;
   font-size: var(--font-size-large);
 }
@@ -53,8 +48,6 @@
   margin: 10px;
   font-size: var(--font-size-small);
 }
-
-/* group-info-item */
 
 .group-info-desc {
   width: 100%;
@@ -101,8 +94,6 @@
   display: none;
 }
 
-/* group-info-qna */
-
 .group-info-qna__mgr {
   display: flex;
   align-items: center;
@@ -124,7 +115,6 @@
 }
 
 .group-info-qna__mgr-name {
-  display: block;
   margin: 10px;
   font-size: var(--font-size-medium);
 }
