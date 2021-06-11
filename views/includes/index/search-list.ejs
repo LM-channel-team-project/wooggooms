@@ -1,19 +1,29 @@
 <ul>
   <% for(let i = 0; i < 10; i++) { %>
   <li class="search-list__item">
-    <a href="/study/info/test-study">
+    <a href="/group/info/test">
       <img class="search-list__img" src="/public/img/test-thumnail.png" />
     </a>
     <table class="search-list__table">
-      <tr onclick=>
-        <th colspan="2" class="search-list__name"><a href="/study/info/test-study">test name</a></th>
+      <tr>
+        <th class="search-list__name" colspan="2">
+          <a href="/group/info/test" class="search-list__link">스터디 이름</a>
+        </th>
       </tr>
       <tr>
-        <td class="search-list__loc"><a href="/study/info/test-study">test location</a></td>
-        <td class="search-list__num"><a href="/study/info/test-study">모집중 0/0</a></td>
+        <td class="search-list__loc">
+          <a href="/group/info/test" class="search-list__link">
+            온/오프라인 장소
+          </a>
+        </td>
+        <td class="search-list__num">
+          <a href="/group/info/test" class="search-list__link">모집중 0/0</a>
+        </td>
       </tr>
       <tr>
-        <td colspan="2" class="search-list__tag"><a href="/study/info/test-study">test tag</a></td>
+        <td class="search-list__tag" colspan="2">
+          <a href="/group/info/test" class="search-list__link color">태그</a>
+        </td>
       </tr>
     </table>
   </li>
