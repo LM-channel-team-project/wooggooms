@@ -16,7 +16,7 @@ function isLoggedIn(req) {
 router.get('/', (req, res, next) => {
   res.render('index', {
     isLoggedIn: isLoggedIn(req),
-    path: '/'
+    path: req.baseUrl
   });
 });
 

@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
   } else {
     res.render('mypage', {
       isLoggedIn: isLoggedIn(req),
-      path: '/mypage',
+      path: req.baseUrl,
       nickname: req.user.nickname
     });
   }
