@@ -11,7 +11,7 @@ const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
 const mypageRouter = require('./routes/mypage');
 const createRouter = require('./routes/create');
-const studyRouter = require('./routes/study');
+const groupRouter = require('./routes/group');
 const dbConfig = require('./config/database');
 
 const PORT = 3000;
@@ -36,7 +36,7 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/mypage', mypageRouter);
 app.use('/create', createRouter);
-app.use('/study', studyRouter);
+app.use('/group', groupRouter);
 
 // 404 responses handler
 app.use((req, res, next) => {
