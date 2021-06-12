@@ -11,7 +11,7 @@ function isLoggedIn(req) {
 }
 
 router.get('/info/test', (req, res, next) => {
-  res.render('study-info', {
+  res.render('group-info', {
     isLoggedIn: isLoggedIn(req)
   });
 });

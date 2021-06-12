@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>테스트 스터디</title>
+    <link href="/public/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/group-info.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <main class="group-info">
+      <section class="group-info-title">
+        <div class="group-info-title__name">스터디 이름</div>
+        <div>
+          <span class="group-info-title__mmbr">0/0</span>
+          <button class="group-info-title__back-btn" type="button">
+            뒤로가기
+          </button>
+        </div>
+      </section>
+      <section class="group-info-desc">
+        <div class="group-tag">
+          <span class="group-tag__cat-main">대분류</span>
+          <span class="group-tag__cat-sub">중분류</span>
+          <span class="group-tag__loc">장소</span>
+          <span class="group-tag__gndr">성별</span>
+        </div>
+        <div class="group-info-desc__text">스터디 소개글</div>
+      </section>
+      <section class="group-info-qna">
+        <div class="group-info-qna__mgr">
+          <div class="group-info-qna__mgr-img-ctr">
+            <img
+              class="group-info-qna__mgr-img"
+              src="/public/img/test-profile.png"
+            />
+          </div>
+          <div>
+            <div class="group-info-qna__mgr-name">닉네임 님에게</div>
+            <div class="group-info-qna__mgr-desc">
+              스터디에 관한 질문을 남겨보세요!
+            </div>
+          </div>
+        </div>
+        <div class="group-info-qna__input">
+          <textarea
+            class="group-info-qna__text"
+            placeholder="여기에 댓글을 입력하세요"
+          ></textarea>
+          <button class="group-info-qna__send-btn" type="submit" value="">
+            등록
+          </button>
+        </div>
+        <div class="group-info-qna__list">질문 답변 댓글</div>
+      </section>
+      <section class="group-info-apply">
+        <button class="group-info-apply__btn" type="button" value="">
+          지원하기!
+        </button>
+      </section>
+    </main>
+    <script src="/public/js/group-info.js"></script>
+  </body>
+</html>
