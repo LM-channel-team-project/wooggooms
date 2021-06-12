@@ -11,7 +11,9 @@
     </div>
     <% if(!isLoggedIn) { %>
     <a href='/auth/sign-in' class='header__btn--sign-in'>(sign in)</a>
-    <% } else { %>
+    <% } else if(isLoggedIn && path === '') { %>
     <a href='/mypage' class='header__btn--mypage'>(mypage)</a>
-    <% } %>      
+    <% } else if(isLoggedIn && path === '/mypage') {%>
+    <a href='/auth/sign-out' class='header__btn--sign-out'>(sign out)</a>
+    <% } %>
 </header>

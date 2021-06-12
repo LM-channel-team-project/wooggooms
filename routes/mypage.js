@@ -17,7 +17,19 @@ router.get('/', (req, res, next) => {
   } else {
     res.render('mypage', {
       isLoggedIn: isLoggedIn(req),
+      path: req.baseUrl,
+      nickname: req.user.nickname
     });
   }
 });
+
+// Edit my-info Route
+router.get('/edit-myinfo', (req, res, next) => {
+  if (!req.user) {
+    res.redirect('/auth/sign-in');
+  } else {
+    res.render('myinfo');
+  }
+});
+
 module.exports = router;

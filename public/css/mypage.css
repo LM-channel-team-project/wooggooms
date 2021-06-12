@@ -1,0 +1,94 @@
+:root {
+    --font-size-large: 20px;
+    --font-size-default: 16px;
+    --font-size-medium: 14px;
+    --font-size-small: 12px;
+    --font-size-x-small: 9px;
+  }
+
+.my-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 330px;
+    height: 50px;
+    background-color: #e5e5e5;
+    padding: 10px;
+}
+
+.join-group-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    margin-top: 0.3rem;
+    overflow: scroll;
+    /* temp */
+    height: 500px;
+    background-color: #e5e5e5;
+}
+
+/* 스크롤바 있지만 안 보이게 하기 */
+.join-group-list::-webkit-scrollbar {
+    display: none;
+}
+
+.lead-group-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    margin-top: 0.3rem; 
+    overflow: scroll;
+    /* temp */
+    height: 200px;
+    background-color: #e5e5e5;
+}
+
+.lead-group-list::-webkit-scrollbar {
+    display: none;
+}
+
+.lead-group-list::-webkit-scrollbar {
+    display: none;
+}
+
+.group-list__text {
+    font-size: var(--font-size-default);
+}
+
+.group-list__item {
+    width: 330px;
+    /* temp */
+    border: 1px dotted;
+    background-color: #eeeeee;
+}
+
+.group-tag {
+    display: flex;
+    padding: 0 8px;
+}
+
+.group-tag__cat-main,
+.group-tag__cat-sub,
+.group-tag__loc,
+.group-tag__gndr {
+  height: 30px;
+  margin: 13px 5px 0 5px;
+  padding: 0 5px;
+  border-radius: 10%;
+  font-size: var(--font-size-medium);
+  line-height: 1.8;
+  background-color: #ffffff;
+}
+
+.group-list__info {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px;
+}
+
+.group-list__mgr {
+    display: flex;
+    justify-content: flex-end;
+}
