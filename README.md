@@ -23,6 +23,6 @@
 ## ⚙️ 개발 환경 설정
 
 ## 🤝 팀원 소개
-- [42KIM](https://github.com/42KIM)
-- [sanoopark](https://github.com/sanoopark)
-- [young961027](https://github.com/young961027)
+- 김사휘 [42KIM](https://github.com/42KIM)
+- 박상우 [sanoopark](https://github.com/sanoopark)
+- 황영수 [young961027](https://github.com/young961027)
