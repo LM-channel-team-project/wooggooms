@@ -93,7 +93,7 @@
     justify-content: flex-end;
 }
 
-.delete-modal {
+.del-modal, .quit-modal {
     width: 375px;
     height: 100vh;
     position: absolute;
@@ -103,7 +103,7 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.delete-modal__content {
+.del-modal__content, .quit-modal__content {
     width: 80%;
     height: 10%;
     display: flex;
@@ -113,7 +113,7 @@
     background-color: white;
 }
 
-.delete-modal__text {
+.del-modal__text, .quit-modal__text {
     width: 80%;
     height: 50%;
     background-color: #e5e5e5;
