@@ -14,7 +14,7 @@ function openModal(modal) {
 }
 
 function closeModal(clicked) {
-    const cur_modal = clicked.target.parentNode.parentNode.parentNode;
+    const cur_modal = clicked.target.closest(".show-modal");
     cur_modal.classList.remove("show-modal");
 }
 
