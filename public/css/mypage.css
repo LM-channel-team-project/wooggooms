@@ -92,3 +92,35 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.delete-modal {
+    width: 375px;
+    height: 100vh;
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.delete-modal__content {
+    width: 80%;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.delete-modal__text {
+    width: 80%;
+    height: 50%;
+    background-color: #e5e5e5;
+    text-align: center;
+    font-size: var(--font-size-medium);
+}
+
+.show-modal {
+    display: flex;
+}
