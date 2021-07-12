@@ -105,7 +105,7 @@
   </tbody>
 </table>
 
-## 📝 기술 및 논의
+## 📝 [기술 및 논의 - WIKI](https://github.com/LM-channel-team-project/wooggooms/wiki)
 
 ## 🌐 브라우저 지원
 
