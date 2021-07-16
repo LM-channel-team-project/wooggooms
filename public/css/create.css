@@ -1,0 +1,230 @@
+:root {
+  --font-size-large: 20px;
+  --font-size-default: 16px;
+  --font-size-medium: 14px;
+  --font-size-small: 12px;
+  --font-size-x-small: 9px;
+  --submit-width: 240px;
+  --submit-height: 40px;
+}
+
+.group-create {
+  height: 100%;
+  overflow: auto;
+}
+
+/* hide strollbar */
+.group-create {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.group-create::-webkit-scrollbar {
+  display: none;
+}
+
+.group-create-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 87px;
+  font-size: var(--font-size-medium);
+  background-color: #c4c4c4;
+}
+
+.group-create-title__name {
+  margin: 0 20px;
+  font-size: var(--font-size-large);
+}
+.group-create-title__desc {
+  margin: 10px 0px 0px 20px;
+  font-size: var(--font-size-small);
+}
+.group-create-title__back-btn {
+  width: 70px;
+  height: 35px;
+  margin: 10px;
+  font-size: var(--font-size-small);
+}
+
+.group-create-name {
+  width: 100%;
+  margin: 10px 0;
+  background-color: #c4c4c4;
+}
+.group-create-name__desc {
+  margin: 20px 0px 0px 20px;
+  font-size: var(--font-size-default);
+}
+.group-create-name__input {
+  margin: 7px 0px 10px 17px;
+  color: white;
+  border: none;
+  background: transparent;
+}
+.group-create-name__input::placeholder {
+  color: white;
+}
+
+.group-create-condition {
+  width: 100%;
+  margin: 10px 0;
+  background-color: #c4c4c4;
+}
+.group-create-condition__desc {
+  margin: 20px 0px 0px 20px;
+  font-size: var(--font-size-default);
+}
+.group-create-condition__select {
+  width: 90px;
+  margin: 10px 0px 10px 15px;
+}
+
+.group-create-category {
+  width: 100%;
+  margin: 10px 0;
+  background-color: #c4c4c4;
+}
+.group-create-category__main {
+  margin: 20px 0px 0px 20px;
+  font-size: var(--font-size-default);
+}
+.group-create-category__sub {
+  margin: 10px 0px 15px 20px;
+  font-size: var(--font-size-default);
+}
+
+.group-create-intro {
+  width: 100%;
+  margin: 10px 0;
+  background-color: #c4c4c4;
+}
+.group-create-intro__desc {
+  margin: 20px 0px 0px 20px;
+  font-size: var(--font-size-default);
+}
+.group-create-intro__text {
+  width: 300px;
+  height: 300px;
+  overflow: auto;
+  margin: 13px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: var(--font-size-default);
+  color: black;
+  background-color: white;
+}
+
+/* hide strollbar */
+.group-create-intro__text {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.group-create-intro__text::-webkit-scrollbar {
+  display: none;
+}
+
+.group-create-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 350px;
+  height: 70px;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.group-create-submit__btn {
+  width: var(--submit-width);
+  height: var(--submit-height);
+}
+
+/* category-filter -- index.css와 중복되는 부분의 처리를 어떻게 해야할지? */
+.cat-filter-main {
+  display: flex;
+  overflow-x: scroll;
+  padding-top: 16px;
+  padding-bottom: 13px;
+}
+.cat-filter-main__btn {
+  background-color: white;
+  text-align: center;
+  padding-top: 3px;
+  margin-left: 9px;
+  min-width: 60px;
+  height: 30px;
+  font-size: 16px;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+.cat-filter-main__btn:hover {
+  background-color: #ddd;
+}
+.cat-filter-main__btn.active-main {
+  color: white;
+  background-color: #4f4f4f;
+}
+.cat-filter-main__btn.active-main:hover {
+  background-color: #4f4f4f;
+}
+.cat-filter-sub {
+  display: flex;
+  overflow-x: scroll;
+  height: 40px;
+  margin-left: 3px;
+}
+.cat-filter-sub__btn {
+  background-color: rgba(229, 229, 229, 1);
+  display: none;
+  text-align: center;
+  padding-top: 2px;
+  margin-left: 6px;
+  min-width: 50px;
+  height: 20px;
+  font-size: 9px;
+  border: none;
+  outline: none;
+}
+
+.cat-filter-sub__btn.show-sub {
+  display: flow-root;
+}
+
+.cat-filter-sub__btn.show-sub:hover {
+  background-color: dimgray;
+}
+
+.cat-filter-sub__btn.active-sub {
+  background-color: #fff;
+}
+
+.cat-filter-sub__btn.active-sub:hover {
+  background-color: #fff;
+}
+
+textarea {
+  border: none;
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
+}
+input {
+  border: none;
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
+}

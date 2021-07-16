@@ -4,12 +4,78 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>스터디 생성 페이지</title>
+    <link href="/public/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/create.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <a href="/">👉Home</a>
-    <p>This is create-study page.</p>
-    <!-- footer -->
-    <%- include('includes/footer'); %>
+    <main class="group-create">
+      <section class="group-create-title">
+        <div>
+          <div class="group-create-title__name">스터디 생성</div>
+          <div class="group-create-title__desc">
+            스터디의 세부 내용을 입력하세요
+          </div>
+        </div>
+        <div>
+          <button class="group-create-title__back-btn" type="button">
+            뒤로가기
+          </button>
+        </div>
+      </section>
+      <section class="group-create-name">
+        <div class="group-create-name__desc">스터디명</div>
+        <div>
+          <input
+            class="group-create-name__input"
+            placeholder="스터디명을 입력하세요"
+          />
+        </div>
+      </section>
+      <section class="group-create-condition">
+        <div class="group-create-condition__desc">스터디조건</div>
+        <div>
+          <select class="group-create-condition__select" name="online">
+            <option value="" disabled selected>온/오프라인</option>
+            <option value="online">온라인</option>
+            <option value="offline">오프라인</option>
+          </select>
+          <select class="group-create-condition__select" name="gender">
+            <option value="" disabled selected>남/여</option>
+            <option value="male">남자만</option>
+            <option value="female">여자만</option>
+            <option value="both">제한없음</option>
+          </select>
+          <select class="group-create-condition__select" name="members">
+            <option value="" disabled selected>인원수</option>
+            <option value="2">2인</option>
+            <option value="3">3인</option>
+            <option value="4">4인</option>
+            <option value="5">5인</option>
+            <option value="6">6인</option>
+            <option value="7">7인</option>
+            <option value="8">8인</option>
+            <option value="9">9인</option>
+          </select>
+        </div>
+      </section>
+      <section class="group-create-category">
+        <%- include('includes/create/category-filter'); %>
+      </section>
+      <section class="group-create-intro">
+        <div class="group-create-intro__desc">스터디 소개</div>
+        <textarea
+          class="group-create-intro__text"
+          spellcheck="false"
+        ></textarea>
+      </section>
+      <section class="group-create-submit">
+        <button class="group-create-submit__btn" type="button" value="">
+          스터디 생성하기
+        </button>
+      </section>
+    </main>
+    <script src="/public/js/category-filter.js"></script>
   </body>
 </html>
