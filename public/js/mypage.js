@@ -13,8 +13,8 @@ function openModal(modal) {
     modal.classList.add("show-modal");
 }
 
-function closeModal(clicked) {
-    const cur_modal = clicked.target.closest(".show-modal");
+function closeModal() {
+    const cur_modal = this.closest(".show-modal");
     cur_modal.classList.remove("show-modal");
 }
 
