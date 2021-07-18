@@ -6,6 +6,8 @@
   --font-size-x-small: 9px;
   --submit-width: 240px;
   --submit-height: 40px;
+  --cat-filter-main-bg-color: white;
+  --cat-filter-main-color: black;
 }
 
 .group-create {
@@ -139,71 +141,6 @@
 .group-create-submit__btn {
   width: var(--submit-width);
   height: var(--submit-height);
-}
-
-/* category-filter -- index.css와 중복되는 부분의 처리를 어떻게 해야할지? */
-.cat-filter-main {
-  display: flex;
-  overflow-x: scroll;
-  padding-top: 16px;
-  padding-bottom: 13px;
-}
-.cat-filter-main__btn {
-  background-color: white;
-  text-align: center;
-  padding-top: 3px;
-  margin-left: 9px;
-  min-width: 60px;
-  height: 30px;
-  font-size: 16px;
-  color: black;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-}
-.cat-filter-main__btn:hover {
-  background-color: #ddd;
-}
-.cat-filter-main__btn.active-main {
-  color: white;
-  background-color: #4f4f4f;
-}
-.cat-filter-main__btn.active-main:hover {
-  background-color: #4f4f4f;
-}
-.cat-filter-sub {
-  display: flex;
-  overflow-x: scroll;
-  height: 40px;
-  margin-left: 3px;
-}
-.cat-filter-sub__btn {
-  background-color: rgba(229, 229, 229, 1);
-  display: none;
-  text-align: center;
-  padding-top: 2px;
-  margin-left: 6px;
-  min-width: 50px;
-  height: 20px;
-  font-size: 9px;
-  border: none;
-  outline: none;
-}
-
-.cat-filter-sub__btn.show-sub {
-  display: flow-root;
-}
-
-.cat-filter-sub__btn.show-sub:hover {
-  background-color: dimgray;
-}
-
-.cat-filter-sub__btn.active-sub {
-  background-color: #fff;
-}
-
-.cat-filter-sub__btn.active-sub:hover {
-  background-color: #fff;
 }
 
 textarea {

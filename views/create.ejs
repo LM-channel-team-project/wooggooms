@@ -8,6 +8,7 @@
     <link href="/public/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="/public/css/default.css" rel="stylesheet" type="text/css" />
     <link href="/public/css/create.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/cat-filter.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <main class="group-create">
@@ -18,50 +19,44 @@
             스터디의 세부 내용을 입력하세요
           </div>
         </div>
-        <div>
-          <button class="group-create-title__back-btn" type="button">
-            뒤로가기
-          </button>
-        </div>
+        <button class="group-create-title__back-btn" type="button">
+          뒤로가기
+        </button>
       </section>
       <section class="group-create-name">
         <div class="group-create-name__desc">스터디명</div>
-        <div>
-          <input
-            class="group-create-name__input"
-            placeholder="스터디명을 입력하세요"
-          />
-        </div>
+        <input
+          class="group-create-name__input"
+          placeholder="스터디명을 입력하세요"
+        />
       </section>
       <section class="group-create-condition">
         <div class="group-create-condition__desc">스터디조건</div>
-        <div>
-          <select class="group-create-condition__select" name="online">
-            <option value="" disabled selected>온/오프라인</option>
-            <option value="online">온라인</option>
-            <option value="offline">오프라인</option>
-          </select>
-          <select class="group-create-condition__select" name="gender">
-            <option value="" disabled selected>남/여</option>
-            <option value="male">남자만</option>
-            <option value="female">여자만</option>
-            <option value="both">제한없음</option>
-          </select>
-          <select class="group-create-condition__select" name="members">
-            <option value="" disabled selected>인원수</option>
-            <option value="2">2인</option>
-            <option value="3">3인</option>
-            <option value="4">4인</option>
-            <option value="5">5인</option>
-            <option value="6">6인</option>
-            <option value="7">7인</option>
-            <option value="8">8인</option>
-            <option value="9">9인</option>
-          </select>
-        </div>
+        <select class="group-create-condition__select" name="online">
+          <option value="" disabled selected>온/오프라인</option>
+          <option value="online">온라인</option>
+          <option value="offline">오프라인</option>
+        </select>
+        <select class="group-create-condition__select" name="gender">
+          <option value="" disabled selected>남/여</option>
+          <option value="male">남자만</option>
+          <option value="female">여자만</option>
+          <option value="both">제한없음</option>
+        </select>
+        <select class="group-create-condition__select" name="members">
+          <option value="" disabled selected>인원수</option>
+          <option value="2">2인</option>
+          <option value="3">3인</option>
+          <option value="4">4인</option>
+          <option value="5">5인</option>
+          <option value="6">6인</option>
+          <option value="7">7인</option>
+          <option value="8">8인</option>
+          <option value="9">9인</option>
+        </select>
       </section>
       <section class="group-create-category">
-        <%- include('includes/create/category-filter'); %>
+        <%- include('includes/index/category-filter'); %>
       </section>
       <section class="group-create-intro">
         <div class="group-create-intro__desc">스터디 소개</div>

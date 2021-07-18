@@ -12,7 +12,9 @@ router.get('/', (req, res, next) => {
   if (!req.user) {
     res.redirect('/auth/sign-in');
   } else {
-    res.render('create');
+    res.render('create', {
+      path: req.baseUrl // 'create'
+    });
   }
 });
 
