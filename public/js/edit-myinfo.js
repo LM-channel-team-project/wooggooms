@@ -1,6 +1,6 @@
 const input = document.querySelectorAll("input");
 const pwdInput = document.querySelectorAll(".edit-pwd__input");
-const confirmPwd = document.querySelector(".confirm-pwd");
+const confirmInput = document.querySelector(".confirm-pwd");
 const submitBtn = document.querySelector(".edit-pwd__submit");
 
 
@@ -36,7 +36,7 @@ function alertMsg() {
 
 function init() {  
     alertMsg();
-    confirmPwd.addEventListener('keyup', checkPwd);
+    confirmInput.addEventListener('keyup', checkPwd);
 }
 
 init();
