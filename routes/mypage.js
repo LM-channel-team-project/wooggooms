@@ -1,4 +1,5 @@
 const express = require('express');
+const { route } = require('./create');
 
 const router = express.Router();
 
@@ -29,6 +30,15 @@ router.get('/edit-myinfo', (req, res, next) => {
     res.redirect('/auth/sign-in');
   } else {
     res.render('myinfo');
+  }
+});
+
+// Group-edit Route
+router.get('/group-edit', (req, res, next) => {
+  if (!req.user) {
+    res.redirect('/auth/sign-in');
+  } else {
+    res.render('group-edit');
   }
 });
 
