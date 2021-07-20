@@ -15,9 +15,8 @@ function checkPwd() {
 }
 
 function alertMsg() {
-    const params = new URLSearchParams(location.search);
-    if (params.has('status')) {
-        const status = params.get('status');        
+    const status = new URLSearchParams(location.search).get('status');
+    if (status) {       
         switch (status) {
             case 'unvalidnick':
                 alert('이미 사용 중인 닉네임입니다.');
