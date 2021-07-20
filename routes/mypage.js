@@ -1,6 +1,4 @@
 const express = require('express');
-const { route } = require('./create');
-
 const router = express.Router();
 
 // Func for checking user login
