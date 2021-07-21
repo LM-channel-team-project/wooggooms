@@ -3,6 +3,7 @@ const quit_modal = document.querySelector('.quit-modal');
 const quit_btn = document.querySelectorAll('.group-list__quit-btn');
 const del_modal = document.querySelector('.del-modal');
 const del_btn = document.querySelectorAll('.group-list__del-btn');
+const edit_btn = document.querySelectorAll('.group-list__edit-btn');
 const no_btn = document.querySelectorAll('.modal__no-btn');
 const group_enter_btn = document.querySelectorAll('.group-list__enter-btn');
 
@@ -35,9 +36,8 @@ function init() {
   no_btn.forEach(Item => {
     Item.addEventListener('click', closeModal);
   });
-
   //   임시적으로는 그냥 group-edit page로 redirect하지만, 추후에는 클릭된 그룹의 id도 함께 넘겨주어야 할듯
-  group_enter_btn.forEach(Item => {
+  edit_btn.forEach(Item => {
     Item.addEventListener('click', redeirectGroupEditPage);
   });
 }
