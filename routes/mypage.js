@@ -2,6 +2,7 @@ const express = require('express');
 const dbConfig = require('../config/database');
 
 const { db } = dbConfig;
+
 const router = express.Router();
 
 // Func for checking user login
@@ -87,6 +88,15 @@ router.post('/edit-pwd', (req, res, next) => {
     }
     res.redirect('/mypage/edit-myinfo?status=validpwd');
   });
+});
+
+// Group-edit Route
+router.get('/group-edit', (req, res, next) => {
+  if (!req.user) {
+    res.redirect('/auth/sign-in');
+  } else {
+    res.render('group-edit');
+  }
 });
 
 module.exports = router;
