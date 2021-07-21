@@ -11,11 +11,11 @@ function goBack() {
 function setInput() {
     const text = this.textContent;
     const parentClass = this.parentNode.getAttribute('class');
-    if(parentClass === "cat-filter-main") {
-        mainCatInput.setAttribute('value', text);
-        subCatInput.setAttribute('value', '');
+    if(parentClass === 'cat-filter-main') {
+        mainCatInput.value = text;
+        subCatInput.value = '';
     } else {
-        subCatInput.setAttribute('value', text);
+        subCatInput.value = text;
     }
 }
 
