@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>스터디 관리</title>
+    <link href="/public/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/group-edit.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <main class="group-edit">
+      <section class="group-edit-category">
+        <select class="group-edit-main-category" name="main">
+          <option value="" disabled selected>대분류</option>
+          <option value="officiary">공무원</option>
+          <option value="language">어학</option>
+          <option value="employee">취업</option>
+          <option value="exam">수능</option>
+          <option value="hobby">취미</option>
+        </select>
+        <select class="group-edit-sub-category" name="main">
+          <option value="" disabled selected>중분류</option>
+        </select>
+      </section>
+      <section class="group-edit-options">
+        <select class="group-edit-option" name="online">
+          <option value="" disabled selected>온/오프라인</option>
+          <option value="online">온라인</option>
+          <option value="offline">오프라인</option>
+        </select>
+        <select class="group-edit-option" name="gender">
+          <option value="" disabled selected>성별</option>
+          <option value="male">남성만</option>
+          <option value="female">여성만</option>
+          <option value="both">상관없음</option>
+        </select>
+        <select class="group-edit-option" name="members">
+          <option value="" disabled selected>인원수</option>
+          <option value="2">2명</option>
+          <option value="3">3명</option>
+          <option value="4">4명</option>
+          <option value="5">5명</option>
+          <option value="6">6명</option>
+          <option value="7">7명</option>
+          <option value="8">8명</option>
+          <option value="9">9명</option>
+        </select>
+      </section>
+      <section class="group-edit-title">
+        <input placeholder="스터디 이름" />
+        <button>수정하기</button>
+      </section>
+      <section class="group-edit-members">
+        <span>참여중인 멤버</span>
+        <hr />
+        <% for (let i = 0; i < 9; i++) { %>
+        <div class="group-edit-member">
+          <div class="group-edit-members-profile">
+            <div class="group-edit-members-profile__container">
+              <img
+                class="group-edit-members-profile__img"
+                src="/public/img/test-profile.png"
+              />
+            </div>
+            <div class="group-edit-members-profile__info">
+              <div class="group-edit-members-profile__nickname">
+                <span>닉네임</span>
+                <span>loopbackseal</span>
+              </div>
+            </div>
+          </div>
+          <div class="group-edit-member-action">
+            <button class="group-edit-member-action__kickout">강퇴</button>
+          </div>
+        </div>
+        <% } %>
+      </section>
+      <section class="group-edit-submit">
+        <button class="group-create-submit__btn">수정완료</button>
+      </section>
+    </main>
+    <script src="/public/js/group-edit.js"></script>
+  </body>
+</html>
