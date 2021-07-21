@@ -57,6 +57,16 @@
       </section>
       <section class="group-create-category">
         <%- include('includes/index/category-filter'); %>
+        <input
+          class="group-create-category__input-main"
+          type="hidden"
+          name="main-cataegory"
+        />
+        <input
+          class="group-create-category__input-sub"
+          type="hidden"
+          name="sub-cataegory"
+        />
       </section>
       <section class="group-create-intro">
         <div class="group-create-intro__desc">스터디 소개</div>
@@ -72,5 +82,6 @@
       </section>
     </main>
     <script src="/public/js/category-filter.js"></script>
+    <script src="/public/js/create.js"></script>
   </body>
 </html>
