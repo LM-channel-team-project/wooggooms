@@ -1,4 +1,4 @@
-const myinfo_btn = document.querySelector(".my-info__btn");
+const myinfo_btn = document.querySelector(".myinfo__btn");
 const quit_modal = document.querySelector(".quit-modal");
 const quit_btn = document.querySelectorAll(".group-list__quit-btn");
 const del_modal = document.querySelector(".del-modal");
