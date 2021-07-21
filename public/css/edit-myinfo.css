@@ -1,0 +1,25 @@
+:root {  
+    /* form */
+    --input-width: 240px;
+    --input-height: 40px;
+    --submit-width: 240px;
+    --submit-height: 40px;
+    --submit-margin: 40px;
+}
+
+.profile-img {
+    margin: 80px;
+}
+
+.edit-myinfo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-done-form__submit {
+    width: var(--input-width);
+    height: var(--input-height);
+    margin: var(--submit-margin);
+}
