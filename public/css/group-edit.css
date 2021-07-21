@@ -1,0 +1,53 @@
+:root {
+  --font-size-large: 20px;
+  --font-size-default: 16px;
+  --font-size-medium: 14px;
+  --font-size-small: 12px;
+  --font-size-x-small: 9px;
+  --submit-width: 240px;
+  --submit-height: 40px;
+}
+
+.group-edit {
+  display: flex;
+}
+
+/* .group-edit-member {
+} */
+.group-edit-members-profile {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.group-edit-members-profile__container {
+  width: 30%;
+}
+.group-edit-members-profile__img {
+  width: 100%;
+}
+.group-edit-members-profile__info {
+  width: 60%;
+  align-items: center;
+}
+
+.group-edit-member-action {
+  width: 100%;
+  justify-content: space-around;
+}
+
+.group-edit-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 350px;
+  height: 70px;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.group-create-submit__btn {
+  width: var(--submit-width);
+  height: var(--submit-height);
+}

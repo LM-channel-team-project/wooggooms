@@ -73,22 +73,26 @@ passport.use(
         const user = results[0];
         if (!user) {
           const id = nanoid();
-          const sns_profile = profile.photos[0].value;
+          const profile_image = profile.photos[0].value;
           const nickname = profile.displayName;
           const sql =
-            'INSERT INTO user (id, sns_id, sns_type, sns_profile, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
-          db.query(sql, [id, sns_id, sns_type, sns_profile, nickname], err => {
-            if (err) {
-              return done(err);
-            }
-            const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
-            db.query(sql, [sns_id, sns_type], (err, results) => {
+            'INSERT INTO user (id, sns_id, sns_type, profile_image, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
+          db.query(
+            sql,
+            [id, sns_id, sns_type, profile_image, nickname],
+            err => {
               if (err) {
                 return done(err);
               }
-              return done(null, results[0]);
-            });
-          });
+              const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
+              db.query(sql, [sns_id, sns_type], (err, results) => {
+                if (err) {
+                  return done(err);
+                }
+                return done(null, results[0]);
+              });
+            }
+          );
         }
         if (user) {
           return done(null, user);
@@ -116,22 +120,26 @@ passport.use(
         console.log(results);
         if (!user) {
           const id = nanoid();
-          const sns_profile = '';
+          const profile_image = '';
           const nickname = profile.displayName;
           const sql =
-            'INSERT INTO user (id, sns_id, sns_type, sns_profile, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
-          db.query(sql, [id, sns_id, sns_type, sns_profile, nickname], err => {
-            if (err) {
-              return done(err);
-            }
-            const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
-            db.query(sql, [sns_id, sns_type], (err, results) => {
+            'INSERT INTO user (id, sns_id, sns_type, profile_image, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
+          db.query(
+            sql,
+            [id, sns_id, sns_type, profile_image, nickname],
+            err => {
               if (err) {
                 return done(err);
               }
-              return done(null, results[0]);
-            });
-          });
+              const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
+              db.query(sql, [sns_id, sns_type], (err, results) => {
+                if (err) {
+                  return done(err);
+                }
+                return done(null, results[0]);
+              });
+            }
+          );
         }
         if (user) {
           return done(null, user);
