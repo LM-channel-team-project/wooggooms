@@ -4,7 +4,6 @@ const dbConfig = require('../config/database');
 const { db } = dbConfig;
 
 const router = express.Router();
-const path = require('path');
 
 
 // Create Route
@@ -19,17 +18,10 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/create_process', (req, res, next) => {
-  const post = req.body;
   const id = nanoid();
   const manager = req.user.id;
-  const { name } = post;
-  const { location } = post;
-  const { gender } = post;
-  const { members } = post;
+  const { name, location, gender, members, main_category, sub_category, description } = req.body;
   const maximum_number = parseInt(members);
-  const { main_category } = post;
-  const { sub_category } = post;
-  const { description } = post;
   const sql =
     'INSERT INTO study_group (id, manager, name, main_category, sub_category, gender, location, description, current_number, maximum_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
   db.query(sql, [id, manager, name, main_category, sub_category, gender, location, description, 1, maximum_number], err => {

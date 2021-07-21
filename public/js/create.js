@@ -8,7 +8,6 @@ function goBack() {
     window.history.back();
 }
 
-// 카테고리를 선택하면 hidden input에 해당 값을 세팅해주는 함수
 function setInput() {
     const text = this.textContent;
     const parentClass = this.parentNode.getAttribute('class');
@@ -26,7 +25,6 @@ function setInput() {
 // const group_mem = document.querySelector('.group-create-condition select[name=members]');
 // const group_desc = document.querySelector('.group-create-intro__text');
 // const submit_btn = document.querySelector('.group-create-submit__btn');
-// validCheck 일단 보류
 // function checkValid() {
 //     let valid_name = false;
 //     let valid_loc = false;
