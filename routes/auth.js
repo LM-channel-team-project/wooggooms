@@ -123,7 +123,7 @@ passport.use(
           const profile_image = '';
           const nickname = profile.displayName;
           const sql =
-            'INSERT INTO user (id, sns_id, sns_type, sns_profile, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
+            'INSERT INTO user (id, sns_id, sns_type, profile_image, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
           db.query(
             sql,
             [id, sns_id, sns_type, profile_image, nickname],
