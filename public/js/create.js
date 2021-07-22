@@ -1,22 +1,24 @@
 const backBtn = document.querySelector('.group-create-title__back-btn');
 const mainCatBtns = document.querySelectorAll('.cat-filter-main__btn');
 const subCatBtns = document.querySelectorAll('.cat-filter-sub__btn');
-const mainCatInput = document.querySelector('.group-create-category__input-main');
+const mainCatInput = document.querySelector(
+  '.group-create-category__input-main'
+);
 const subCatInput = document.querySelector('.group-create-category__input-sub');
 
 function goBack() {
-    window.history.back();
+  window.history.back();
 }
 
 function setInput() {
-    const text = this.textContent;
-    const parentClass = this.parentNode.getAttribute('class');
-    if(parentClass === 'cat-filter-main') {
-        mainCatInput.value = text;
-        subCatInput.value = '';
-    } else {
-        subCatInput.value = text;
-    }
+  const text = this.textContent;
+  const parentClass = this.parentNode.getAttribute('class');
+  if (parentClass === 'cat-filter-main') {
+    mainCatInput.value = text;
+    subCatInput.value = '';
+  } else {
+    subCatInput.value = text;
+  }
 }
 
 // const group_name = document.querySelector('.group-create-name__input');
@@ -43,18 +45,18 @@ function setInput() {
 // }
 
 function init() {
-    backBtn.addEventListener('click', goBack);
-    mainCatBtns.forEach(Item => {
-        Item.type = 'button';
-        Item.addEventListener('click', setInput);
-    });
-    subCatBtns.forEach(Item => {
-        Item.type = 'button';
-        Item.addEventListener('click', setInput);
-    });
-    // mainCatBtns.forEach(Item => Item.addEventListener('click', checkValid));
-    // subCatBtns.forEach(Item => Item.addEventListener('click', checkValid));
-    // document.addEventListener('input', checkValid);
+  backBtn.addEventListener('click', goBack);
+  mainCatBtns.forEach(Item => {
+    Item.type = 'button';
+    Item.addEventListener('click', setInput);
+  });
+  subCatBtns.forEach(Item => {
+    Item.type = 'button';
+    Item.addEventListener('click', setInput);
+  });
+  // mainCatBtns.forEach(Item => Item.addEventListener('click', checkValid));
+  // subCatBtns.forEach(Item => Item.addEventListener('click', checkValid));
+  // document.addEventListener('input', checkValid);
 }
 
 init();

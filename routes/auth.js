@@ -77,18 +77,22 @@ passport.use(
           const nickname = profile.displayName;
           const sql =
             'INSERT INTO user (id, sns_id, sns_type, profile_image, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
-          db.query(sql, [id, sns_id, sns_type, profile_image, nickname], err => {
-            if (err) {
-              return done(err);
-            }
-            const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
-            db.query(sql, [sns_id, sns_type], (err, results) => {
+          db.query(
+            sql,
+            [id, sns_id, sns_type, profile_image, nickname],
+            err => {
               if (err) {
                 return done(err);
               }
-              return done(null, results[0]);
-            });
-          });
+              const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
+              db.query(sql, [sns_id, sns_type], (err, results) => {
+                if (err) {
+                  return done(err);
+                }
+                return done(null, results[0]);
+              });
+            }
+          );
         }
         if (user) {
           return done(null, user);
@@ -120,18 +124,22 @@ passport.use(
           const nickname = profile.displayName;
           const sql =
             'INSERT INTO user (id, sns_id, sns_type, sns_profile, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
-          db.query(sql, [id, sns_id, sns_type, profile_image, nickname], err => {
-            if (err) {
-              return done(err);
-            }
-            const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
-            db.query(sql, [sns_id, sns_type], (err, results) => {
+          db.query(
+            sql,
+            [id, sns_id, sns_type, profile_image, nickname],
+            err => {
               if (err) {
                 return done(err);
               }
-              return done(null, results[0]);
-            });
-          });
+              const sql = 'SELECT * FROM user WHERE sns_id=? AND sns_type=?';
+              db.query(sql, [sns_id, sns_type], (err, results) => {
+                if (err) {
+                  return done(err);
+                }
+                return done(null, results[0]);
+              });
+            }
+          );
         }
         if (user) {
           return done(null, user);

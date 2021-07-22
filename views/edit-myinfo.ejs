@@ -1,43 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>내 정보 관리</title>
     <link href="/public/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="/public/css/default.css" rel="stylesheet" type="text/css" />
     <link href="/public/css/edit-myinfo.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
+  </head>
+  <body>
     <section class="profile-img">
-        <img src="" width="80" height="80">
+      <img src="" width="80" height="80" />
     </section>
     <section class="edit-myinfo-container">
-        <form action="/mypage/edit-nickname" method="post" class="edit-nickname-form">
-            <input class="edit-nickname__input" type="text" name="nickname" value="<%= nickname %>"/>
-            <input class="edit-nickname__submit" type="submit" value="수정하기"/>
-        </form>
-        <form action="/mypage/edit-email" method="post" class="edit-email-form">
-            <% if(userEmail === null) { %>
-            <input class="edit-email__input" type="text" name="email" placeholder="이메일을 입력하세요"/>
-            <input class="edit-email__submit" type="submit" value="등록하기"/>
-            <% } else { %>
-            <input class="edit-email__input" type="text" name="email" value="<%= userEmail %>"/>
-            <input class="edit-email__submit" type="submit" value="수정하기"/>
-            <% } %>
-        </form>
-        <% if(!isSNSUser) { %> 
-        <form action="/mypage/edit-pwd" method="post" class="edit-pwd-form">
-            <input class="edit-pwd__input" type="password" placeholder="새 비밀번호를 입력하세요"/>
-            <input class="edit-pwd__input confirm-pwd" type="password" name="pwd" placeholder="다시 한 번 입력하세요"/>
-            <input class="edit-pwd__submit" type="submit" value="수정하기" disabled/>
-        </form>
+      <form
+        action="/mypage/edit-nickname"
+        method="post"
+        class="edit-nickname-form"
+      >
+        <input
+          class="edit-nickname__input"
+          type="text"
+          name="nickname"
+          value="<%= nickname %>"
+        />
+        <input class="edit-nickname__submit" type="submit" value="수정하기" />
+      </form>
+      <form action="/mypage/edit-email" method="post" class="edit-email-form">
+        <% if(userEmail === null) { %>
+        <input
+          class="edit-email__input"
+          type="text"
+          name="email"
+          placeholder="이메일을 입력하세요"
+        />
+        <input class="edit-email__submit" type="submit" value="등록하기" />
+        <% } else { %>
+        <input
+          class="edit-email__input"
+          type="text"
+          name="email"
+          value="<%= userEmail %>"
+        />
+        <input class="edit-email__submit" type="submit" value="수정하기" />
         <% } %>
-        <form action="/mypage" method="get" class="edit-done-form">
-            <input class="edit-done-form__submit" type="submit" value="수정 완료"/>
-        </form>
+      </form>
+      <% if(!isSNSUser) { %>
+      <form action="/mypage/edit-pwd" method="post" class="edit-pwd-form">
+        <input
+          class="edit-pwd__input"
+          type="password"
+          placeholder="새 비밀번호를 입력하세요"
+        />
+        <input
+          class="edit-pwd__input confirm-pwd"
+          type="password"
+          name="pwd"
+          placeholder="다시 한 번 입력하세요"
+        />
+        <input
+          class="edit-pwd__submit"
+          type="submit"
+          value="수정하기"
+          disabled
+        />
+      </form>
+      <% } %>
+      <form action="/mypage" method="get" class="edit-done-form">
+        <input class="edit-done-form__submit" type="submit" value="수정 완료" />
+      </form>
     </section>
     <script src="/public/js/edit-myinfo.js"></script>
-</body>
+  </body>
 </html>
