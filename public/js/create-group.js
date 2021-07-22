@@ -6,7 +6,7 @@ const subInput = document.querySelector('.group-create-category__input-sub');
 function setSubInput(e) {
   const text = e.target.textContent;
   console.log(text);
-  subInput.setAttribute('value', text);
+  subInput.value = text;
 }
 function setMainInput(e) {
   const mainCategory = e.target.textContent;
@@ -18,8 +18,8 @@ function setMainInput(e) {
   if (pre_sub !== null) pre_sub.classList.remove('active-sub');
   subCategory.classList.add('active-sub');
   console.log(mainCategory, subCategory);
-  mainInput.setAttribute('value', mainCategory);
-  subInput.setAttribute('value', subCategory.textContent);
+  mainInput.value = mainCategory;
+  subInput.value = subCategory.textContent;
 }
 
 function init() {
