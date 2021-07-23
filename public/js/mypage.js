@@ -1,9 +1,9 @@
-const myinfo_btn = document.querySelector(".myinfo__btn");
-const quit_modal = document.querySelector(".quit-modal");
-const quit_btn = document.querySelectorAll(".group-list__quit-btn");
-const del_modal = document.querySelector(".del-modal");
-const del_btn = document.querySelectorAll(".group-list__del-btn");
-const no_btn = document.querySelectorAll(".modal__no-btn");
+const myinfo_btn = document.querySelector('.myinfo__btn');
+const quit_modal = document.querySelector('.quit-modal');
+const quit_btn = document.querySelectorAll('.group-list__quit-btn');
+const del_modal = document.querySelector('.del-modal');
+const del_btn = document.querySelectorAll('.group-list__del-btn');
+const no_btn = document.querySelectorAll('.modal__no-btn');
 const edit_btn = document.querySelectorAll('.group-list__edit-btn');
 const group_enter_btn = document.querySelectorAll('.group-list__enter-btn');
 

@@ -197,8 +197,8 @@ router.post('/sign-up_process', (req, res, next) => {
       if (err) {
         next(err);
       }
+      res.redirect('/auth/sign-in');
     });
-    res.redirect('/auth/sign-in');
   }
 });
 
