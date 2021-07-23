@@ -17,8 +17,9 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/create_process', (req, res, next) => {
-  const id = nanoid();
-  const manager = req.user.id;
+  const study_group_id = nanoid();
+  const group_member_id = nanoid();
+  const { id: manager, nickname } = req.user;
   const {
     name,
     location,
@@ -29,12 +30,14 @@ router.post('/create_process', (req, res, next) => {
     description
   } = req.body;
   const maximum_number = parseInt(members);
-  const sql =
-    'INSERT INTO study_group (id, manager, name, main_category, sub_category, gender, location, description, current_number, maximum_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  const sql_group =
+    'INSERT INTO study_group (id, manager, name, main_category, sub_category, gender, location, description, current_number, maximum_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+  const sql_member =
+    'INSERT INTO group_member (id, user_id, study_group_id, is_manager, nickname) VALUES (?, ?, ?, ?, ?)';
   db.query(
-    sql,
+    sql_group + sql_member,
     [
-      id,
+      study_group_id,
       manager,
       name,
       main_category,
@@ -43,7 +46,12 @@ router.post('/create_process', (req, res, next) => {
       location,
       description,
       1,
-      maximum_number
+      maximum_number,
+      group_member_id,
+      manager,
+      study_group_id,
+      1,
+      nickname
     ],
     err => {
       if (err) {
