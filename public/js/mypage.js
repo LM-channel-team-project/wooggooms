@@ -5,13 +5,15 @@ const del_modal = document.querySelector('.del-modal');
 const del_btn = document.querySelectorAll('.group-list__del-btn');
 const no_btn = document.querySelectorAll('.modal__no-btn');
 const edit_btn = document.querySelectorAll('.group-list__edit-btn');
+const edit_input = document.querySelectorAll('.group-list__hidden-input');
 const group_enter_btn = document.querySelectorAll('.group-list__enter-btn');
+const form = document.querySelector('.group-edit__form');
 
 function redirectEditPage() {
   location.href = 'http://localhost:3000/mypage/edit-myinfo';
 }
 function redeirectGroupEditPage() {
-  location.href = 'http://localhost:3000/mypage/group-edit';
+  form.submit();
 }
 
 function openModal(modal) {
@@ -32,9 +34,11 @@ function fetchGroups() {
     .then(response => response.json())
     .then(data => {
       let count = 0;
-      edit_btn.forEach(Item => {
+      // 개수에 맞게 렌더링 하기 위해서 ejs대신 createElement를 사용하는건 어떨까?
+      // 초기에는 "운영중인 스터디가 없습니다." if(data[0].length > 0)이면 그거 지우고 createElement하는 방식
+      // ?: 애초에 ejs를 사용한 이유가? - 위키에 작성하거나 ejs를 차근차근 대체해 나가야할듯?
+      edit_input.forEach(Item => {
         Item.value = data[0][count].study_group_id;
-        Item.addEventListener('click', redeirectGroupEditPage);
         count++;
       });
     });
@@ -53,7 +57,9 @@ function init() {
   no_btn.forEach(Item => {
     Item.addEventListener('click', closeModal);
   });
-
+  edit_btn.forEach(Item => {
+    Item.addEventListener('click', redeirectGroupEditPage);
+  });
   window.addEventListener('load', fetchGroups);
 }
 

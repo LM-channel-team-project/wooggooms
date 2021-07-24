@@ -103,12 +103,9 @@ router.post('/edit-pwd', (req, res, next) => {
 });
 
 // Group-edit Route
-router.get('/group-edit', (req, res, next) => {
-  if (!req.user) {
-    res.redirect('/auth/sign-in');
-  } else {
-    res.render('group-edit');
-  }
+router.post('/group-edit/process', (req, res, next) => {
+  console.log(req.body);
+  res.render('group-edit');
 });
 
 module.exports = router;
