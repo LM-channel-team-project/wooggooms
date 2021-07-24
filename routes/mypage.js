@@ -18,12 +18,32 @@ router.get('/', (req, res, next) => {
   if (!req.user) {
     res.redirect('/auth/sign-in');
   } else {
-    res.render('mypage', {
-      isLoggedIn: isLoggedIn(req),
-      path: req.baseUrl,
-      nickname: req.user.nickname
+    const sql = 'SELECT * FROM study_group WHERE idx BETWEEN 1 AND 4';
+    db.query(sql, (err, results) => {
+      if (err) {
+        next(err);
+      }
+      res.render('mypage', {
+        isLoggedIn: isLoggedIn(req),
+        path: req.baseUrl,
+        nickname: req.user.nickname,
+        dataArray: results
+      });
     });
   }
+});
+
+// lead-group data Fetch 요청 처리
+router.get('/fetch-leadgroup', (req, res, next) => {
+  const startIdx = parseInt(req.query.load);
+  const endIdx = startIdx + 3;
+  const sql = `SELECT * FROM study_group WHERE idx BETWEEN ${startIdx} AND ${endIdx}`;
+  db.query(sql, (err, results) => {
+    if (err) {
+      next(err);
+    }
+    res.json(results);
+  });
 });
 
 // Edit my-info Route
