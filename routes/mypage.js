@@ -14,14 +14,52 @@ function isLoggedIn(req) {
 }
 
 // Mypage Route
+let idx = 0;
+let dataArray = [];
 router.get('/', (req, res, next) => {
   if (!req.user) {
     res.redirect('/auth/sign-in');
-  } else {
-    res.render('mypage', {
-      isLoggedIn: isLoggedIn(req),
-      path: req.baseUrl,
-      nickname: req.user.nickname
+  }
+  // 다른 페이지에서 마이페이지로 접속한 경우 (= 쿼리 스트링이 없다)
+  if (!req.query.reload) {
+    idx = 0;
+    dataArray = [];
+    const sql = `SELECT * FROM study_group WHERE idx BETWEEN ${idx + 1} AND ${
+      idx + 4
+    }`;
+    console.log('idx: ', idx);
+    db.query(sql, (err, results) => {
+      if (err) {
+        next(err);
+      }
+      idx += 4;
+      dataArray.push(...results);
+      res.render('mypage', {
+        isLoggedIn: isLoggedIn(req),
+        path: req.baseUrl,
+        nickname: req.user.nickname,
+        dataArray: dataArray
+      });
+    });
+  }
+  // 마이페이지에서 리스트 갱신이 실행된 경우 (= /mypage?reload=true)
+  if (req.query.reload === 'true') {
+    const sql = `SELECT * FROM study_group WHERE idx BETWEEN ${idx + 1} AND ${
+      idx + 4
+    }`;
+    console.log('idx: ', idx);
+    db.query(sql, (err, results) => {
+      if (err) {
+        next(err);
+      }
+      idx += 4;
+      dataArray.push(...results);
+      res.render('mypage', {
+        isLoggedIn: isLoggedIn(req),
+        path: req.baseUrl,
+        nickname: req.user.nickname,
+        dataArray: dataArray
+      });
     });
   }
 });
