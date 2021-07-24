@@ -55,7 +55,9 @@
       <section class="group-edit-members">
         <span>참여중인 멤버</span>
         <hr />
-        <% for (let i = 0; i < 9; i++) { %>
+        <!-- name,location.gender,member는 undefined인 상태 -->
+        <% console.log(result,name,location,gender,members,member); %> <% for
+        (let i = 0; i < 9; i++) { %>
         <div class="group-edit-member">
           <div class="group-edit-members-profile">
             <div class="group-edit-members-profile__container">

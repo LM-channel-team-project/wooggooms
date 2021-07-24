@@ -12,7 +12,8 @@ const form = document.querySelector('.group-edit__form');
 function redirectEditPage() {
   location.href = 'http://localhost:3000/mypage/edit-myinfo';
 }
-function redeirectGroupEditPage() {
+// redirectGroupEditPage보다 renderGroupEditPage에 더 적합한 듯
+function renderGroupEditPage() {
   form.submit();
 }
 
@@ -58,7 +59,7 @@ function init() {
     Item.addEventListener('click', closeModal);
   });
   edit_btn.forEach(Item => {
-    Item.addEventListener('click', redeirectGroupEditPage);
+    Item.addEventListener('click', renderGroupEditPage);
   });
   window.addEventListener('load', fetchGroups);
 }

@@ -104,8 +104,28 @@ router.post('/edit-pwd', (req, res, next) => {
 
 // Group-edit Route
 router.post('/group-edit/process', (req, res, next) => {
-  console.log(req.body);
-  res.render('group-edit');
+  const { study_group_id } = req.body;
+  const sql_group = 'SELECT * FROM study_group WHERE id = ?;';
+  const sql_member = 'SELECT * FROM group_member WHERE study_group_id = ?';
+  db.query(
+    sql_group + sql_member,
+    [study_group_id, study_group_id],
+    (err, result) => {
+      if (err) {
+        next(err);
+      }
+      const study_group = result[0];
+      const member = result[1];
+      res.render('group-edit', {
+        result: result,
+        name: study_group.name,
+        location: study_group.location,
+        gender: study_group.gender,
+        members: study_group.maximum_number,
+        member: member
+      });
+    }
+  );
 });
 
 module.exports = router;
