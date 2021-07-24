@@ -26,6 +26,20 @@ router.get('/', (req, res, next) => {
   }
 });
 
+router.get('/fetch', (req, res, next) => {
+  const { id } = req.user;
+  const sql_manager =
+    'SELECT * FROM group_member WHERE user_id = ? AND is_manager = 1;';
+  const sql_member =
+    'SELECT * FROM group_member WHERE user_id = ? AND is_manager = 0';
+  db.query(sql_manager + sql_member, [id, id], (err, result) => {
+    if (err) {
+      next(err);
+    }
+    res.json(result);
+  });
+});
+
 // Edit my-info Route
 router.get('/edit-myinfo', (req, res, next) => {
   if (!req.user) {

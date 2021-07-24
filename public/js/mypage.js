@@ -23,6 +23,16 @@ function closeModal() {
   cur_modal.classList.remove('show-modal');
 }
 
+function fetchGroups() {
+  fetch('http://localhost:3000/mypage/fetch', {
+    headers: {
+      Accept: 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => console.log(data));
+}
+
 function init() {
   myinfo_btn.addEventListener('click', redirectEditPage);
   quit_btn.forEach(Item => {
@@ -40,6 +50,8 @@ function init() {
   edit_btn.forEach(Item => {
     Item.addEventListener('click', redeirectGroupEditPage);
   });
+
+  window.addEventListener('load', fetchGroups);
 }
 
 init();
