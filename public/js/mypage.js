@@ -30,7 +30,14 @@ function fetchGroups() {
     }
   })
     .then(response => response.json())
-    .then(data => console.log(data));
+    .then(data => {
+      let count = 0;
+      edit_btn.forEach(Item => {
+        Item.value = data[0][count].study_group_id;
+        Item.addEventListener('click', redeirectGroupEditPage);
+        count++;
+      });
+    });
 }
 
 function init() {
@@ -45,10 +52,6 @@ function init() {
 
   no_btn.forEach(Item => {
     Item.addEventListener('click', closeModal);
-  });
-  //   임시적으로는 그냥 group-edit page로 redirect하지만, 추후에는 클릭된 그룹의 id도 함께 넘겨주어야 할듯
-  edit_btn.forEach(Item => {
-    Item.addEventListener('click', redeirectGroupEditPage);
   });
 
   window.addEventListener('load', fetchGroups);
