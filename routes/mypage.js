@@ -114,14 +114,15 @@ router.post('/group-edit/process', (req, res, next) => {
       if (err) {
         next(err);
       }
-      const study_group = result[0];
+      const study_group = result[0][0];
       const member = result[1];
       res.render('group-edit', {
-        result: result,
         name: study_group.name,
         location: study_group.location,
         gender: study_group.gender,
         members: study_group.maximum_number,
+        main: study_group.main_category,
+        sub: study_group.sub_category,
         member: member
       });
     }

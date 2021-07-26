@@ -14,13 +14,14 @@
       <section class="group-edit-category">
         <select class="group-edit-main-category" name="main">
           <option value="" disabled selected>대분류</option>
-          <option value="officiary">공무원</option>
-          <option value="language">어학</option>
-          <option value="employee">취업</option>
-          <option value="exam">수능</option>
-          <option value="hobby">취미</option>
+          <% let options = ["공무원", "어학", "취업", "수능", "취미"]; let
+          optName = ["officiary","language","employee","exam","hobby"]; for (let
+          i = 0; i < options.length; i++) { %>
+          <!-- <option value="<%= optName[i] %>" selected><%=options[i]%></option> -->
+          <option value="<%= optName[i] %>"><%=options[i]%></option>
+          <% } %>
         </select>
-        <select class="group-edit-sub-category" name="main">
+        <select class="group-edit-sub-category" name="sub">
           <option value="" disabled selected>중분류</option>
         </select>
       </section>
@@ -49,15 +50,14 @@
         </select>
       </section>
       <section class="group-edit-title">
-        <input placeholder="스터디 이름" />
+        <input placeholder="스터디 이름" value="<%= name %>" />
         <button>수정하기</button>
       </section>
       <section class="group-edit-members">
         <span>참여중인 멤버</span>
         <hr />
-        <!-- name,location.gender,member는 undefined인 상태 -->
-        <% console.log(result,name,location,gender,members,member); %> <% for
-        (let i = 0; i < 9; i++) { %>
+        <% console.log(main,name,location,gender,members,member); %> <% for (let
+        i = 0; i < 9; i++) { %>
         <div class="group-edit-member">
           <div class="group-edit-members-profile">
             <div class="group-edit-members-profile__container">
