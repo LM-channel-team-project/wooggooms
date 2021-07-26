@@ -1,6 +1,7 @@
 const cat_main = document.querySelector('.group-edit-main-category');
 
 function categoryChange(e) {
+  // 얘네도 바뀔때마다 받아오거나 수정해야 할 것 같다.
   const office = ['9급', '7급', '5급'];
   const lang = ['영어', '중국어', '일본어'];
   const employ = ['경영/사무', 'IT/인터넷', '마케팅', '디자인', '미디어'];

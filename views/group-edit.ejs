@@ -14,39 +14,63 @@
       <section class="group-edit-category">
         <select class="group-edit-main-category" name="main">
           <option value="" disabled selected>대분류</option>
-          <% let options = ["공무원", "어학", "취업", "수능", "취미"]; let
-          optName = ["officiary","language","employee","exam","hobby"]; for (let
-          i = 0; i < options.length; i++) { %>
-          <!-- <option value="<%= optName[i] %>" selected><%=options[i]%></option> -->
-          <option value="<%= optName[i] %>"><%=options[i]%></option>
-          <% } %>
+          <% let mainCategoryList = ["공무원", "어학", "취업", "수능", "취미"];
+          let mainValue = ["officiary","language","employee","exam","hobby"];
+          for (let i = 0; i < mainCategoryList.length; i++) {
+          if(mainCategoryList[i] === main) { %>
+          <option value="<%= mainValue[i] %>" selected>
+            <%=mainCategoryList[i]%>
+          </option>
+          <% } else { %>
+          <option value="<%= mainValue[i] %>"><%=mainCategoryList[i]%></option>
+          <% } }%>
         </select>
         <select class="group-edit-sub-category" name="sub">
           <option value="" disabled selected>중분류</option>
         </select>
       </section>
       <section class="group-edit-options">
-        <select class="group-edit-option" name="online">
+        <select class="group-edit-option" name="location">
           <option value="" disabled selected>온/오프라인</option>
-          <option value="online">온라인</option>
-          <option value="offline">오프라인</option>
+          <% let locationList = ["온라인","오프라인"]; let locationValue
+          =["online","offline"]; for (let i = 0; i < locationValue.length; i++)
+          { if(locationValue[i] === location) { %>
+          <option value="<%= locationValue[i] %>" selected>
+            <%= locationList[i] %>
+          </option>
+          <% } else { %>
+          <option value="<%= locationValue[i] %>">
+            <%= locationList[i] %>
+          </option>
+          <% } } %>
         </select>
         <select class="group-edit-option" name="gender">
           <option value="" disabled selected>성별</option>
-          <option value="male">남성만</option>
-          <option value="female">여성만</option>
-          <option value="both">상관없음</option>
+          <% let genderList = ["남성만","여성만","상관없음"]; let genderValue
+          =["male","female","both"]; for (let i = 0; i < genderValue.length;
+          i++) { if(genderValue[i] === gender) { %>
+          <option value="<%= genderValue[i] %>" selected>
+            <%= genderList[i] %>
+          </option>
+          <% } else { %>
+          <option value="<%= genderValue[i] %>"><%= genderList[i] %></option>
+          <% } } %>
         </select>
         <select class="group-edit-option" name="members">
           <option value="" disabled selected>인원수</option>
-          <option value="2">2명</option>
-          <option value="3">3명</option>
-          <option value="4">4명</option>
-          <option value="5">5명</option>
-          <option value="6">6명</option>
-          <option value="7">7명</option>
-          <option value="8">8명</option>
-          <option value="9">9명</option>
+          <% let maximumNumberList =
+          ["2명","3명","4명","5명","6명","7명","8명","9명"]; let
+          maximumNumberValue = ["2","3","4","5","6","7","8","9"]; let maximum =
+          members.toString(); for (let i = 0; i < maximumNumberValue.length;
+          i++) { if(maximumNumberValue[i] === maximum) { %>
+          <option value="<%= maximumNumberValue[i] %>" selected>
+            <%= maximumNumberList[i] %>
+          </option>
+          <% } else { %>
+          <option value="<%= maximumNumberValue[i] %>">
+            <%= maximumNumberList[i] %>
+          </option>
+          <% } } %>
         </select>
       </section>
       <section class="group-edit-title">
