@@ -25,6 +25,12 @@
           <option value="<%= mainValue[i] %>"><%=mainCategoryList[i]%></option>
           <% } }%>
         </select>
+        <input
+          class="group-edit-sub-category__input"
+          type="hidden"
+          name="sub_category"
+          value="<%= sub %>"
+        />
         <select class="group-edit-sub-category" name="sub">
           <option value="" disabled selected>중분류</option>
         </select>

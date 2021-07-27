@@ -27,7 +27,7 @@ function closeModal() {
 }
 
 function fetchGroups() {
-  fetch('http://localhost:3000/mypage/fetch', {
+  fetch('http://localhost:3000/mypage/fetch-group', {
     headers: {
       Accept: 'application/json'
     }
