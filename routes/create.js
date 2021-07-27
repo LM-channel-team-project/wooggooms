@@ -31,7 +31,7 @@ router.post('/create_process', (req, res, next) => {
   } = req.body;
   const maximum_number = parseInt(members);
   const sql_group =
-    'INSERT INTO study_group (id, manager, name, main_category, sub_category, gender, location, description, current_number, maximum_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+    'INSERT INTO study_group (id, manager, name, main_category, sub_category, gender, location, description, current_number, maximum_number, create_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW());';
   const sql_member =
     'INSERT INTO group_member (id, user_id, study_group_id, is_manager, nickname) VALUES (?, ?, ?, ?, ?)';
   db.query(

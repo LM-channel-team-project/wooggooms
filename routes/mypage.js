@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
   if (!req.user) {
     res.redirect('/auth/sign-in');
   } else {
-    const sql = 'SELECT * FROM study_group WHERE idx BETWEEN 1 AND 4';
+    const sql = 'SELECT * FROM study_group ORDER BY create_date LIMIT 0, 4';
     db.query(sql, (err, results) => {
       if (err) {
         next(err);
@@ -34,10 +34,9 @@ router.get('/', (req, res, next) => {
 });
 
 // lead-group data Fetch 요청 처리
-router.get('/fetch-leadgroup', (req, res, next) => {
-  const startIdx = parseInt(req.query.load);
-  const endIdx = startIdx + 3;
-  const sql = `SELECT * FROM study_group WHERE idx BETWEEN ${startIdx} AND ${endIdx}`;
+router.get('/get-groups', (req, res, next) => {
+  const idx = parseInt(req.query.load);
+  const sql = `SELECT * FROM study_group ORDER BY create_date LIMIT ${idx}, 4`;
   db.query(sql, (err, results) => {
     if (err) {
       next(err);

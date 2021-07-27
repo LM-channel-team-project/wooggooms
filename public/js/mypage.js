@@ -26,7 +26,7 @@ function closeModal() {
 }
 
 // 전달 받은 데이터를 사용하여 element를 생성하는 함수
-function createLeadgroup(data) {
+function createGroup(data) {
   // group-list__item
   const newItem = document.createElement('div');
   newItem.className = 'group-list__item';
@@ -99,13 +99,13 @@ function createLeadgroup(data) {
 }
 
 // 새로운 데이터를 요청하는 함수
-let count = 1;
-function fetchLeadgroup() {
+let count = 0;
+function getGroups() {
   count += 4;
-  fetch(`http://localhost:3000/mypage/fetch-leadgroup?load=${count}`)
+  fetch(`http://localhost:3000/mypage/get-groups?load=${count}`)
     .then(response => response.json())
     .then(data => {
-      data.forEach(group => createLeadgroup(group));
+      data.forEach(group => createGroup(group));
     });
 }
 
@@ -126,7 +126,7 @@ function init() {
   edit_btn.forEach(Item => {
     Item.addEventListener('click', redeirectGroupEditPage);
   });
-  reloadLeadGroupBtn.addEventListener('click', fetchLeadgroup);
+  reloadLeadGroupBtn.addEventListener('click', getGroups);
 }
 
 init();
