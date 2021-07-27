@@ -17,7 +17,7 @@ const dbConfig = require('./config/database');
 const PORT = 3000;
 
 app.set('view engine', 'ejs');
-
+app.use(express.text());
 app.use(helmet());
 app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: false }));
