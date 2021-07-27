@@ -99,10 +99,10 @@ function createGroup(data) {
 }
 
 // 새로운 데이터를 요청하는 함수
-let count = 0;
+let idx = 0;
 function getGroups() {
-  count += 4;
-  fetch(`http://localhost:3000/mypage/get-groups?load=${count}`)
+  idx += 4;
+  fetch(`http://localhost:3000/mypage/get-groups?load=${idx}`)
     .then(response => response.json())
     .then(data => {
       data.forEach(group => createGroup(group));
