@@ -86,8 +86,8 @@
       <section class="group-edit-members">
         <span>참여중인 멤버</span>
         <hr />
-        <% console.log(main,name,location,gender,members,member); %> <% for (let
-        i = 0; i < 9; i++) { %>
+        <% for (let i = 0; i < member.length; i++) { %>
+        <!-- is_manager 검증을 통해서 회원만 보이도록 처리를 해야함. -->
         <div class="group-edit-member">
           <div class="group-edit-members-profile">
             <div class="group-edit-members-profile__container">
@@ -99,12 +99,17 @@
             <div class="group-edit-members-profile__info">
               <div class="group-edit-members-profile__nickname">
                 <span>닉네임</span>
-                <span>loopbackseal</span>
+                <span><%= member[i].nickname %></span>
               </div>
             </div>
           </div>
           <div class="group-edit-member-action">
-            <button class="group-edit-member-action__kickout">강퇴</button>
+            <button
+              class="group-edit-member-action__kickout"
+              value="<%= member[i].id %>"
+            >
+              강퇴
+            </button>
           </div>
         </div>
         <% } %>

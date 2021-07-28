@@ -26,7 +26,7 @@ router.get('/', (req, res, next) => {
   }
 });
 
-router.get('/fetch-group', (req, res, next) => {
+router.get('/get-group', (req, res, next) => {
   const { id } = req.user;
   const sql_manager =
     'SELECT * FROM group_member WHERE user_id = ? AND is_manager = 1;';

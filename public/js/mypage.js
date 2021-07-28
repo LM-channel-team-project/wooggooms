@@ -26,8 +26,8 @@ function closeModal() {
   cur_modal.classList.remove('show-modal');
 }
 
-function fetchGroups() {
-  fetch('http://localhost:3000/mypage/fetch-group', {
+function getGroups() {
+  fetch('http://localhost:3000/mypage/get-group', {
     headers: {
       Accept: 'application/json'
     }
@@ -61,7 +61,7 @@ function init() {
   edit_btn.forEach(Item => {
     Item.addEventListener('click', renderGroupEditPage);
   });
-  window.addEventListener('load', fetchGroups);
+  window.addEventListener('load', getGroups);
 }
 
 init();
