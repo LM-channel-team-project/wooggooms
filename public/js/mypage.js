@@ -8,8 +8,8 @@ const desc_btn = document.querySelector('.group-list__desc-btn');
 const edit_btn = document.querySelectorAll('.group-list__edit-btn');
 const group_enter_btn = document.querySelectorAll('.group-list__enter-btn');
 // 임시 '더 보기' 버튼
-const loadJoinGroupBtn = document.querySelector('.group-list__load-lead-btn');
-const loadLeadGroupBtn = document.querySelector('.group-list__load-lead-btn');
+// const loadJoinGroupBtn = document.querySelector('.group-list__load-lead-btn');
+// const loadLeadGroupBtn = document.querySelector('.group-list__load-lead-btn');
 const joingroupSection = document.querySelector('.join-group-list');
 const leadgroupSection = document.querySelector('.lead-group-list');
 
@@ -124,6 +124,18 @@ function getLeadgroups() {
     });
 }
 
+// 스크롤이 끝가지 내려지면, 새로운 데이터를 요청하여 출력하는 함수
+function loadJoingroups() {
+  const sectionHegiht = this.scrollHeight;
+  const viewHeight = this.clientHeight;
+  if (this.scrollTop === sectionHegiht - viewHeight) getJoingroups();
+}
+function loadLeadgroups() {
+  const sectionHegiht = this.scrollHeight;
+  const viewHeight = this.clientHeight;
+  if (this.scrollTop === sectionHegiht - viewHeight) getLeadgroups();
+}
+
 function init() {
   myinfo_btn.addEventListener('click', redirectEditPage);
   quit_btn.forEach(Item => {
@@ -141,7 +153,8 @@ function init() {
   edit_btn.forEach(Item => {
     Item.addEventListener('click', redeirectGroupEditPage);
   });
-  loadLeadGroupBtn.addEventListener('click', getLeadgroups);
+  joingroupSection.addEventListener('scroll', loadJoingroups);
+  leadgroupSection.addEventListener('scroll', loadLeadgroups);
 }
 
 init();
