@@ -18,8 +18,12 @@ router.get('/', (req, res, next) => {
   if (!req.user) {
     res.redirect('/auth/sign-in');
   } else {
-    const sql = 'SELECT * FROM study_group ORDER BY create_date LIMIT 0, 4';
-    db.query(sql, (err, results) => {
+    const { id } = req.user;
+    const sql_leadgroup =
+      'SELECT * FROM study_group WHERE id IN (SELECT * FROM (SELECT study_group_id FROM group_member WHERE user_id=? AND is_manager=1 ORDER BY create_date LIMIT 0, 4) as tmp);';
+    const sql_joingroup =
+      'SELECT * FROM study_group WHERE id IN (SELECT * FROM (SELECT study_group_id FROM group_member WHERE user_id=? AND is_manager=0 ORDER BY create_date LIMIT 0, 4) as tmp)';
+    db.query(sql_leadgroup + sql_joingroup, [id, id], (err, results) => {
       if (err) {
         next(err);
       }
@@ -27,17 +31,32 @@ router.get('/', (req, res, next) => {
         isLoggedIn: isLoggedIn(req),
         path: req.baseUrl,
         nickname: req.user.nickname,
-        dataArray: results
+        leadgroups: results[0],
+        joingroups: results[1]
       });
     });
   }
 });
 
-// lead-group data Fetch 요청 처리
-router.get('/get-groups', (req, res, next) => {
+// get-joingroups Fetch 요청 처리
+router.get('/get-joingroups', (req, res, next) => {
+  const { id } = req.user;
   const idx = parseInt(req.query.load);
-  const sql = `SELECT * FROM study_group ORDER BY create_date LIMIT ${idx}, 4`;
-  db.query(sql, (err, results) => {
+  const sql = `SELECT * FROM study_group WHERE id IN (SELECT * FROM (SELECT study_group_id FROM group_member WHERE user_id=? AND is_manager=0 ORDER BY create_date LIMIT ${idx}, 4) as tmp)`;
+  db.query(sql, [id], (err, results) => {
+    if (err) {
+      next(err);
+    }
+    res.json(results);
+  });
+});
+
+// get-leadgroups Fetch 요청 처리
+router.get('/get-leadgroups', (req, res, next) => {
+  const { id } = req.user;
+  const idx = parseInt(req.query.load);
+  const sql = `SELECT * FROM study_group WHERE id IN (SELECT * FROM (SELECT study_group_id FROM group_member WHERE user_id=? AND is_manager=1 ORDER BY create_date LIMIT ${idx}, 4) as tmp)`;
+  db.query(sql, [id], (err, results) => {
     if (err) {
       next(err);
     }

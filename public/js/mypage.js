@@ -4,9 +4,13 @@ const quit_btn = document.querySelectorAll('.group-list__quit-btn');
 const del_modal = document.querySelector('.del-modal');
 const del_btn = document.querySelectorAll('.group-list__del-btn');
 const no_btn = document.querySelectorAll('.modal__no-btn');
+const desc_btn = document.querySelector('.group-list__desc-btn');
 const edit_btn = document.querySelectorAll('.group-list__edit-btn');
 const group_enter_btn = document.querySelectorAll('.group-list__enter-btn');
-const reloadLeadGroupBtn = document.querySelector('.group-list__load-btn');
+// 임시 '더 보기' 버튼
+const loadJoinGroupBtn = document.querySelector('.group-list__load-lead-btn');
+const loadLeadGroupBtn = document.querySelector('.group-list__load-lead-btn');
+const joingroupSection = document.querySelector('.join-group-list');
 const leadgroupSection = document.querySelector('.lead-group-list');
 
 function redirectEditPage() {
@@ -25,12 +29,12 @@ function closeModal() {
   cur_modal.classList.remove('show-modal');
 }
 
-// 전달 받은 데이터를 사용하여 element를 생성하는 함수
-function createGroup(data) {
+// 전달 받은 데이터를 사용하여 '참여 중인 스터디' 또는 '진행 중인 스터디'에 element를 생성하는 함수
+function createGroup(data, section) {
   // group-list__item
   const newItem = document.createElement('div');
   newItem.className = 'group-list__item';
-  leadgroupSection.appendChild(newItem);
+  section.appendChild(newItem);
   // group-tag
   const newTag = document.createElement('div');
   newTag.className = 'group-tag';
@@ -98,14 +102,25 @@ function createGroup(data) {
   newMgrForm.appendChild(newMgrEditBtn);
 }
 
-// 새로운 데이터를 요청하는 함수
-let idx = 0;
-function getGroups() {
-  idx += 4;
-  fetch(`http://localhost:3000/mypage/get-groups?load=${idx}`)
+// '참여 중인 스터디' 추가 요청하는 함수
+let joingroupIdx = 0;
+function getJoingroups() {
+  joingroupIdx += 4;
+  fetch(`http://localhost:3000/mypage/get-joingroups?load=${joingroupIdx}`)
     .then(response => response.json())
     .then(data => {
-      data.forEach(group => createGroup(group));
+      data.forEach(group => createGroup(group, joingroupSection));
+    });
+}
+
+// '진행 중인 스터디' 추가 요청하는 함수
+let leadgroupIdx = 0;
+function getLeadgroups() {
+  leadgroupIdx += 4;
+  fetch(`http://localhost:3000/mypage/get-leadgroups?load=${leadgroupIdx}`)
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(group => createGroup(group, leadgroupSection));
     });
 }
 
@@ -126,7 +141,7 @@ function init() {
   edit_btn.forEach(Item => {
     Item.addEventListener('click', redeirectGroupEditPage);
   });
-  reloadLeadGroupBtn.addEventListener('click', getGroups);
+  loadLeadGroupBtn.addEventListener('click', getLeadgroups);
 }
 
 init();

@@ -1,7 +1,7 @@
 <span class="group-list__text">진행 중인 스터디</span>
 <!-- 내가 모집한 스터디 목록 -->
 <!-- Load default data -->
-<% dataArray.forEach(data => { %>
+<% leadgroups.forEach(data => { %>
 <div class="group-list__item">
   <div class="group-tag">
     <div class="group-tag__cat-main"><%= data.main_category %></div>
@@ -27,8 +27,8 @@
         type="hidden"
         value="<%= data.id %>"
       />
-      <button class="group-list__del-btn">삭제</button>
-      <button class="group-list__edit-btn">관리</button>
+      <button class="group-list__del-btn" type="button">삭제</button>
+      <button class="group-list__edit-btn" type="button">관리</button>
     </form>
   </div>
 </div>

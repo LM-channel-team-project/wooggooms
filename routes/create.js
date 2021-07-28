@@ -33,7 +33,7 @@ router.post('/create_process', (req, res, next) => {
   const sql_group =
     'INSERT INTO study_group (id, manager, name, main_category, sub_category, gender, location, description, current_number, maximum_number, create_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW());';
   const sql_member =
-    'INSERT INTO group_member (id, user_id, study_group_id, is_manager, nickname) VALUES (?, ?, ?, ?, ?)';
+    'INSERT INTO group_member (id, user_id, study_group_id, is_manager, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
   db.query(
     sql_group + sql_member,
     [
