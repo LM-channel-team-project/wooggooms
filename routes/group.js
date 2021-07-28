@@ -30,6 +30,7 @@ function getManagerName(members) {
 
 router.get('/info/test', (req, res, next) => {
   const study_group_id = 'vhdWO65xB7PE5rEl99yDf'; /* test */
+  const { id } = req.user ? req.user : '';
   const sql_group = 'SELECT * FROM study_group WHERE id=?;';
   const sql_member = 'SELECT * FROM group_member WHERE study_group_id=?';
   db.query(
@@ -42,7 +43,7 @@ router.get('/info/test', (req, res, next) => {
       const study_group = result[0][0];
       const members = result[1];
       const managerName = getManagerName(members);
-      const isMember = checkIsMember(req.user.id, members);
+      const isMember = checkIsMember(id, members);
       res.render('group-info', {
         isLoggedIn: isLoggedIn(req),
         isMember: isMember,
