@@ -31,13 +31,14 @@
       </section>
       <section class="group-info-qna">
         <div class="group-info-qna__mgr">
+          <!-- temp -->
           <div class="group-info-qna__mgr-img-ctr">
-            <!-- temp -->
             <img
               class="group-info-qna__mgr-img"
               src="/public/img/test-profile.png"
             />
           </div>
+          <!-- temp -->
           <div>
             <div class="group-info-qna__mgr-name"><%=manager%> 님에게</div>
             <div class="group-info-qna__mgr-desc">
@@ -50,19 +51,66 @@
             class="group-info-qna__text"
             placeholder="여기에 댓글을 입력하세요"
           ></textarea>
-          <button class="group-info-qna__send-btn" type="button" value="">
+          <button
+            class="group-info-qna__send-btn"
+            name="comment"
+            value="<%=isLoggedIn%>"
+            type="button"
+          >
             등록
           </button>
         </div>
-        <div class="group-info-qna__list">질문 답변 댓글</div>
+
+        <div class="group-info-qna__list-wrap">
+          <% comments.forEach(comment => { %>
+          <div class="group-info-qna__list">
+            <!-- temp -->
+            <div class="group-info-qna__img-ctr">
+              <img
+                class="group-info-qna__img"
+                src="/public/img/test-profile.png"
+              />
+            </div>
+            <!-- temp -->
+            <div class="group-info-qna__text">
+              <div class="group-info-qna__header">
+                <span class="group-info-qna__nickname">
+                  <%=comment.nickname%>
+                </span>
+                <span class="group-info-qna__datetime">
+                  <%=comment.update_date%>
+                </span>
+              </div>
+              <div class="group-info-qna__message"><%=comment.message%></div>
+              <div class="group-info-qna__btns">
+                <button
+                  class="group-info-qna__btn"
+                  name="delete"
+                  value="<%=comment.id%>,<%=comment.user_id%>,<%=userId%>"
+                >
+                  삭제
+                </button>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
       </section>
       <section class="group-info-apply">
         <% if (isMember) { %>
-        <button class="group-info-apply__btn" disabled>지원하기</button>
+        <button
+          class="group-info-apply__btn"
+          name="apply"
+          value="<%=groupId%>"
+          type="button"
+          disabled
+        >
+          지원하기
+        </button>
         <% } else { %>
         <button
           class="group-info-apply__btn"
-          name="groupId"
+          name="apply"
           value="<%=groupId%>"
           type="button"
         >
