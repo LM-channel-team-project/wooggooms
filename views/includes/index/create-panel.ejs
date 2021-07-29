@@ -1,4 +1,4 @@
-<% if(!isLoggedIn) { %>
+<% if(!isLoggedIn || !myGroups.length) { %>
 <a href="/auth/sign-in" class="create-panel__btn--unauth">
   (새로운 스터디 만들기)
 </a>
@@ -20,5 +20,5 @@
     <input class="create-panel-list-item__input" type="hidden" value="<%= myGroups[1].study_group_id %>">
   </div>
 </div>
-  <% } %>
-</div>
+<% } %>
+

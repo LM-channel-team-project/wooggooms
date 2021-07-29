@@ -1,5 +1,5 @@
 <ul>
-  <% searchlistGroups.forEach(group => { %>
+  <% if(searchlistGroups.length) { %> <% searchlistGroups.forEach(group => { %>
   <li class="search-list__item">
     <a href="/group/info/test">
       <!-- 추후 mainGroup.thumnail로 변경 필요 -->
@@ -35,5 +35,7 @@
       </tr>
     </table>
   </li>
-  <% }) %>
+  <% }); %> <% } else { %>
+  <span class="search-list__text">현재 모집 중인 스터디가 없습니다...</span>
+  <% } %>
 </ul>
