@@ -45,16 +45,31 @@ function getGroups() {
     });
 }
 
+function alertMsg() {
+  const status = new URLSearchParams(location.search).get('status');
+  if (status) {
+    switch (status) {
+      case 'invalidname':
+        alert('이미 사용 중인 스터디명입니다.');
+        break;
+      case 'invalidmembers':
+        alert('현재 인원수보다 정원이 적을 수 없습니다.');
+        break;
+      case 'complete':
+        alert('정상적으로 수정되었습니다.');
+        break;
+    }
+  }
+}
+
 function init() {
   myinfo_btn.addEventListener('click', redirectEditPage);
   quit_btn.forEach(Item => {
     Item.addEventListener('click', () => openModal(quit_modal));
   });
-
   del_btn.forEach(Item => {
     Item.addEventListener('click', () => openModal(del_modal));
   });
-
   no_btn.forEach(Item => {
     Item.addEventListener('click', closeModal);
   });
@@ -62,6 +77,7 @@ function init() {
     Item.addEventListener('click', renderGroupEditPage);
   });
   window.addEventListener('load', getGroups);
+  alertMsg();
 }
 
 init();

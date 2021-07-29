@@ -10,114 +10,122 @@
     <link href="/public/css/group-edit.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <main class="group-edit">
-      <section class="group-edit-category">
-        <select class="group-edit-main-category" name="main">
-          <option value="" disabled selected>대분류</option>
-          <% let mainCategoryList = ["공무원", "어학", "취업", "수능", "취미"];
-          let mainValue = ["officiary","language","employee","exam","hobby"];
-          for (let i = 0; i < mainCategoryList.length; i++) {
-          if(mainCategoryList[i] === main) { %>
-          <option value="<%= mainValue[i] %>" selected>
-            <%=mainCategoryList[i]%>
-          </option>
-          <% } else { %>
-          <option value="<%= mainValue[i] %>"><%=mainCategoryList[i]%></option>
-          <% } }%>
-        </select>
-        <input
-          class="group-edit-sub-category__input"
-          type="hidden"
-          name="sub_category"
-          value="<%= sub %>"
-        />
-        <select class="group-edit-sub-category" name="sub">
-          <option value="" disabled selected>중분류</option>
-        </select>
-      </section>
-      <section class="group-edit-options">
-        <select class="group-edit-option" name="location">
-          <option value="" disabled selected>온/오프라인</option>
-          <% let locationList = ["온라인","오프라인"]; let locationValue
-          =["online","offline"]; for (let i = 0; i < locationValue.length; i++)
-          { if(locationValue[i] === location) { %>
-          <option value="<%= locationValue[i] %>" selected>
-            <%= locationList[i] %>
-          </option>
-          <% } else { %>
-          <option value="<%= locationValue[i] %>">
-            <%= locationList[i] %>
-          </option>
-          <% } } %>
-        </select>
-        <select class="group-edit-option" name="gender">
-          <option value="" disabled selected>성별</option>
-          <% let genderList = ["남성만","여성만","상관없음"]; let genderValue
-          =["male","female","both"]; for (let i = 0; i < genderValue.length;
-          i++) { if(genderValue[i] === gender) { %>
-          <option value="<%= genderValue[i] %>" selected>
-            <%= genderList[i] %>
-          </option>
-          <% } else { %>
-          <option value="<%= genderValue[i] %>"><%= genderList[i] %></option>
-          <% } } %>
-        </select>
-        <select class="group-edit-option" name="members">
-          <option value="" disabled selected>인원수</option>
-          <% let maximumNumberList =
-          ["2명","3명","4명","5명","6명","7명","8명","9명"]; let
-          maximumNumberValue = ["2","3","4","5","6","7","8","9"]; let maximum =
-          members.toString(); for (let i = 0; i < maximumNumberValue.length;
-          i++) { if(maximumNumberValue[i] === maximum) { %>
-          <option value="<%= maximumNumberValue[i] %>" selected>
-            <%= maximumNumberList[i] %>
-          </option>
-          <% } else { %>
-          <option value="<%= maximumNumberValue[i] %>">
-            <%= maximumNumberList[i] %>
-          </option>
-          <% } } %>
-        </select>
-      </section>
-      <section class="group-edit-title">
-        <input placeholder="스터디 이름" value="<%= name %>" />
-        <button>수정하기</button>
-      </section>
-      <section class="group-edit-members">
-        <span>참여중인 멤버</span>
-        <hr />
-        <% for (let i = 0; i < member.length; i++) { %>
-        <!-- is_manager 검증을 통해서 회원만 보이도록 처리를 해야함. -->
-        <div class="group-edit-member">
-          <div class="group-edit-members-profile">
-            <div class="group-edit-members-profile__container">
-              <img
-                class="group-edit-members-profile__img"
-                src="/public/img/test-profile.png"
-              />
-            </div>
-            <div class="group-edit-members-profile__info">
-              <div class="group-edit-members-profile__nickname">
-                <span>닉네임</span>
-                <span><%= member[i].nickname %></span>
+    <form action="/mypage/edit_process" method="POST" class="group-edit-form">
+      <input type="hidden" name="id" value="<%=id%>" />
+      <main class="group-edit">
+        <section class="group-edit-category">
+          <select class="group-edit-main-category" name="main">
+            <option value="" disabled selected>대분류</option>
+            <% let mainCategoryList = ["공무원", "어학", "취업", "수능",
+            "취미"]; let mainValue =
+            ["officiary","language","employee","exam","hobby"]; for (let i = 0;
+            i < mainCategoryList.length; i++) { if(mainCategoryList[i] === main)
+            { %>
+            <option value="<%= mainCategoryList[i] %>" selected>
+              <%=mainCategoryList[i]%>
+            </option>
+            <% } else { %>
+            <option value="<%= mainCategoryList[i] %>">
+              <%=mainCategoryList[i]%>
+            </option>
+            <% } }%>
+          </select>
+          <input
+            class="group-edit-sub-category__input"
+            type="hidden"
+            name="sub_category"
+            value="<%= sub %>"
+          />
+          <select class="group-edit-sub-category" name="sub">
+            <option value="" disabled selected>중분류</option>
+          </select>
+        </section>
+        <section class="group-edit-options">
+          <select class="group-edit-option" name="location">
+            <option value="" disabled selected>온/오프라인</option>
+            <% let locationList = ["온라인","오프라인"]; let locationValue
+            =["online","offline"]; for (let i = 0; i < locationValue.length;
+            i++) { if(locationValue[i] === location) { %>
+            <option value="<%= locationValue[i] %>" selected>
+              <%= locationList[i] %>
+            </option>
+            <% } else { %>
+            <option value="<%= locationValue[i] %>">
+              <%= locationList[i] %>
+            </option>
+            <% } } %>
+          </select>
+          <select class="group-edit-option" name="gender">
+            <option value="" disabled selected>성별</option>
+            <% let genderList = ["남성만","여성만","상관없음"]; let genderValue
+            =["male","female","both"]; for (let i = 0; i < genderValue.length;
+            i++) { if(genderValue[i] === gender) { %>
+            <option value="<%= genderValue[i] %>" selected>
+              <%= genderList[i] %>
+            </option>
+            <% } else { %>
+            <option value="<%= genderValue[i] %>"><%= genderList[i] %></option>
+            <% } } %>
+          </select>
+          <select class="group-edit-option" name="members">
+            <option value="" disabled selected>인원수</option>
+            <% let maximumNumberList =
+            ["2명","3명","4명","5명","6명","7명","8명","9명"]; let
+            maximumNumberValue = ["2","3","4","5","6","7","8","9"]; let maximum
+            = members.toString(); for (let i = 0; i < maximumNumberValue.length;
+            i++) { if(maximumNumberValue[i] === maximum) { %>
+            <option value="<%= maximumNumberValue[i] %>" selected>
+              <%= maximumNumberList[i] %>
+            </option>
+            <% } else { %>
+            <option value="<%= maximumNumberValue[i] %>">
+              <%= maximumNumberList[i] %>
+            </option>
+            <% } } %>
+          </select>
+        </section>
+        <section class="group-edit-title">
+          <input placeholder="스터디 이름" name="name" value="<%= name %>" />
+          <button>수정하기</button>
+        </section>
+        <section class="group-edit-members">
+          <span>참여중인 멤버</span>
+          <hr />
+          <% for (let i = 0; i < member.length; i++) { %>
+          <!-- is_manager 검증을 통해서 회원만 보이도록 처리를 해야함. -->
+          <div class="group-edit-member">
+            <div class="group-edit-members-profile">
+              <div class="group-edit-members-profile__container">
+                <img
+                  class="group-edit-members-profile__img"
+                  src="/public/img/test-profile.png"
+                />
+              </div>
+              <div class="group-edit-members-profile__info">
+                <div class="group-edit-members-profile__nickname">
+                  <span>닉네임</span>
+                  <span><%= member[i].nickname %></span>
+                </div>
               </div>
             </div>
+            <div class="group-edit-member-action">
+              <button
+                class="group-edit-member-action__kickout"
+                value="<%= member[i].id %>"
+              >
+                강퇴
+              </button>
+            </div>
           </div>
-          <div class="group-edit-member-action">
-            <button
-              class="group-edit-member-action__kickout"
-              value="<%= member[i].id %>"
-            >
-              강퇴
-            </button>
-          </div>
-        </div>
-        <% } %>
-      </section>
-      <section class="group-edit-submit">
-        <button class="group-create-submit__btn">수정완료</button>
-      </section>
-    </main>
+          <% } %>
+        </section>
+        <section class="group-edit-submit">
+          <button class="group-create-submit__btn" type="button">
+            수정완료
+          </button>
+        </section>
+      </main>
+    </form>
     <script src="/public/js/group-edit.js"></script>
   </body>
 </html>
