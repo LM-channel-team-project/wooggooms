@@ -63,8 +63,8 @@ router.get('/', (req, res, next) => {
     } else {
       const { id } = req.user;
       const sql_mygroups =
-        'SELECT study_group_id, study_group_name FROM group_member WHERE user_id=? ORDER BY RAND() LIMIT 2';
-      db.query(sql_mygroups, [id], (err, myResults) => {
+        'SELECT * FROM group_member WHERE user_id=? ORDER BY RAND() LIMIT 2';
+      db.query(sql_mygroups, [id], (err, mygroupResults) => {
         if (err) {
           next(err);
         }
@@ -72,7 +72,7 @@ router.get('/', (req, res, next) => {
           isLoggedIn: true,
           path: req.baseUrl,
           searchlistGroups: searchlistResults,
-          myGroups: myResults
+          myGroups: mygroupResults
         });
       });
     }
