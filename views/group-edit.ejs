@@ -10,9 +10,9 @@
     <link href="/public/css/group-edit.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <form action="/mypage/edit_process" method="POST" class="group-edit-form">
-      <input type="hidden" name="id" value="<%=id%>" />
-      <main class="group-edit">
+    <main class="group-edit">
+      <form action="/mypage/edit_process" method="POST" class="group-edit-form">
+        <input type="hidden" name="id" value="<%=id%>" />
         <section class="group-edit-category">
           <select class="group-edit-main-category" name="main">
             <option value="" disabled selected>대분류</option>
@@ -88,44 +88,50 @@
           <input placeholder="스터디 이름" name="name" value="<%= name %>" />
           <button>수정하기</button>
         </section>
-        <section class="group-edit-members">
-          <span>참여중인 멤버</span>
-          <hr />
-          <% for (let i = 0; i < member.length; i++) { %>
-          <!-- is_manager 검증을 통해서 회원만 보이도록 처리를 해야함. -->
-          <div class="group-edit-member">
-            <div class="group-edit-members-profile">
-              <div class="group-edit-members-profile__container">
-                <img
-                  class="group-edit-members-profile__img"
-                  src="/public/img/test-profile.png"
-                />
-              </div>
-              <div class="group-edit-members-profile__info">
-                <div class="group-edit-members-profile__nickname">
-                  <span>닉네임</span>
-                  <span><%= member[i].nickname %></span>
-                </div>
-              </div>
+      </form>
+      <section class="group-edit-members">
+        <span>참여중인 멤버</span>
+        <hr />
+        <% for (let i = 0; i < member.length; i++) { %>
+        <!-- is_manager 검증을 통해서 회원만 보이도록 처리를 해야함. -->
+        <div class="group-edit-member">
+          <div class="group-edit-members-profile">
+            <div class="group-edit-members-profile__container">
+              <img
+                class="group-edit-members-profile__img"
+                src="/public/img/test-profile.png"
+              />
             </div>
-            <div class="group-edit-member-action">
-              <button
-                class="group-edit-member-action__kickout"
-                value="<%= member[i].id %>"
-              >
-                강퇴
-              </button>
+            <div class="group-edit-members-profile__info">
+              <div class="group-edit-members-profile__nickname">
+                <span>닉네임</span>
+                <span><%= member[i].nickname %></span>
+              </div>
             </div>
           </div>
-          <% } %>
-        </section>
-        <section class="group-edit-submit">
-          <button class="group-create-submit__btn" type="button">
-            수정완료
-          </button>
-        </section>
-      </main>
-    </form>
+          <div class="group-edit-member-action">
+            <form
+              action="/mypage/kickout"
+              method="POST"
+              class="group-edit-member__form"
+            >
+              <input
+                type="hidden"
+                name="memberid"
+                value="<%= member[i].id %>"
+              />
+              <button class="group-edit-member-action__kickout" type="button">
+                강퇴
+              </button>
+            </form>
+          </div>
+        </div>
+        <% } %>
+      </section>
+      <section class="group-edit-submit">
+        <button class="group-create-submit__btn" type="button">수정완료</button>
+      </section>
+    </main>
     <script src="/public/js/group-edit.js"></script>
   </body>
 </html>

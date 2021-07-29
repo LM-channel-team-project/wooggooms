@@ -55,8 +55,14 @@ function alertMsg() {
       case 'invalidmembers':
         alert('현재 인원수보다 정원이 적을 수 없습니다.');
         break;
-      case 'complete':
+      case 'edit':
         alert('정상적으로 수정되었습니다.');
+        break;
+      case 'ismanager':
+        alert('방장. 추후 참여중인 멤버에서 방장은 삭제 예정');
+        break;
+      case 'kickout':
+        alert('해당 멤버를 강퇴하였습니다.');
         break;
     }
   }

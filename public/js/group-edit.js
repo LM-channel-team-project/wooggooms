@@ -5,6 +5,8 @@ const sub_value = document.querySelector(
 ).value;
 const submitBtn = document.querySelector('.group-create-submit__btn');
 const editForm = document.querySelector('.group-edit-form');
+const kickoutForm = document.querySelector('.group-edit-member__form');
+const kickoutBtn = document.querySelector('.group-edit-member-action__kickout');
 // 얘네도 바뀔때마다 받아오거나 수정해야 할 것 같다
 const office = ['9급', '7급', '5급'];
 const lang = ['영어', '중국어', '일본어'];
@@ -44,10 +46,15 @@ function editSubmit(e) {
   editForm.submit();
 }
 
+function kickoutSubmit(e) {
+  kickoutForm.submit();
+}
+
 function init() {
   cat_main.addEventListener('change', categoryChange);
   document.addEventListener('DOMContentLoaded', initialChange);
   submitBtn.addEventListener('click', editSubmit);
+  kickoutBtn.addEventListener('click', kickoutSubmit);
 }
 
 init();
