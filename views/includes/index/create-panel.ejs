@@ -5,9 +5,20 @@
 <% } else { %>
 <!-- 내가 가입한 스터디가 있으면 n개 불러와서 출력 -->
 <!-- 가입한 스터디 없으면 그대로 스터디 생성 버튼 -->
-<a href="/create" class="create-panel__btn--auth">
-  (새로운 스터디 만들기)
-</a>
-<p class="create-panel__list">내 스터디1</p>
-<p class="create-panel__list">내 스터디2</p>
-<% } %>
+<a href="/create" class="create-panel__btn--auth">(새로운 스터디 만들기)</a>
+<div class="create-panel__list">
+  <div class="create-panel-list__item">
+    <span class="create-panel-list-item__text">
+      <%= myGroups[0].study_group_name %>
+    </span>
+    <input class="create-panel-list-item__input" type="hidden" value="<%= myGroups[0].study_group_id %>">
+  </div>
+  <div class="create-panel-list__item">
+    <span class="create-panel-list-item__text">
+      <%= myGroups[1].study_group_name %>
+    </span>
+    <input class="create-panel-list-item__input" type="hidden" value="<%= myGroups[1].study_group_id %>">
+  </div>
+</div>
+  <% } %>
+</div>

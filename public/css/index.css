@@ -33,6 +33,10 @@
   height: 30px;
 }
 
+.create-panel-list__item {
+  cursor: pointer;
+}
+
 /* cat-filter */
 .cat-filter {
   min-height: 93px;
