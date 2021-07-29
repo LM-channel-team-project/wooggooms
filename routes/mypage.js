@@ -18,25 +18,49 @@ router.get('/', (req, res, next) => {
   if (!req.user) {
     res.redirect('/auth/sign-in');
   } else {
-    res.render('mypage', {
-      isLoggedIn: isLoggedIn(req),
-      path: req.baseUrl,
-      nickname: req.user.nickname
+    const { id } = req.user;
+    const sql_leadgroup =
+      'SELECT * FROM study_group WHERE id IN (SELECT * FROM (SELECT study_group_id FROM group_member WHERE user_id=? AND is_manager=1 ORDER BY create_date LIMIT 0, 4) as tmp);';
+    const sql_joingroup =
+      'SELECT * FROM study_group WHERE id IN (SELECT * FROM (SELECT study_group_id FROM group_member WHERE user_id=? AND is_manager=0 ORDER BY create_date LIMIT 0, 4) as tmp)';
+    db.query(sql_leadgroup + sql_joingroup, [id, id], (err, results) => {
+      if (err) {
+        next(err);
+      }
+      res.render('mypage', {
+        isLoggedIn: isLoggedIn(req),
+        path: req.baseUrl,
+        nickname: req.user.nickname,
+        leadgroups: results[0],
+        joingroups: results[1]
+      });
     });
   }
 });
 
-router.get('/get-group', (req, res, next) => {
+// get-joingroups Fetch 요청 처리
+router.get('/get-joingroups', (req, res, next) => {
   const { id } = req.user;
-  const sql_manager =
-    'SELECT * FROM group_member WHERE user_id = ? AND is_manager = 1;';
-  const sql_member =
-    'SELECT * FROM group_member WHERE user_id = ? AND is_manager = 0';
-  db.query(sql_manager + sql_member, [id, id], (err, result) => {
+  const idx = parseInt(req.query.load);
+  const sql = `SELECT * FROM study_group WHERE id IN (SELECT * FROM (SELECT study_group_id FROM group_member WHERE user_id=? AND is_manager=0 ORDER BY create_date LIMIT ${idx}, 4) as tmp)`;
+  db.query(sql, [id], (err, results) => {
     if (err) {
       next(err);
     }
-    res.json(result);
+    res.json(results);
+  });
+});
+
+// get-leadgroups Fetch 요청 처리
+router.get('/get-leadgroups', (req, res, next) => {
+  const { id } = req.user;
+  const idx = parseInt(req.query.load);
+  const sql = `SELECT * FROM study_group WHERE id IN (SELECT * FROM (SELECT study_group_id FROM group_member WHERE user_id=? AND is_manager=1 ORDER BY create_date LIMIT ${idx}, 4) as tmp)`;
+  db.query(sql, [id], (err, results) => {
+    if (err) {
+      next(err);
+    }
+    res.json(results);
   });
 });
 
