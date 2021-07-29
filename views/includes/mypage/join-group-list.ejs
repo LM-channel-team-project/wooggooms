@@ -1,37 +1,35 @@
 <span class="group-list__text">참여 중인 스터디</span>
 <!-- 내가 가입한 스터디 목록 -->
+<!-- Load default data -->
+<% joingroups.forEach(data => { %>
 <div class="group-list__item">
   <div class="group-tag">
-    <div class="group-tag__cat-main">대분류</div>
-    <div class="group-tag__cat-sub">중분류</div>
-    <div class="group-tag__loc">장소</div>
-    <div class="group-tag__gndr">성별</div>
+    <div class="group-tag__cat-main"><%= data.main_category %></div>
+    <div class="group-tag__cat-sub"><%= data.sub_category %></div>
+    <div class="group-tag__loc"><%= data.location %></div>
+    <div class="group-tag__gndr"><%= data.gender %></div>
   </div>
   <div class="group-list__info">
-    <span class="group-list__num">3/5</span>
-    <span class="group-list__name">스터디 이름</span>
+    <span class="group-list__num">
+      <%= data.current_number + '/' + data.maximum_number %>
+    </span>
+    <span class="group-list__name"><%= data.name %></span>
   </div>
   <div class="group-list__mgr">
-    <button class="group-list__quit-btn">탈퇴</button>
-    <button class="group-list__desc-btn">자세히 보기</button>
+    <form
+      class="group-edit__form"
+      action="/mypage/group-edit/process"
+      method="POST"
+    >
+      <input
+        class="group-list__hidden-input"
+        name="study-group-id"
+        type="hidden"
+        value="<%= data.id %>"
+      />
+      <button class="group-list__quit-btn" type="button">탈퇴</button>
+      <button class="group-list__desc-btn" type="button">자세히보기</button>
+    </form>
   </div>
 </div>
-<!-- TEST DATA!!! -->
-<% for(let i = 0; i < 5; i++) { %>
-<div class="group-list__item">
-  <div class="group-tag">
-    <div class="group-tag__cat-main">대분류</div>
-    <div class="group-tag__cat-sub">중분류</div>
-    <div class="group-tag__loc">장소</div>
-    <div class="group-tag__gndr">성별</div>
-  </div>
-  <div class="group-list__info">
-    <span class="group-list__num">3/5</span>
-    <span class="group-list__name">TEST</span>
-  </div>
-  <div class="group-list__mgr">
-    <button class="group-list__quit-btn">탈퇴</button>
-    <button class="group-list__desc-btn">자세히 보기</button>
-  </div>
-</div>
-<% } %>
+<% }) %>
