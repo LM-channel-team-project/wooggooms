@@ -5,14 +5,6 @@ const { db } = dbConfig;
 
 const router = express.Router();
 
-// Func for checking user login
-function isLoggedIn(req) {
-  if (req.user) {
-    return true;
-  }
-  return false;
-}
-
 // Mypage Route
 router.get('/', (req, res, next) => {
   if (!req.user) {
@@ -28,7 +20,7 @@ router.get('/', (req, res, next) => {
         next(err);
       }
       res.render('mypage', {
-        isLoggedIn: isLoggedIn(req),
+        isLoggedIn: true,
         path: req.baseUrl,
         nickname: req.user.nickname,
         leadgroups: results[0],

@@ -5,49 +5,23 @@ const { db } = dbConfig;
 
 const router = express.Router();
 
-// Func for checking user login
-// function isLoggedIn(req) {
-//   if (req.user) {
-//     return true;
-//   }
-//   return false;
-// }
-
 // Main Route
 // eslint-disable-next-line no-unused-vars
 router.get('/', (req, res, next) => {
-  const category = req.query.cat;
+  const mainCategory = req.query.main;
+  const subCategory = req.query.sub;
   let sql_searchlist;
   // 초기 접속 화면이거나 '전체' 카테고리를 선택한 경우
-  if (category === undefined || category === 'all') {
+  if (mainCategory === undefined || mainCategory === '전체') {
     sql_searchlist =
       'SELECT * FROM study_group ORDER BY create_date DESC LIMIT 0, 10';
   }
-  // 다른 카테고리를 선택한 경우
+  // 다른 카테고리를 선택한 경우 해당 카테고리에 맞는 데이터 DB에서 SELECT
   else {
-    // 해당 카테고리에 맞는 데이터 DB에서 SELECT
-    // 추후 category-filter value 수정되면 여기 삭제할 것!!!!!!!!!!!!!!!!
-    switch (category) {
-      case 'officiary':
-        sql_searchlist =
-          'SELECT * FROM study_group WHERE main_category="공무원" ORDER BY create_date DESC LIMIT 0, 10';
-        break;
-      case 'language':
-        sql_searchlist =
-          'SELECT * FROM study_group WHERE main_category="어학" ORDER BY create_date DESC LIMIT 0, 10';
-        break;
-      case 'employee':
-        sql_searchlist =
-          'SELECT * FROM study_group WHERE main_category="취업" ORDER BY create_date DESC LIMIT 0, 10';
-        break;
-      case 'exam':
-        sql_searchlist =
-          'SELECT * FROM study_group WHERE main_category="수능" ORDER BY create_date DESC LIMIT 0, 10';
-        break;
-      case 'hobby':
-        sql_searchlist =
-          'SELECT * FROM study_group WHERE main_category="취미" ORDER BY create_date DESC LIMIT 0, 10';
-        break;
+    sql_searchlist = `SELECT * FROM study_group WHERE main_category='${mainCategory}' ORDER BY create_date DESC LIMIT 0, 10`;
+    // 소분류를 선택한 경우
+    if (subCategory) {
+      sql_searchlist = `SELECT * FROM study_group WHERE sub_category='${subCategory}' ORDER BY create_date DESC LIMIT 0, 10`;
     }
   }
   db.query(sql_searchlist, (err, searchlistResults) => {
