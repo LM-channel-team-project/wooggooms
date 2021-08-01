@@ -8,18 +8,15 @@ const desc_btn = document.querySelector('.group-list__desc-btn');
 const edit_btn = document.querySelectorAll('.group-list__edit-btn');
 const edit_input = document.querySelectorAll('.group-list__hidden-input');
 const group_enter_btn = document.querySelectorAll('.group-list__enter-btn');
-const form = document.querySelector('.group-edit__form');
-// 임시 '더 보기' 버튼
-// const loadJoinGroupBtn = document.querySelector('.group-list__load-lead-btn');
-// const loadLeadGroupBtn = document.querySelector('.group-list__load-lead-btn');
 const joingroupSection = document.querySelector('.join-group-list');
 const leadgroupSection = document.querySelector('.lead-group-list');
 
-function redirectEditPage() {
+function renderMyEditPage() {
   location.href = 'http://localhost:3000/mypage/edit-myinfo';
 }
-// redirectGroupEditPage보다 renderGroupEditPage에 더 적합한 듯
+
 function renderGroupEditPage() {
+  const form = this.closest('.group-edit__form');
   form.submit();
 }
 
@@ -106,15 +103,15 @@ function createGroup(data, section) {
 
   const newMgrForm = document.createElement('form');
   newMgrForm.className = 'group-edit__form';
-  newMgrForm.action = '/mypage/group-edit/process';
+  newMgrForm.action = '/mypage/group-edit';
   newMgrForm.method = 'POST';
   newMgr.appendChild(newMgrForm);
 
   const newMgrInput = document.createElement('input');
   newMgrInput.className = 'group-list__hidden-input';
-  newMgrInput.name = 'study-group-id';
+  newMgrInput.name = 'study_group_id';
   newMgrInput.type = 'hidden';
-  newMgrInput.value = `${data.id}`;
+  newMgrInput.value = data.id;
   newMgrForm.appendChild(newMgrInput);
 
   const newMgrDelBtn = document.createElement('button');
@@ -125,6 +122,7 @@ function createGroup(data, section) {
   const newMgrEditBtn = document.createElement('button');
   newMgrEditBtn.className = 'group-list__edit-btn';
   newMgrEditBtn.textContent = '관리';
+  newMgrEditBtn.addEventListener('click', renderGroupEditPage);
   newMgrForm.appendChild(newMgrEditBtn);
 }
 
@@ -163,7 +161,7 @@ function loadLeadgroups() {
 }
 
 function init() {
-  myinfo_btn.addEventListener('click', redirectEditPage);
+  myinfo_btn.addEventListener('click', renderMyEditPage);
   quit_btn.forEach(Item => {
     Item.addEventListener('click', () => openModal(quit_modal));
   });
