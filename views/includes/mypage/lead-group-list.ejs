@@ -16,14 +16,10 @@
     <span class="group-list__name"><%= data.name %></span>
   </div>
   <div class="group-list__mgr">
-    <form
-      class="group-edit__form"
-      action="/mypage/group-edit/process"
-      method="POST"
-    >
+    <form class="group-edit__form" action="/mypage/group-edit" method="POST">
       <input
         class="group-list__hidden-input"
-        name="study-group-id"
+        name="study_group_id"
         type="hidden"
         value="<%= data.id %>"
       />

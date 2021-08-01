@@ -6,7 +6,9 @@ const del_btn = document.querySelectorAll('.group-list__del-btn');
 const no_btn = document.querySelectorAll('.modal__no-btn');
 const desc_btn = document.querySelector('.group-list__desc-btn');
 const edit_btn = document.querySelectorAll('.group-list__edit-btn');
+const edit_input = document.querySelectorAll('.group-list__hidden-input');
 const group_enter_btn = document.querySelectorAll('.group-list__enter-btn');
+const form = document.querySelector('.group-edit__form');
 // 임시 '더 보기' 버튼
 // const loadJoinGroupBtn = document.querySelector('.group-list__load-lead-btn');
 // const loadLeadGroupBtn = document.querySelector('.group-list__load-lead-btn');
@@ -16,8 +18,9 @@ const leadgroupSection = document.querySelector('.lead-group-list');
 function redirectEditPage() {
   location.href = 'http://localhost:3000/mypage/edit-myinfo';
 }
-function redeirectGroupEditPage() {
-  location.href = 'http://localhost:3000/mypage/group-edit';
+// redirectGroupEditPage보다 renderGroupEditPage에 더 적합한 듯
+function renderGroupEditPage() {
+  form.submit();
 }
 
 function openModal(modal) {
@@ -27,6 +30,29 @@ function openModal(modal) {
 function closeModal() {
   const cur_modal = this.closest('.show-modal');
   cur_modal.classList.remove('show-modal');
+}
+
+function alertMsg() {
+  const status = new URLSearchParams(location.search).get('status');
+  if (status) {
+    switch (status) {
+      case 'invalidname':
+        alert('이미 사용 중인 스터디명입니다.');
+        break;
+      case 'invalidmembers':
+        alert('현재 인원수보다 정원이 적을 수 없습니다.');
+        break;
+      case 'edit':
+        alert('정상적으로 수정되었습니다.');
+        break;
+      case 'ismanager':
+        alert('방장. 추후 참여중인 멤버에서 방장은 삭제 예정');
+        break;
+      case 'kickout':
+        alert('해당 멤버를 강퇴하였습니다.');
+        break;
+    }
+  }
 }
 
 // 전달 받은 데이터를 사용하여 '참여 중인 스터디' 또는 '진행 중인 스터디'에 element를 생성하는 함수
@@ -141,20 +167,18 @@ function init() {
   quit_btn.forEach(Item => {
     Item.addEventListener('click', () => openModal(quit_modal));
   });
-
   del_btn.forEach(Item => {
     Item.addEventListener('click', () => openModal(del_modal));
   });
-
   no_btn.forEach(Item => {
     Item.addEventListener('click', closeModal);
   });
-  //   임시적으로는 그냥 group-edit page로 redirect하지만, 추후에는 클릭된 그룹의 id도 함께 넘겨주어야 할듯
   edit_btn.forEach(Item => {
-    Item.addEventListener('click', redeirectGroupEditPage);
+    Item.addEventListener('click', renderGroupEditPage);
   });
   joingroupSection.addEventListener('scroll', loadJoingroups);
   leadgroupSection.addEventListener('scroll', loadLeadgroups);
+  alertMsg();
 }
 
 init();
