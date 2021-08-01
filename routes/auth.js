@@ -16,6 +16,9 @@ const dbConfig = require('../config/database');
 
 const { db } = dbConfig;
 
+const { randomBytes } = require('crypto');
+const { pbkdf2Sync } = require('crypto');
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -48,7 +51,15 @@ passport.use(
         if (!user) {
           return done(null, false, { message: 'Incorrect email' });
         }
-        if (password !== user.password) {
+        const salt = user.salt;
+        const secret = pbkdf2Sync(
+          password,
+          salt,
+          100000,
+          64,
+          'sha512'
+        ).toString('base64');
+        if (secret !== user.secret) {
           return done(null, false, { message: 'Incorrect password' });
         }
         return done(null, user);
@@ -188,12 +199,16 @@ router.post('/sign-up_process', (req, res, next) => {
   const { pwd } = post;
   const { pwd2 } = post;
   const { nickname } = post;
-  const sql =
-    'INSERT INTO user (id, email, password, nickname, create_date) VALUES (?, ?, ?, ?, NOW())';
   if (pwd !== pwd2) {
     console.log('비밀번호가 일치하지 않습니다');
   } else {
-    db.query(sql, [id, email, pwd, nickname], err => {
+    const salt = randomBytes(64).toString('base64');
+    const secret = pbkdf2Sync(pwd, salt, 100000, 64, 'sha512').toString(
+      'base64'
+    );
+    const sql =
+      'INSERT INTO user (id, email, secret, salt, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
+    db.query(sql, [id, email, secret, salt, nickname], err => {
       if (err) {
         next(err);
       }
