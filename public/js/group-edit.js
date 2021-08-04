@@ -50,11 +50,32 @@ function kickoutSubmit(e) {
   kickoutForm.submit();
 }
 
+function alertMsg() {
+  const status = new URLSearchParams(location.search).get('status');
+  if (status) {
+    switch (status) {
+      case 'invalidname':
+        alert('이미 사용 중인 스터디명입니다.');
+        break;
+      case 'invalidmembers':
+        alert('현재 인원수보다 정원이 적을 수 없습니다.');
+        break;
+      case 'ismanager':
+        alert('방장. 추후 참여중인 멤버에서 방장은 삭제 예정');
+        break;
+      case 'kickout':
+        alert('해당 멤버를 강퇴하였습니다.');
+        break;
+    }
+  }
+}
+
 function init() {
   cat_main.addEventListener('change', categoryChange);
   document.addEventListener('DOMContentLoaded', initialChange);
   submitBtn.addEventListener('click', editSubmit);
   kickoutBtn.addEventListener('click', kickoutSubmit);
+  alertMsg();
 }
 
 init();

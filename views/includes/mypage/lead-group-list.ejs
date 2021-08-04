@@ -16,15 +16,10 @@
     <span class="group-list__name"><%= data.name %></span>
   </div>
   <div class="group-list__mgr">
-    <form class="group-edit__form" action="/mypage/group-edit" method="POST">
-      <input
-        class="group-list__hidden-input"
-        name="study_group_id"
-        type="hidden"
-        value="<%= data.id %>"
-      />
       <button class="group-list__del-btn" type="button">삭제</button>
-      <button class="group-list__edit-btn" type="button">관리</button>
+      <button class="group-list__edit-btn" type="button" value="<%= data.id %>">
+        관리
+      </button>
     </form>
   </div>
 </div>
