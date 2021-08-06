@@ -83,12 +83,15 @@
             </option>
             <% } } %>
           </select>
+        </form>
         </section>
-        <section class="group-edit-title">
-          <input placeholder="스터디 이름" name="name" value="<%= name %>" />
-          <button>수정하기</button>
-        </section>
-      </form>
+        <form action="/mypage/edit_check" method="POST" class="name-check-form">
+          <input type="hidden" name="id" value="<%=id%>" />
+          <section class="group-edit-name">
+            <input class="group-edit-name__input" placeholder="스터디 이름" name="name" value="<%= name %>" />
+            <button class="name-check-btn" type="button">수정하기</button>
+          </section>
+        </form>
       <section class="group-edit-members">
         <span>참여중인 멤버</span>
         <hr />
@@ -129,7 +132,9 @@
         <% } %>
       </section>
       <section class="group-edit-submit">
-        <button class="group-create-submit__btn" type="button">수정완료</button>
+        <button class="group-create-submit__btn" type="button" disabled>
+          수정완료
+        </button>
       </section>
     </main>
     <script src="/public/js/group-edit.js"></script>
