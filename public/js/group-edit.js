@@ -3,7 +3,7 @@ const cat_sub = document.querySelector('.group-edit-sub-category');
 const sub_value = document.querySelector(
   '.group-edit-sub-category__input'
 ).value;
-const submitBtn = document.querySelector('.group-create-submit__btn');
+const submitBtn = document.querySelector('.group-edit-submit__btn');
 const editForm = document.querySelector('.group-edit-form');
 const kickoutForm = document.querySelector('.group-edit-member__form');
 const kickoutBtn = document.querySelector('.group-edit-member-action__kickout');
