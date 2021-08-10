@@ -3,6 +3,11 @@ const applyBtn = document.querySelector('.group-info-apply__btn');
 const commentBtn = document.querySelector('.group-info-qna__send-btn');
 const commentInput = document.querySelector('.group-info-qna__text');
 const deleteBtns = document.querySelectorAll('.group-info-qna__btn');
+const capacityStatus = document.querySelector('.group-info-title__mmbr');
+const capacityText = capacityStatus.textContent;
+const slashIndex = capacityText.indexOf('/');
+const currentNumber = capacityText.slice(0, slashIndex);
+const maximumNumber = capacityText.slice(slashIndex + 1);
 
 function goBack() {
   window.history.back();
@@ -12,14 +17,23 @@ function disableBtn() {
   applyBtn.disabled = true;
 }
 
+function increaseCurrentNumber() {
+  let renewedNumber = Number(currentNumber) + 1;
+  capacityStatus.textContent = `${renewedNumber}/${maximumNumber}`;
+}
+
 function postGroupId() {
   if (commentBtn.value === 'false') {
     alert('스터디에 지원하려면 로그인을 해주세요.');
+  } else if (currentNumber >= maximumNumber) {
+    alert('정원이 가득 차서 지원할 수 없습니다.');
   } else {
     fetch(`http://localhost:3000/group/post-group-id`, {
       method: 'POST',
       body: this.value
-    }).then(disableBtn());
+    })
+      .then(disableBtn())
+      .then(increaseCurrentNumber());
   }
 }
 
