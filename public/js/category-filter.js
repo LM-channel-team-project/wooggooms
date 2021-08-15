@@ -11,7 +11,7 @@ function handleMain(event) {
   });
 
   const cat = event.target;
-  const cat_name = cat.classList[1];
+  const cat_name = cat.value;
 
   cat.classList.add('active-main');
   const selected_sub = document.querySelectorAll('.' + cat_name);

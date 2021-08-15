@@ -119,8 +119,8 @@ router.post('/edit-pwd', (req, res, next) => {
 });
 
 // Group-edit Route
-router.post('/group-edit', (req, res, next) => {
-  const { study_group_id } = req.body;
+router.get('/group-edit/:id', (req, res, next) => {
+  const study_group_id = req.params.id;
   const sql_group = 'SELECT * FROM study_group WHERE id = ?;';
   const sql_member = 'SELECT * FROM group_member WHERE study_group_id = ?';
   db.query(
@@ -146,31 +146,46 @@ router.post('/group-edit', (req, res, next) => {
   );
 });
 
-router.post('/edit_process', (req, res, next) => {
-  console.log(req.body);
-  const { id, name, main, sub, gender, location, members } = req.body;
+router.post('/edit_check', (req, res, next) => {
+  const { id, name } = req.body;
   const sql_name = 'SELECT COUNT(*) as used FROM study_group WHERE name=?;';
   const sql_number = 'SELECT * FROM study_group WHERE id=?';
   db.query(sql_name + sql_number, [name, id], (err, result) => {
     if (err) {
       next(err);
-    } else if (result[0][0].used && result[1][0].name !== name) {
-      res.redirect('/mypage?status=invalidname');
-    } else if (result[1][0].current_number > parseInt(members)) {
-      res.redirect('/mypage?stauts=invlaidmembers');
+    }
+    if (result[0][0].used && result[1][0].name !== name) {
+      res.redirect('/mypage/group-edit/' + id + '?status=invalidname');
+    } else {
+      const sql_name_edit = 'UPDATE study_group SET name=? WHERE id=?';
+      db.query(sql_name_edit, [name, id], err => {
+        if (err) {
+          next(err);
+        }
+        res.redirect('/mypage/group-edit/' + id + '?status=validname');
+      });
+    }
+  });
+});
+
+router.post('/edit_process', (req, res, next) => {
+  console.log(req.body);
+  const { id, main, sub, gender, location, members } = req.body;
+  const sql_number = 'SELECT * FROM study_group WHERE id=?';
+  db.query(sql_number, [id], (err, result) => {
+    if (err) {
+      next(err);
+    } else if (result[0].current_number > parseInt(members)) {
+      res.redirect('/mypage/group-edit/' + id + '?stauts=invlaidmembers');
     } else {
       const sql_edit =
-        'UPDATE study_group SET name=?, main_category=?, sub_category=?, gender=?, location=?, maximum_number=? WHERE id=?';
-      db.query(
-        sql_edit,
-        [name, main, sub, gender, location, members, id],
-        err => {
-          if (err) {
-            next(err);
-          }
-          res.redirect('/mypage?status=edit');
+        'UPDATE study_group SET main_category=?, sub_category=?, gender=?, location=?, maximum_number=? WHERE id=?';
+      db.query(sql_edit, [main, sub, gender, location, members, id], err => {
+        if (err) {
+          next(err);
         }
-      );
+        res.redirect('/mypage/?status=edit');
+      });
     }
   });
 });
@@ -182,16 +197,23 @@ router.post('/kickout', (req, res, next) => {
   db.query(sql_member, [memberid], (err, result) => {
     if (err) {
       next(err);
-    } else if (result[0].is_manager) {
-      res.redirect('/mypage?status=ismanager');
     } else {
-      const sql_kickout = 'DELETE FROM group_member WHERE id=?';
-      db.query(sql_kickout, [memberid], err => {
-        if (err) {
-          next(err);
-        }
-        res.redirect('/mypage?status=kickout');
-      });
+      const study_group_id = result[0].study_group_id;
+      if (result[0].is_manager) {
+        res.redirect(
+          '/mypage/group-edit/' + study_group_id + '?status=ismanager'
+        );
+      } else {
+        const sql_kickout = 'DELETE FROM group_member WHERE id=?';
+        db.query(sql_kickout, [memberid], err => {
+          if (err) {
+            next(err);
+          }
+          res.redirect(
+            '/mypage/group-edit/' + study_group_id + '?status=kickout'
+          );
+        });
+      }
     }
   });
 });
