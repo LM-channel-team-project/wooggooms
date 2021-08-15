@@ -81,20 +81,45 @@ router.get('/info/:id', (req, res, next) => {
 });
 
 router.post('/post-group-id', (req, res, next) => {
-  const group_member_id = nanoid();
   const study_group_id = req.body;
-  const { id: user_id, nickname } = req.user;
-  const sql_member =
-    'INSERT INTO group_member (id, user_id, study_group_id, is_manager, nickname) VALUES (?, ?, ?, ?, ?)';
-  db.query(
-    sql_member,
-    [group_member_id, user_id, study_group_id, 0, nickname],
-    err => {
-      if (err) {
-        next(err);
-      }
+  const sql_group = 'SELECT * FROM study_group WHERE id=?';
+  db.query(sql_group, [study_group_id], (err, result) => {
+    if (err) {
+      next(err);
     }
-  );
+    const study_group = result[0];
+    const { current_number } = study_group;
+    const { maximum_number } = study_group;
+    if (current_number >= maximum_number) {
+      console.log('비정상 접근 : 정원 초과');
+      next(err);
+    } else {
+      const group_member_id = nanoid();
+      const { id: user_id, nickname } = req.user;
+      const { name: study_group_name } = study_group;
+      const sql_member =
+        'INSERT INTO group_member (id, user_id, study_group_id, is_manager, nickname, study_group_name, create_date) VALUES (?, ?, ?, ?, ?, ?, now());';
+      const sql_update_member =
+        'UPDATE study_group SET current_number=current_number+1 WHERE id=?';
+      db.query(
+        sql_member + sql_update_member,
+        [
+          group_member_id,
+          user_id,
+          study_group_id,
+          0,
+          nickname,
+          study_group_name,
+          study_group_id
+        ],
+        err => {
+          if (err) {
+            next(err);
+          }
+        }
+      );
+    }
+  });
 });
 
 router.post('/create-comment', (req, res, next) => {
