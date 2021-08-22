@@ -1,4 +1,9 @@
 :root {
+  --font-size-large: 20px;
+  --font-size-default: 16px;
+  --font-size-medium: 14px;
+  --font-size-small: 12px;
+  --font-size-x-small: 9px;
   /* form */
   --input-width: 240px;
   --input-height: 40px;
@@ -66,10 +71,20 @@
 .sign-up-form__input {
   width: var(--input-width);
   height: var(--input-height);
+  margin: 5% 0;
 }
 
 .sign-up-form__submit {
   width: var(--submit-width);
   height: var(--submit-height);
   margin: var(--submit-margin);
+}
+
+.sign-up-form__email,
+.sign-up-form__pwd,
+.sign-up-form__pwd2,
+.sign-up-form__name {
+  min-height: 10px;
+  font-size: var(--font-size-x-small);
+  color: red;
 }
