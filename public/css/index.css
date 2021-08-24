@@ -33,6 +33,10 @@
   height: 30px;
 }
 
+.create-panel-list__item {
+  cursor: pointer;
+}
+
 /* cat-filter */
 .cat-filter {
   min-height: 93px;
@@ -117,9 +121,7 @@
 
 .search-list__link {
   display: block;
-  width: 100%;
-  height: 100%;
-  line-height: 1.8em;
+  line-height: 0.4em;
   color: #ffffff;
   text-decoration: none; /* temp */
 }

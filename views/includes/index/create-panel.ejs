@@ -1,13 +1,27 @@
+<!-- 로그인 하지 않은 유저 -->
 <% if(!isLoggedIn) { %>
 <a href="/auth/sign-in" class="create-panel__btn--unauth">
   (새로운 스터디 만들기)
 </a>
+<!-- 로그인 했지만 가입한 스터디가 없는 유저 -->
+<% } else if(!myGroups.length) { %>
+<a href="/create" class="create-panel__btn--auth">(새로운 스터디 만들기)</a>
+<span class="create-panel__text">현재 가입한 스터디가 없습니다...</span>
+<!-- 로그인 했고 가입한 스터디가 있는 유저 -->
 <% } else { %>
-<!-- 내가 가입한 스터디가 있으면 n개 불러와서 출력 -->
-<!-- 가입한 스터디 없으면 그대로 스터디 생성 버튼 -->
-<a href="/create" class="create-panel__btn--auth">
-  (새로운 스터디 만들기)
-</a>
-<p class="create-panel__list">내 스터디1</p>
-<p class="create-panel__list">내 스터디2</p>
+<a href="/create" class="create-panel__btn--auth">(새로운 스터디 만들기)</a>
+<div class="create-panel__list">
+  <% myGroups.forEach(group => { %>
+  <div class="create-panel-list__item">
+    <span class="create-panel-list-item__text">
+      <%= group.study_group_name %>
+    </span>
+    <input
+      class="create-panel-list-item__input"
+      type="hidden"
+      value="<%= group.study_group_id %>"
+    />
+  </div>
+  <% }); %>
+</div>
 <% } %>

@@ -29,13 +29,13 @@ function goBack() {
 }
 
 function setInput() {
-  const text = this.textContent;
+  const selectedCategory = this.value;
   const parentClass = this.parentNode.getAttribute('class');
   if (parentClass === 'cat-filter-main') {
-    mainCatInput.value = text;
+    mainCatInput.value = selectedCategory;
     subCatInput.value = '';
   } else {
-    subCatInput.value = text;
+    subCatInput.value = selectedCategory;
   }
 }
 
