@@ -93,6 +93,9 @@ function alertMsg() {
 function init() {
   cat_main.addEventListener('change', categoryChange);
   document.addEventListener('DOMContentLoaded', initialChange);
+  backBtn.addEventListener('click', () => {
+    window.history.back();
+  });
   submitBtn.addEventListener('click', editSubmit);
   kickoutBtn.addEventListener('click', kickoutSubmit);
   checkBtn.addEventListener('click', checkSubmit);
