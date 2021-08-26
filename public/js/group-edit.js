@@ -3,10 +3,12 @@ const cat_sub = document.querySelector('.group-edit-sub-category');
 const sub_value = document.querySelector(
   '.group-edit-sub-category__input'
 ).value;
+const backBtn = document.querySelector('.group-edit__back-btn');
 const submitBtn = document.querySelector('.group-edit-submit__btn');
 const editForm = document.querySelector('.group-edit-form');
-const kickoutForm = document.querySelector('.group-edit-member__form');
-const kickoutBtn = document.querySelector('.group-edit-member-action__kickout');
+const kickoutBtnAll = document.querySelectorAll(
+  '.group-edit-member-action__kickout'
+);
 const checkForm = document.querySelector('.name-check-form');
 const checkBtn = document.querySelector('.name-check-btn');
 const nameInput = document.querySelector('.group-edit-name__input');
@@ -52,31 +54,33 @@ function editSubmit(e) {
 }
 
 function checkSubmit(e) {
-  checkForm.submit();
+  const groupId = window.location.pathname.split('/')[3];
+  const groupName = nameInput.value;
+  fetch(`http://localhost:3000/mypage/group-edit/` + groupId, {
+    method: 'POST',
+    body: [groupName, groupId]
+  })
+    .then(res => res.json())
+    .then(status => submitCheck(status));
+}
+
+function submitCheck(isValid) {
+  if (isValid) {
+    alert('사용 가능한 스터디명입니다.');
+    submitBtn.disabled = false;
+  } else {
+    alert('이미 사용 중인 스터디명입니다.');
+  }
 }
 
 function kickoutSubmit(e) {
-  kickoutForm.submit();
+  this.closest('.group-edit-member__form').submit();
 }
 
-function submitCheck() {
-  console.log(isValid);
-  if (isValid) {
-    submitBtn.disabled = false;
-  }
-}
 function alertMsg() {
   const status = new URLSearchParams(location.search).get('status');
   if (status) {
     switch (status) {
-      case 'invalidname':
-        alert('이미 사용 중인 스터디명입니다.');
-        break;
-      case 'validname':
-        alert('사용 가능한 스터디명입니다.');
-        isValid = 1;
-        submitCheck();
-        break;
       case 'invalidmembers':
         alert('현재 인원수보다 정원이 적을 수 없습니다.');
         break;
@@ -97,7 +101,9 @@ function init() {
     window.history.back();
   });
   submitBtn.addEventListener('click', editSubmit);
-  kickoutBtn.addEventListener('click', kickoutSubmit);
+  for (let i = 0; i < kickoutBtnAll.length; i++) {
+    kickoutBtnAll[i].addEventListener('click', kickoutSubmit);
+  }
   checkBtn.addEventListener('click', checkSubmit);
   nameInput.onkeypress = function () {
     submitBtn.disabled = true;

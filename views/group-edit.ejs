@@ -15,14 +15,14 @@
         <span>스터디 관리</span>
         <button class="group-edit__back-btn" type="button">뒤로가기</button>
       </section>
+      <input type="hidden" name="id" value="<%=id%>" />
       <form action="/mypage/edit_process" method="POST" class="group-edit-form">
         <input type="hidden" name="id" value="<%=id%>" />
         <section class="group-edit-category">
           <select class="group-edit-main-category" name="main">
             <option value="" disabled selected>대분류</option>
             <% let mainCategoryList = ["공무원", "어학", "취업", "수능",
-            "취미"]; let mainValue =
-            ["officiary","language","employee","exam","hobby"]; for (let i = 0;
+            "취미"]; for (let i = 0;
             i < mainCategoryList.length; i++) { if(mainCategoryList[i] === main)
             { %>
             <option value="<%= mainCategoryList[i] %>" selected>
@@ -89,13 +89,10 @@
           </select>
         </form>
         </section>
-        <form action="/mypage/edit_check" method="POST" class="name-check-form">
-          <input type="hidden" name="id" value="<%=id%>" />
-          <section class="group-edit-name">
-            <input class="group-edit-name__input" placeholder="스터디 이름" name="name" value="<%= name %>" />
-            <button class="name-check-btn" type="button">중복체크</button>
-          </section>
-        </form>
+        <section class="group-edit-name">
+          <input class="group-edit-name__input" placeholder="스터디 이름" name="name" value="<%= name %>" />
+          <button class="name-check-btn" type="button">중복체크</button>
+        </section>
       <section class="group-edit-members">
         <span>참여중인 멤버</span>
         <hr />

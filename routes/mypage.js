@@ -146,8 +146,9 @@ router.get('/group-edit/:id', (req, res, next) => {
   );
 });
 
-router.post('/edit_check', (req, res, next) => {
-  const { id, name } = req.body;
+router.post('/group-edit/:id', (req, res, next) => {
+  const name = req.body.split(',')[0];
+  const id = req.body.split(',')[1];
   const sql_name = 'SELECT COUNT(*) as used FROM study_group WHERE name=?;';
   const sql_number = 'SELECT * FROM study_group WHERE id=?';
   db.query(sql_name + sql_number, [name, id], (err, result) => {
@@ -155,14 +156,14 @@ router.post('/edit_check', (req, res, next) => {
       next(err);
     }
     if (result[0][0].used && result[1][0].name !== name) {
-      res.redirect('/mypage/group-edit/' + id + '?status=invalidname');
+      res.send('0');
     } else {
       const sql_name_edit = 'UPDATE study_group SET name=? WHERE id=?';
       db.query(sql_name_edit, [name, id], err => {
         if (err) {
           next(err);
         }
-        res.redirect('/mypage/group-edit/' + id + '?status=validname');
+        res.send('1');
       });
     }
   });
