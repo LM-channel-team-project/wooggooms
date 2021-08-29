@@ -207,6 +207,25 @@ router.post('/kickout', (req, res, next) => {
       if (result[0].is_manager) {
         res.send(['ismanager']);
       } else {
+        // Kickout 이후 current_number -1
+        const groupId = result[0].study_group_id;
+        const sql_current_number = 'SELECT * FROM study_group WHERE id=?';
+        db.query(sql_current_number, [groupId], (err, result) => {
+          if (err) {
+            next(err);
+          } else {
+            const currentNum = result[0].current_number;
+            const sql_update_number =
+              'UPDATE study_group SET current_number=? WHERE id=?';
+            db.query(
+              sql_update_number,
+              [currentNum - 1, groupId],
+              (err, result) => {
+                if (err) next(err);
+              }
+            );
+          }
+        });
         const sql_kickout = 'DELETE FROM group_member WHERE id=?';
         db.query(sql_kickout, [memberId], err => {
           if (err) {
