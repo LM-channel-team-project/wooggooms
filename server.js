@@ -12,6 +12,7 @@ const authRouter = require('./routes/auth');
 const mypageRouter = require('./routes/mypage');
 const createRouter = require('./routes/create');
 const groupRouter = require('./routes/group');
+const listApiRouter = require('./routes/listApi');
 const dbConfig = require('./config/database');
 
 const PORT = 3000;
@@ -38,6 +39,7 @@ app.use('/auth', authRouter);
 app.use('/mypage', mypageRouter);
 app.use('/create', createRouter);
 app.use('/group', groupRouter);
+app.use('/list', listApiRouter);
 
 // 404 responses handler
 app.use((req, res, next) => {
