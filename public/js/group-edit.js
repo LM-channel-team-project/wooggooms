@@ -116,6 +116,7 @@ function kickoutAlert(message) {
   if (message === 'ismanager') {
     alert('방장. 추후 참여중인 멤버에서 방장은 삭제 예정');
   } else if (message === 'kickout') {
+    location.href = 'http://localhost:3000/mypage';
     alert('해당 멤버를 강퇴하였습니다.');
   } else {
     alert(message);
