@@ -190,31 +190,58 @@ router.get('/sign-up', (req, res, next) => {
   res.render('sign-up');
 });
 
+// 회원가입 유효성 검증
+function checkValidEmail(userInput) {
+  const regExp =
+    /^[\w!#$%&'*+/=?^_{|}~-]+(?:\.[\w!#$%&'*+/=?^_{|}~-]+)*@(?:\w+\.)+\w+$/;
+
+  return regExp.test(userInput) ? true : false;
+}
+
+function checkStrongPwd(userInput) {
+  const regExp =
+    /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]).{8,16}$/;
+
+  return regExp.test(userInput) ? true : false;
+}
+
+function checkEqualPwd(pwd1, pwd2) {
+  return pwd1 === pwd2 ? true : false;
+}
+
+function checkValidName(userInput) {
+  return userInput.length <= 10 ? true : false;
+}
+
 // Sign-up_process Route
 // POST request 암호화 필요
 router.post('/sign-up_process', (req, res, next) => {
-  const post = req.body;
   const id = nanoid();
-  const { email } = post;
-  const { pwd } = post;
-  const { pwd2 } = post;
-  const { nickname } = post;
-  if (pwd !== pwd2) {
-    console.log('비밀번호가 일치하지 않습니다');
-  } else {
-    const salt = randomBytes(64).toString('base64');
-    const secret = pbkdf2Sync(pwd, salt, 100000, 64, 'sha512').toString(
-      'base64'
-    );
-    const sql =
-      'INSERT INTO user (id, email, secret, salt, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
-    db.query(sql, [id, email, secret, salt, nickname], err => {
-      if (err) {
-        next(err);
-      }
-      res.redirect('/auth/sign-in');
-    });
+  const { email, pwd1, pwd2, nickname } = req.body;
+
+  if (
+    !checkValidEmail(email) ||
+    !checkEqualPwd(pwd1, pwd2) ||
+    !checkStrongPwd(pwd1) ||
+    !checkValidName(nickname)
+  ) {
+    console.log('Invalid User Input');
+    return;
   }
+
+  const salt = randomBytes(64).toString('base64');
+  const secret = pbkdf2Sync(pwd1, salt, 100000, 64, 'sha512').toString(
+    'base64'
+  );
+  const sql =
+    'INSERT INTO user (id, email, secret, salt, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
+
+  db.query(sql, [id, email, secret, salt, nickname], err => {
+    if (err) {
+      next(err);
+    }
+    res.redirect('/auth/sign-in');
+  });
 });
 
 // Sign-in Route
