@@ -9,7 +9,6 @@ const editForm = document.querySelector('.group-edit-form');
 const kickoutBtnAll = document.querySelectorAll(
   '.group-edit-member-action__kickout'
 );
-const optionsAll = document.querySelectorAll('select');
 const checkForm = document.querySelector('.name-check-form');
 const checkBtn = document.querySelector('.name-check-btn');
 const nameInput = document.querySelector('.group-edit-name__input');
