@@ -9,6 +9,7 @@ const editForm = document.querySelector('.group-edit-form');
 const kickoutBtnAll = document.querySelectorAll(
   '.group-edit-member-action__kickout'
 );
+const optionsAll = document.querySelectorAll('select');
 const checkForm = document.querySelector('.name-check-form');
 const checkBtn = document.querySelector('.name-check-btn');
 const nameInput = document.querySelector('.group-edit-name__input');
@@ -18,8 +19,6 @@ const lang = ['영어', '중국어', '일본어'];
 const employ = ['경영/사무', 'IT/인터넷', '마케팅', '디자인', '미디어'];
 const hobby = ['독서', '토론', '기타'];
 const exam = ['고1', '고2', '고3', 'N수'];
-
-let isValid = 0;
 
 function setSub(mainValue) {
   let val = ['전체'];
@@ -56,15 +55,15 @@ function editSubmit(e) {
 function checkSubmit(e) {
   const groupId = window.location.pathname.split('/')[3];
   const groupName = nameInput.value;
-  fetch(`http://localhost:3000/mypage/group-edit/` + groupId, {
+  fetch(`http://localhost:3000/mypage/name-check`, {
     method: 'POST',
     body: [groupName, groupId]
   })
     .then(res => res.json())
-    .then(status => submitCheck(status));
+    .then(status => checkAlert(status, groupName));
 }
 
-function submitCheck(isValid) {
+function checkAlert(isValid, name) {
   if (isValid) {
     alert('사용 가능한 스터디명입니다.');
     submitBtn.disabled = false;
@@ -74,7 +73,23 @@ function submitCheck(isValid) {
 }
 
 function kickoutSubmit(e) {
-  this.closest('.group-edit-member__form').submit();
+  const memberId = this.previousElementSibling.value;
+  fetch(`http://localhost:3000/mypage/kickout`, {
+    method: 'POST',
+    body: memberId
+  })
+    .then(res => res.json())
+    .then(result => kickoutAlert(result[0]));
+}
+
+function kickoutAlert(message) {
+  if (message === 'ismanager') {
+    alert('방장. 추후 참여중인 멤버에서 방장은 삭제 예정');
+  } else if (message === 'kickout') {
+    alert('해당 멤버를 강퇴하였습니다.');
+  } else {
+    alert(message);
+  }
 }
 
 function alertMsg() {
@@ -84,17 +99,16 @@ function alertMsg() {
       case 'invalidmembers':
         alert('현재 인원수보다 정원이 적을 수 없습니다.');
         break;
-      case 'ismanager':
-        alert('방장. 추후 참여중인 멤버에서 방장은 삭제 예정');
-        break;
-      case 'kickout':
-        alert('해당 멤버를 강퇴하였습니다.');
-        break;
     }
   }
 }
 
+function changeListener(e) {
+  submitBtn.disabled = false;
+}
+
 function init() {
+  submitBtn.disabled = true;
   cat_main.addEventListener('change', categoryChange);
   document.addEventListener('DOMContentLoaded', initialChange);
   backBtn.addEventListener('click', () => {
@@ -104,6 +118,7 @@ function init() {
   for (let i = 0; i < kickoutBtnAll.length; i++) {
     kickoutBtnAll[i].addEventListener('click', kickoutSubmit);
   }
+  editForm.addEventListener('change', changeListener);
   checkBtn.addEventListener('click', checkSubmit);
   nameInput.onkeypress = function () {
     submitBtn.disabled = true;

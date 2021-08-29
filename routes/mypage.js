@@ -146,7 +146,7 @@ router.get('/group-edit/:id', (req, res, next) => {
   );
 });
 
-router.post('/group-edit/:id', (req, res, next) => {
+router.post('/name-check', (req, res, next) => {
   const name = req.body.split(',')[0];
   const id = req.body.split(',')[1];
   const sql_name = 'SELECT COUNT(*) as used FROM study_group WHERE name=?;';
@@ -192,27 +192,21 @@ router.post('/edit_process', (req, res, next) => {
 });
 
 router.post('/kickout', (req, res, next) => {
-  console.log(req.body);
-  const { memberid } = req.body;
+  const memberId = req.body;
   const sql_member = 'SELECT * FROM group_member WHERE id=?';
-  db.query(sql_member, [memberid], (err, result) => {
+  db.query(sql_member, [memberId], (err, result) => {
     if (err) {
       next(err);
     } else {
-      const study_group_id = result[0].study_group_id;
       if (result[0].is_manager) {
-        res.redirect(
-          '/mypage/group-edit/' + study_group_id + '?status=ismanager'
-        );
+        res.send(['ismanager']);
       } else {
         const sql_kickout = 'DELETE FROM group_member WHERE id=?';
-        db.query(sql_kickout, [memberid], err => {
+        db.query(sql_kickout, [memberId], err => {
           if (err) {
             next(err);
           }
-          res.redirect(
-            '/mypage/group-edit/' + study_group_id + '?status=kickout'
-          );
+          res.send(['kickout']);
         });
       }
     }
