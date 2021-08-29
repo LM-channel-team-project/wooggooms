@@ -132,7 +132,7 @@ function init() {
   cat_main.addEventListener('change', categoryChange);
   document.addEventListener('DOMContentLoaded', initialChange);
   backBtn.addEventListener('click', () => {
-    window.history.back();
+    location.href = 'http://localhost:3000/mypage';
   });
   submitBtn.addEventListener('click', editSubmit);
   for (let i = 0; i < kickoutBtnAll.length; i++) {
