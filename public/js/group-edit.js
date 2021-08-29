@@ -49,7 +49,38 @@ function initialChange(e) {
 }
 
 function editSubmit(e) {
-  editForm.submit();
+  const groupId = window.location.pathname.split('/')[3];
+  const groupName = nameInput.value;
+  const main = document.querySelector(
+    '.group-edit-main-category option:checked'
+  ).value;
+  const sub = document.querySelector(
+    '.group-edit-sub-category option:checked'
+  ).value;
+  const gender = document.querySelector(
+    '.group-edit-option-gender option:checked'
+  ).value;
+  const location = document.querySelector(
+    '.group-edit-option-location option:checked'
+  ).value;
+  const members = document.querySelector(
+    '.group-edit-option-members option:checked'
+  ).value;
+  fetch(`http://localhost:3000/mypage/edit_process`, {
+    method: 'POST',
+    body: [groupId, groupName, main, sub, gender, location, members]
+  })
+    .then(res => res.json())
+    .then(status => submitAlert(status));
+}
+
+function submitAlert(isSubmit) {
+  if (isSubmit) {
+    location.href = 'http://localhost:3000/mypage';
+    alert('정상적으로 수정되었습니다');
+  } else {
+    alert('현재 인원수보다 정원이 적을 수 없습니다.');
+  }
 }
 
 function checkSubmit(e) {
@@ -92,17 +123,6 @@ function kickoutAlert(message) {
   }
 }
 
-function alertMsg() {
-  const status = new URLSearchParams(location.search).get('status');
-  if (status) {
-    switch (status) {
-      case 'invalidmembers':
-        alert('현재 인원수보다 정원이 적을 수 없습니다.');
-        break;
-    }
-  }
-}
-
 function changeListener(e) {
   submitBtn.disabled = false;
 }
@@ -123,7 +143,6 @@ function init() {
   nameInput.onkeypress = function () {
     submitBtn.disabled = true;
   };
-  alertMsg();
 }
 
 init();

@@ -158,35 +158,41 @@ router.post('/name-check', (req, res, next) => {
     if (result[0][0].used && result[1][0].name !== name) {
       res.send('0');
     } else {
-      const sql_name_edit = 'UPDATE study_group SET name=? WHERE id=?';
-      db.query(sql_name_edit, [name, id], err => {
-        if (err) {
-          next(err);
-        }
-        res.send('1');
-      });
+      res.send('1');
     }
   });
 });
 
 router.post('/edit_process', (req, res, next) => {
-  console.log(req.body);
-  const { id, main, sub, gender, location, members } = req.body;
+  // { id, name, main, sub, gender, location, members }
+  const studyInfo = req.body.split(',');
   const sql_number = 'SELECT * FROM study_group WHERE id=?';
-  db.query(sql_number, [id], (err, result) => {
+  db.query(sql_number, [studyInfo[0]], (err, result) => {
     if (err) {
       next(err);
-    } else if (result[0].current_number > parseInt(members)) {
-      res.redirect('/mypage/group-edit/' + id + '?stauts=invlaidmembers');
+    } else if (result[0].current_number > parseInt(studyInfo[6])) {
+      res.send('0');
     } else {
       const sql_edit =
-        'UPDATE study_group SET main_category=?, sub_category=?, gender=?, location=?, maximum_number=? WHERE id=?';
-      db.query(sql_edit, [main, sub, gender, location, members, id], err => {
-        if (err) {
-          next(err);
+        'UPDATE study_group SET name=?, main_category=?, sub_category=?, gender=?, location=?, maximum_number=? WHERE id=?';
+      db.query(
+        sql_edit,
+        [
+          studyInfo[1],
+          studyInfo[2],
+          studyInfo[3],
+          studyInfo[4],
+          studyInfo[5],
+          studyInfo[6],
+          studyInfo[0]
+        ],
+        err => {
+          if (err) {
+            next(err);
+          }
+          res.send('1');
         }
-        res.redirect('/mypage/?status=edit');
-      });
+      );
     }
   });
 });
