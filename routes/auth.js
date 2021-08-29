@@ -205,34 +205,91 @@ function checkStrongPwd(userInput) {
   return regExp.test(userInput) ? true : false;
 }
 
-function checkEqualPwd(pwd1, pwd2) {
-  return pwd1 === pwd2 ? true : false;
+function checkEqualPwd(userInputA, userInputB) {
+  return userInputA === userInputB ? true : false;
 }
 
 function checkValidName(userInput) {
   return userInput.length <= 10 ? true : false;
 }
 
+function checkDuplicateEmail(userInput) {
+  const sql_user = 'SELECT * FROM user WHERE email=?';
+  db.query(sql_user, [userInput], (err, results) => {
+    if (err) {
+      next(err);
+    } else if (results[0]) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+}
+
+function checkDuplicateName(userInput) {
+  const sql_user = 'SELECT * FROM user WHERE nickname=?';
+  db.query(sql_user, [userInput], (err, results) => {
+    if (err) {
+      next(err);
+    } else if (results[0]) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+}
+
+router.post('/check-duplicate-email', (req, res, next) => {
+  const email = req.body;
+  const sql_user = 'SELECT * FROM user WHERE email=?';
+  db.query(sql_user, [email], (err, results) => {
+    if (err) {
+      next(err);
+    } else if (results[0]) {
+      res.send(false);
+    } else {
+      res.send(true);
+    }
+  });
+});
+
+router.post('/check-duplicate-nickname', (req, res, next) => {
+  const nickname = req.body;
+  const sql_user = 'SELECT * FROM user WHERE nickname=?';
+  db.query(sql_user, [nickname], (err, results) => {
+    if (err) {
+      next(err);
+    } else if (results[0]) {
+      res.send(false);
+    } else {
+      res.send(true);
+    }
+  });
+});
+
 // Sign-up_process Route
 // POST request 암호화 필요
 router.post('/sign-up_process', (req, res, next) => {
   const id = nanoid();
-  const { email, pwd1, pwd2, nickname } = req.body;
+  const { email, pwd, pwd2, nickname } = req.body;
 
   if (
     !checkValidEmail(email) ||
-    !checkEqualPwd(pwd1, pwd2) ||
-    !checkStrongPwd(pwd1) ||
+    !checkEqualPwd(pwd, pwd2) ||
+    !checkStrongPwd(pwd) ||
     !checkValidName(nickname)
   ) {
     console.log('Invalid User Input');
     return;
   }
 
+  if (!checkDuplicateEmail(email) || !checkDuplicateName(nickname)) {
+    console.log('Duplicate User Input');
+    return;
+  }
+
   const salt = randomBytes(64).toString('base64');
-  const secret = pbkdf2Sync(pwd1, salt, 100000, 64, 'sha512').toString(
-    'base64'
-  );
+  const secret = pbkdf2Sync(pwd, salt, 100000, 64, 'sha512').toString('base64');
   const sql =
     'INSERT INTO user (id, email, secret, salt, nickname, create_date) VALUES (?, ?, ?, ?, ?, NOW())';
 

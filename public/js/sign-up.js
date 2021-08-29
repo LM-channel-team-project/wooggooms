@@ -14,6 +14,35 @@ function showIsValid(element, text) {
   element.innerText = text;
 }
 
+async function checkDuplicateEmail() {
+  const userInput = emailInput.value;
+  const res = await fetch(`http://localhost:3000/auth/check-duplicate-email`, {
+    method: 'POST',
+    body: userInput
+  });
+  const isValid = await res.json();
+  if (!isValid) {
+    showIsValid(emailValidDiv, '이미 사용 중인 이메일입니다.');
+  }
+  return isValid;
+}
+
+async function checkDuplicateName() {
+  const userInput = nameInput.value;
+  const res = await fetch(
+    `http://localhost:3000/auth/check-duplicate-nickname`,
+    {
+      method: 'POST',
+      body: userInput
+    }
+  );
+  const isValid = await res.json();
+  if (!isValid) {
+    showIsValid(nameValidDiv, '이미 사용 중인 닉네임입니다.');
+  }
+  return isValid;
+}
+
 function checkValidEmail() {
   const regExp =
     /^[\w!#$%&'*+/=?^_{|}~-]+(?:\.[\w!#$%&'*+/=?^_{|}~-]+)*@(?:\w+\.)+\w+$/;
@@ -77,7 +106,9 @@ function checkValidAll() {
     checkValidEmail() &&
     checkStrongPwd() &&
     checkEqualPwd() &&
-    checkValidName()
+    checkValidName() &&
+    checkDuplicateEmail() &&
+    checkDuplicateName()
   ) {
     form.submit();
   }
@@ -85,10 +116,12 @@ function checkValidAll() {
 
 function init() {
   emailInput.addEventListener('keyup', checkValidEmail);
+  emailInput.addEventListener('focusout', checkDuplicateEmail);
   pwdInput.addEventListener('keyup', checkStrongPwd);
   pwdInput.addEventListener('keyup', checkEqualPwd);
   pwd2Input.addEventListener('keyup', checkEqualPwd);
   nameInput.addEventListener('keyup', checkValidName);
+  nameInput.addEventListener('focusout', checkDuplicateName);
   submitBtn.addEventListener('click', checkValidAll);
 }
 
