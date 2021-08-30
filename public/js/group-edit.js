@@ -137,9 +137,9 @@ function init() {
     location.href = 'http://localhost:3000/mypage';
   });
   submitBtn.addEventListener('click', editSubmit);
-  for (let i = 0; i < kickoutBtnAll.length; i++) {
-    kickoutBtnAll[i].addEventListener('click', kickoutSubmit);
-  }
+  kickoutBtnAll.forEach(btn => {
+    btn.addEventListener('click', kickoutSubmit);
+  });
   editForm.addEventListener('change', changeListener);
   checkBtn.addEventListener('click', checkSubmit);
   nameInput.onkeypress = function () {

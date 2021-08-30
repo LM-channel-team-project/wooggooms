@@ -165,27 +165,19 @@ router.post('/name-check', (req, res, next) => {
 
 router.post('/edit_process', (req, res, next) => {
   // { id, name, main, sub, gender, location, members }
-  const studyInfo = req.body.split(',');
+  const [id, name, main, sub, gender, location, members] = req.body.split(',');
   const sql_number = 'SELECT * FROM study_group WHERE id=?';
-  db.query(sql_number, [studyInfo[0]], (err, result) => {
+  db.query(sql_number, [id], (err, result) => {
     if (err) {
       next(err);
-    } else if (result[0].current_number > parseInt(studyInfo[6])) {
+    } else if (result[0].current_number > parseInt(members)) {
       res.send('0');
     } else {
       const sql_edit =
         'UPDATE study_group SET name=?, main_category=?, sub_category=?, gender=?, location=?, maximum_number=? WHERE id=?';
       db.query(
         sql_edit,
-        [
-          studyInfo[1],
-          studyInfo[2],
-          studyInfo[3],
-          studyInfo[4],
-          studyInfo[5],
-          studyInfo[6],
-          studyInfo[0]
-        ],
+        [name, main, sub, gender, location, members, id],
         err => {
           if (err) {
             next(err);
@@ -207,33 +199,20 @@ router.post('/kickout', (req, res, next) => {
       if (result[0].is_manager) {
         res.send(['ismanager']);
       } else {
-        // Kickout 이후 current_number -1
         const groupId = result[0].study_group_id;
-        const sql_current_number = 'SELECT * FROM study_group WHERE id=?';
-        db.query(sql_current_number, [groupId], (err, result) => {
-          if (err) {
-            next(err);
-          } else {
-            const currentNum = result[0].current_number;
-            const sql_update_number =
-              'UPDATE study_group SET current_number=? WHERE id=?';
-            db.query(
-              sql_update_number,
-              [currentNum - 1, groupId],
-              (err, result) => {
-                if (err) next(err);
-              }
-            );
-          }
-        });
-        const sql_kickout = 'DELETE FROM group_member WHERE id=?';
-        db.query(sql_kickout, [memberId], err => {
-          if (err) {
-            next(err);
-          }
-          res.send(['kickout']);
+        const sql_update_number =
+          'UPDATE study_group SET current_number=current_number-1 WHERE id=?';
+        db.query(sql_update_number, [groupId], (err, result) => {
+          if (err) next(err);
         });
       }
+      const sql_kickout = 'DELETE FROM group_member WHERE id=?';
+      db.query(sql_kickout, [memberId], err => {
+        if (err) {
+          next(err);
+        }
+        res.send(['kickout']);
+      });
     }
   });
 });
