@@ -146,8 +146,9 @@ router.get('/group-edit/:id', (req, res, next) => {
   );
 });
 
-router.post('/edit_check', (req, res, next) => {
-  const { id, name } = req.body;
+router.post('/name-check', (req, res, next) => {
+  const name = req.body.split(',')[0];
+  const id = req.body.split(',')[1];
   const sql_name = 'SELECT COUNT(*) as used FROM study_group WHERE name=?;';
   const sql_number = 'SELECT * FROM study_group WHERE id=?';
   db.query(sql_name + sql_number, [name, id], (err, result) => {
@@ -155,65 +156,63 @@ router.post('/edit_check', (req, res, next) => {
       next(err);
     }
     if (result[0][0].used && result[1][0].name !== name) {
-      res.redirect('/mypage/group-edit/' + id + '?status=invalidname');
+      res.send('0');
     } else {
-      const sql_name_edit = 'UPDATE study_group SET name=? WHERE id=?';
-      db.query(sql_name_edit, [name, id], err => {
-        if (err) {
-          next(err);
-        }
-        res.redirect('/mypage/group-edit/' + id + '?status=validname');
-      });
+      res.send('1');
     }
   });
 });
 
 router.post('/edit_process', (req, res, next) => {
-  console.log(req.body);
-  const { id, main, sub, gender, location, members } = req.body;
+  // { id, name, main, sub, gender, location, members }
+  const [id, name, main, sub, gender, location, members] = req.body.split(',');
   const sql_number = 'SELECT * FROM study_group WHERE id=?';
   db.query(sql_number, [id], (err, result) => {
     if (err) {
       next(err);
     } else if (result[0].current_number > parseInt(members)) {
-      res.redirect('/mypage/group-edit/' + id + '?stauts=invlaidmembers');
+      res.send('0');
     } else {
       const sql_edit =
-        'UPDATE study_group SET main_category=?, sub_category=?, gender=?, location=?, maximum_number=? WHERE id=?';
-      db.query(sql_edit, [main, sub, gender, location, members, id], err => {
-        if (err) {
-          next(err);
+        'UPDATE study_group SET name=?, main_category=?, sub_category=?, gender=?, location=?, maximum_number=? WHERE id=?';
+      db.query(
+        sql_edit,
+        [name, main, sub, gender, location, members, id],
+        err => {
+          if (err) {
+            next(err);
+          }
+          res.send('1');
         }
-        res.redirect('/mypage/?status=edit');
-      });
+      );
     }
   });
 });
 
 router.post('/kickout', (req, res, next) => {
-  console.log(req.body);
-  const { memberid } = req.body;
+  const memberId = req.body;
   const sql_member = 'SELECT * FROM group_member WHERE id=?';
-  db.query(sql_member, [memberid], (err, result) => {
+  db.query(sql_member, [memberId], (err, result) => {
     if (err) {
       next(err);
     } else {
-      const study_group_id = result[0].study_group_id;
       if (result[0].is_manager) {
-        res.redirect(
-          '/mypage/group-edit/' + study_group_id + '?status=ismanager'
-        );
+        res.send(['ismanager']);
       } else {
-        const sql_kickout = 'DELETE FROM group_member WHERE id=?';
-        db.query(sql_kickout, [memberid], err => {
-          if (err) {
-            next(err);
-          }
-          res.redirect(
-            '/mypage/group-edit/' + study_group_id + '?status=kickout'
-          );
+        const groupId = result[0].study_group_id;
+        const sql_update_number =
+          'UPDATE study_group SET current_number=current_number-1 WHERE id=?';
+        db.query(sql_update_number, [groupId], (err, result) => {
+          if (err) next(err);
         });
       }
+      const sql_kickout = 'DELETE FROM group_member WHERE id=?';
+      db.query(sql_kickout, [memberId], err => {
+        if (err) {
+          next(err);
+        }
+        res.send(['kickout']);
+      });
     }
   });
 });

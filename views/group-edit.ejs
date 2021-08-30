@@ -11,14 +11,18 @@
   </head>
   <body>
     <main class="group-edit">
-      <form action="/mypage/edit_process" method="POST" class="group-edit-form">
+      <section class="header">
+        <span>스터디 관리</span>
+        <button class="group-edit__back-btn" type="button">뒤로가기</button>
+      </section>
+      <input type="hidden" name="id" value="<%=id%>" />
+      <form class="group-edit-form">
         <input type="hidden" name="id" value="<%=id%>" />
         <section class="group-edit-category">
           <select class="group-edit-main-category" name="main">
             <option value="" disabled selected>대분류</option>
             <% let mainCategoryList = ["공무원", "어학", "취업", "수능",
-            "취미"]; let mainValue =
-            ["officiary","language","employee","exam","hobby"]; for (let i = 0;
+            "취미"]; for (let i = 0;
             i < mainCategoryList.length; i++) { if(mainCategoryList[i] === main)
             { %>
             <option value="<%= mainCategoryList[i] %>" selected>
@@ -41,33 +45,31 @@
           </select>
         </section>
         <section class="group-edit-options">
-          <select class="group-edit-option" name="location">
+          <select class="group-edit-option-location">
             <option value="" disabled selected>온/오프라인</option>
-            <% let locationList = ["온라인","오프라인"]; let locationValue
-            =["online","offline"]; for (let i = 0; i < locationValue.length;
-            i++) { if(locationValue[i] === location) { %>
-            <option value="<%= locationValue[i] %>" selected>
+            <% let locationList = ["온라인","오프라인"]; for (let i = 0; i < locationList.length;
+            i++) { if(locationList[i] === location) { %>
+            <option value="<%= locationList[i] %>" selected>
               <%= locationList[i] %>
             </option>
             <% } else { %>
-            <option value="<%= locationValue[i] %>">
+            <option value="<%= locationList[i] %>">
               <%= locationList[i] %>
             </option>
             <% } } %>
           </select>
-          <select class="group-edit-option" name="gender">
+          <select class="group-edit-option-gender">
             <option value="" disabled selected>성별</option>
-            <% let genderList = ["남성만","여성만","상관없음"]; let genderValue
-            =["male","female","both"]; for (let i = 0; i < genderValue.length;
-            i++) { if(genderValue[i] === gender) { %>
-            <option value="<%= genderValue[i] %>" selected>
+            <% let genderList = ["남성만","여성만","상관없음"]; for (let i = 0; i < genderList.length;
+            i++) { if(genderList[i] === gender) { %>
+            <option value="<%= genderList[i] %>" selected>
               <%= genderList[i] %>
             </option>
             <% } else { %>
-            <option value="<%= genderValue[i] %>"><%= genderList[i] %></option>
+            <option value="<%= genderList[i] %>"><%= genderList[i] %></option>
             <% } } %>
           </select>
-          <select class="group-edit-option" name="members">
+          <select class="group-edit-option-members">
             <option value="" disabled selected>인원수</option>
             <% let maximumNumberList =
             ["2명","3명","4명","5명","6명","7명","8명","9명"]; let
@@ -85,13 +87,10 @@
           </select>
         </form>
         </section>
-        <form action="/mypage/edit_check" method="POST" class="name-check-form">
-          <input type="hidden" name="id" value="<%=id%>" />
-          <section class="group-edit-name">
-            <input class="group-edit-name__input" placeholder="스터디 이름" name="name" value="<%= name %>" />
-            <button class="name-check-btn" type="button">중복체크</button>
-          </section>
-        </form>
+        <section class="group-edit-name">
+          <input class="group-edit-name__input" placeholder="스터디 이름" name="name" value="<%= name %>" />
+          <button class="name-check-btn" type="button">중복체크</button>
+        </section>
       <section class="group-edit-members">
         <span>참여중인 멤버</span>
         <hr />
@@ -113,13 +112,9 @@
             </div>
           </div>
           <div class="group-edit-member-action">
-            <form
-              action="/mypage/kickout"
-              method="POST"
-              class="group-edit-member__form"
-            >
               <input
                 type="hidden"
+                class="group-edit-member__input"
                 name="memberid"
                 value="<%= member[i].id %>"
               />
@@ -132,7 +127,7 @@
         <% } %>
       </section>
       <section class="group-edit-submit">
-        <button class="group-create-submit__btn" type="button" disabled>
+        <button class="group-edit-submit__btn" type="button">
           수정완료
         </button>
       </section>

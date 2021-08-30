@@ -47,7 +47,7 @@
   backdrop-filter: blur(2px);
 }
 
-.group-create-submit__btn {
+.group-edit-submit__btn {
   width: var(--submit-width);
   height: var(--submit-height);
 }
