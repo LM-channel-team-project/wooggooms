@@ -92,7 +92,7 @@ function checkValidName() {
   }
 }
 
-function checkValidAll() {
+async function checkValidAll() {
   const inputs = [emailInput, pwdInput, pwd2Input, nameInput];
   const divs = [emailValidDiv, pwdValidDiv, pwd2ValidDiv, nameValidDiv];
 
@@ -102,15 +102,19 @@ function checkValidAll() {
     }
   });
 
+  const isDuplicateEmail = await checkDuplicateEmail();
+  const isDuplicateName = await checkDuplicateName();
+
   if (
     checkValidEmail() &&
     checkStrongPwd() &&
     checkEqualPwd() &&
-    checkValidName() &&
-    checkDuplicateEmail() &&
-    checkDuplicateName()
+    isDuplicateEmail &&
+    isDuplicateName
   ) {
     form.submit();
+  } else {
+    alert('입력하신 정보를 확인하세요.');
   }
 }
 
